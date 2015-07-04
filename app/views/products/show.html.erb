@@ -1,0 +1,5 @@
+<h1>Страница итема</h1>
+
+<h2  class = 'editable' <%= editable %> data-url = '<%= product_path @product %>' data-attr = 'name'><%= @product.name %></h2>
+<h3  class = 'editable' <%= editable %> data-url = '<%= product_path @product %>' data-attr = 'price'><%= @product.price %></h3>
+<div class = 'editable' <%= editable %> data-url = '<%= product_path @product %>' data-attr = 'tags'><%= tag_string @product %></div>

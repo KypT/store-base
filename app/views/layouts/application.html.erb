@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html>
 <head>
-  <title>MintyStore</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+    <title>MintyStore</title>
+    <meta charset="utf-8">
+    <%= yield :meta %>
+    <%= yield :stylesheets %>
+    <%= stylesheet_link_tag 'application', params[:controller]%>
+    <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+    <div>
+      <a href="/">root</a>
+      <% @sections.each_pair do | name, url | %>
+          <a href="<%= url %>"><%= name %></a>
+    <% end %>
+      <a href="<%= destroy_user_session_path %>" data-method = 'delete'>sign out</a>
+      <a href="<%= new_user_session_path %>">sign in</a>
+    </div>
+    <%= yield %>
+    <%= javascript_include_tag 'application', params[:controller]%>
+    <%= javascript_include_tag 'admin' if user_signed_in? %>
+    <%= yield :javascripts %>
 </body>
-</html>
