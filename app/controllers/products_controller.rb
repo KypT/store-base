@@ -20,6 +20,7 @@ class ProductsController < ApplicationController
   end
 
   def update
+    add_image if params[:image]
     update_tags if params[:tags]
     @product.update(product_params)
     render nothing: true
@@ -48,6 +49,14 @@ class ProductsController < ApplicationController
     Tag.find_each do | tag |
       tag.destroy if tag.products.empty?
     end
+  end
+
+  def add_image
+    @product.images.destroy_all
+    img = Image.new
+    img.file = params[:image]
+    img.save
+    @product.images << img
   end
 
   def product_params
