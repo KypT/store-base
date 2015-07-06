@@ -1,3 +1,5 @@
 {
-  store: '/store'
+  store: '/store',
+  cart: '/cart',
+  orders: '/orders'
 }

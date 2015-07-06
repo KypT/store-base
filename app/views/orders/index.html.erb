@@ -1,0 +1,9 @@
+<h1>Orders</h1>
+
+<% @orders.each do |order| %>
+    <div class = 'orders'>
+      <%= render order %>
+      <%= link_to 'Show', order %>
+      <%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+<% end %>

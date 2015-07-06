@@ -1,0 +1,7 @@
+<h1><%= render @order %></h1>
+
+<% @order.products.each do | product | %>
+    <%= render product %> <br/>
+<% end %>
+
+<span> Sum: <%= @order.products.reduce(0) {|sum, product| sum + product.price } %></span>
