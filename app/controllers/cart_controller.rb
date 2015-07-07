@@ -1,35 +1,33 @@
 class CartController < ApplicationController
-  before_action :parse_id, only: [:new, :destroy]
+  before_action :find_product, only: [:new, :destroy]
   before_action :get_cart
-  layout false
 
   def index
-    @items = @cart.items
-    render layout: 'application'
+    @products = @cart.products
   end
 
   def new
-    @cart.add @id
-    render nothing: true
+    @cart.put @product
+    render layout: false
   end
 
   def destroy
-    @cart.remove @id
+    @cart.remove @product
+    render layout: false
   end
 
   def checkout
-    redirect_to action: :index and return if @cart.items.empty?
+    redirect_to action: :index and return if @cart.products.empty?
     @cart.checkout
-    render layout: 'application'
   end
 
   private
-  def parse_id
-    @id = params[:id].to_i
-  end
-
   def get_cart
-    @cart = Cart.new session
+    @cart = SessionCart.new session
   end
 
+  def find_product
+    id = params[:id].to_i
+    @product = Product.find id
+  end
 end

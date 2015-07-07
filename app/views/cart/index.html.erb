@@ -1,11 +1,11 @@
 <h1> Cart </h1>
 
 <div class = 'products'>
-  <% @items.each do |item| %>
-      <div class = 'product' data-id = <%= item.id %>>
-        <%= render item %>
-        <%= link_to 'Show', product_path(item) %>
-        <%= link_to 'Remove', cart_path(item.id), :method => 'delete', remote: true %>
+  <% @products.each do |product| %>
+      <div class = 'product' data-id = <%= product.id %>>
+        <%= render product %>
+        <%= link_to 'Show', product_path(product) %>
+        <%= link_to 'Remove', cart_path(product.id), :method => 'delete', remote: true %>
       </div>
   <% end %>
 </div>
