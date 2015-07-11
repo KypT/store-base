@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :products, path: 'store', except: [:edit, :create] do
     post '' => 'products#update', on: :member
+    get 'get', on: :collection
   end
 
   resources :cart, only: [:index, :new, :destroy] do

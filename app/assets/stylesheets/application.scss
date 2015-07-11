@@ -1,2 +1,5 @@
-@import 'bootstrap-sprockets';
-@import "bootstrap";
+//= require semantic/reset
+//= require semantic/site
+//= require semantic/container
+//= require semantic/grid
+@import 'main';

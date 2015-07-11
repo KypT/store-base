@@ -1,3 +1,5 @@
-<span>
-  <%= "#{product.name} - #{product.price}"%>
-</span>
+<div class = 'four wide column product' title = '<%= product.name %>'>
+  <a href="<%= product_path product %>">
+    <div class = 'product-data' style = 'background-image: url(<%= image_for product %>)'>&nbsp;</div>
+  </a>
+</div>

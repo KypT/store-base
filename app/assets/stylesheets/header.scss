@@ -1,0 +1,30 @@
+.navigation {
+  height: 150px;
+  padding: 25px 0;
+
+  .ui.grid {
+    background-color: #91B6AE;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .nav-item {
+    text-align: center;
+    line-height: 100px;
+    height: 100px;
+    padding: 0 !important;
+
+    h3 {
+      color: $brand-text-color-1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .logo {
+      position: absolute;
+      width: 40%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

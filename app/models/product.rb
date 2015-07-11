@@ -12,4 +12,8 @@ class Product < ActiveRecord::Base
   def self.default
     Product.create name: 'Назови меня', price: 0
   end
+
+  def <=>(this)
+    self.created_at <=> this.created_at
+  end
 end
