@@ -12,5 +12,10 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  pool: 5
+  encoding: unicode
+  host: localhost
+  username: minty_developer
+  password: mintypasssword
+  database: minty_store
