@@ -7,7 +7,8 @@ window.Controls = (function() {
         $tagButtons = $('.tag-buttons .tag'),
         $tags = $('.tags'),
         $loadPrev = $('.get-prev'),
-        $loadNext = $('.get-next');
+        $loadNext = $('.get-next'),
+        $productModal = $('.products.modal');
 
     function tagHandler() {
         var $this = $(this),
@@ -36,6 +37,14 @@ window.Controls = (function() {
         });
     }
 
+    function showProductModal() {
+        var productId = this.getAttribute('data-id'),
+            product = Content.getProduct(productId);
+        $productModal.modal('show');
+        $productModal.find('.product-name').html(product.name);
+        $productModal.find('.product-image').css('background-image', 'url(' + Content.getImage(productId) + ')');
+    }
+
     return {
         init: function() {
             bindDropdownTo($collectionsDropdown, $toggleCollections);
@@ -44,6 +53,10 @@ window.Controls = (function() {
             $tags.find('.tag').click(function() { removeTag(this.getAttribute('id')) });
             $loadPrev.click( Content.loadPrevProducts );
             $loadNext.click( Content.loadNextProducts );
+        },
+        initProducts: function() {
+            var $products = $('.product');
+            $products.click( showProductModal );
         }
     }
 }());

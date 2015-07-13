@@ -1,17 +1,32 @@
 .navigation {
-  height: 150px;
+  height: 125px;
   padding: 25px 0;
+  margin: 50px 0 50px 0;
 
   .ui.grid {
-    background-color: #91B6AE;
+    background-color: $brand-bg-color-2;
     margin-top: 0;
     margin-bottom: 0;
   }
 
+  .icon {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 5;
+    img {
+      width: 60px;
+    }
+  }
+
+  .profile.icon {
+    right: 100px;
+  }
+
   .nav-item {
     text-align: center;
-    line-height: 100px;
-    height: 100px;
+    line-height: 75px;
+    height: 75px;
     padding: 0 !important;
 
     h3 {
@@ -21,7 +36,7 @@
     }
     .logo {
       position: absolute;
-      width: 40%;
+      width: 50%;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);

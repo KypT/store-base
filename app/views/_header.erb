@@ -1,4 +1,14 @@
 <nav class='navigation'>
+  <div class = 'profile icon'>
+    <%= link_to destroy_user_session_path, method: :delete do %>
+        <%= image_tag 'profile.png' %>
+    <% end %>
+  </div>
+  <div class = 'cart icon'>
+    <%= link_to cart_index_path do %>
+        <%= image_tag 'cart.png' %>
+    <% end %>
+  </div>
   <ul class='ui grid'>
     <li class='nav-item three wide column'>
       <h3><%= link_to 'Магазин', products_path %></h3>
