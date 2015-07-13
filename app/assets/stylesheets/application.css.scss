@@ -2,4 +2,9 @@
 //= require semantic/site
 //= require semantic/container
 //= require semantic/grid
-@import 'main';
+
+@import 'global';
+@import 'header';
+@import 'pages';
+@import 'cart';
+@import 'products';
