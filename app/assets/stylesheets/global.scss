@@ -1,9 +1,14 @@
 $brand-bg-color-1: #B69F8D;
 $brand-bg-color-2: #C0DEC2;
+$brand-bg-color-3: #F5FFED;
 $brand-text-color-1: #756651;
 $brand-text-color-2: #B7A08E;
 $brand-hover-color: #4f4337;
 $band-selected-color: #94D6BA;
+
+body {
+  background: $brand-bg-color-3;
+}
 
 a {
   text-decoration: none;

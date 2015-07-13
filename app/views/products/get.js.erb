@@ -1,0 +1,3 @@
+Content.displayResults('<%=j render @products %>');
+Content.initProducts('<%=j @products.to_json.html_safe %>');
+Content.initImages('<%=j @products.map { |p| [p.id, image_for(p) ] }.to_json.html_safe %>');

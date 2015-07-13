@@ -11,6 +11,7 @@ gem 'jquery-rails'
 gem 'carrierwave'
 gem 'rails-i18n'
 gem 'devise'
+gem 'json'
 
 group :development, :test do
   gem 'web-console', '~> 2.0'

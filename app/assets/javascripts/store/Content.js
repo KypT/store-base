@@ -4,14 +4,9 @@ window.Content = (function() {
         lowerBound = 0,
         upperBound = 999,
         offset = 0,
-        tags = [];
-
-    function displayResults(data) {
-        if (data.length > 0)
-            $container.html(data);
-        else
-            offset -= loadAmount;
-    }
+        tags = [],
+        products = [],
+        images = [];
 
     function loadProducts() {
         $.get('/store/get?offset=' + offset + '&limit=' + loadAmount,
@@ -19,13 +14,36 @@ window.Content = (function() {
                 offset: offset,
                 limit: loadAmount,
                 tags: tags
-            },
-            displayResults);
+            });
     }
 
     return {
         setLoadAmount: function(val) { loadAmount = val; },
         setUpperBound: function(val) { upperBound = val; },
+
+        displayResults: function(data) {
+        if (data.length > 0)
+            $container.html(data);
+        else
+            offset -= loadAmount;
+        },
+
+        initProducts: function(data) {
+            products = JSON.parse(data);
+            Controls.initProducts();
+        },
+
+        getProduct: function(id) {
+            return products.filter(function(val){ return val.id == id })[0];
+        },
+
+        initImages: function(data) {
+            images = JSON.parse(data);
+        },
+
+        getImage: function(id) {
+            return images.filter(function(val) { return val[0] == id })[0][1];
+        },
 
         loadNextProducts: function() {
             if (offset + loadAmount <= upperBound) {
