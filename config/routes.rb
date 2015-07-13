@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   root 'pages#root'
+  get 'payment' => 'pages#payment'
+  get 'uniq' => 'pages#uniq'
+  get 'specials' => 'pages#specials'
   devise_for :users
 
   resources :products, path: 'store', except: [:edit, :create] do

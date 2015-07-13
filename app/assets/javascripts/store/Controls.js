@@ -8,6 +8,8 @@ window.Controls = (function() {
         $tags = $('.tags'),
         $loadPrev = $('.get-prev'),
         $loadNext = $('.get-next'),
+        $tabs = $storeControls.find('a'),
+        $storeContainer = $('.store-content'),
         $productModal = $('.products.modal');
 
     function tagHandler() {
@@ -29,12 +31,19 @@ window.Controls = (function() {
     }
 
     function bindDropdownTo($dropdown, $trigger) {
-        $trigger.click(function() {
-            $dropdown.fadeToggle(200);
-        });
-        $dropdown.mouseleave(function() {
-            setTimeout(function() { $dropdown.fadeOut(200); }, 100);
-        });
+        var onmouseleave = function(){
+            var $this = $(this),
+                timeoutId = setTimeout(function(){ $dropdown.fadeOut(200); }, 200);
+            $trigger.data('timeoutId', timeoutId);
+        };
+        var onmouseenter = function(){
+            clearTimeout($trigger.data('timeoutId'));
+            $dropdown.fadeIn(200);
+        };
+        $dropdown.mouseleave(onmouseleave);
+        $dropdown.mouseenter(onmouseenter);
+        $trigger.mouseleave(onmouseleave);
+        $trigger.mouseenter(onmouseenter);
     }
 
     function showProductModal() {
@@ -45,6 +54,10 @@ window.Controls = (function() {
         $productModal.find('.product-image').css('background-image', 'url(' + Content.getImage(productId) + ')');
     }
 
+    function loadTab(_, data) {
+        $storeContainer.html(data.responseText);
+    }
+
     return {
         init: function() {
             bindDropdownTo($collectionsDropdown, $toggleCollections);
@@ -53,6 +66,7 @@ window.Controls = (function() {
             $tags.find('.tag').click(function() { removeTag(this.getAttribute('id')) });
             $loadPrev.click( Content.loadPrevProducts );
             $loadNext.click( Content.loadNextProducts );
+            $tabs.bind('ajax:complete', loadTab);
         },
         initProducts: function() {
             var $products = $('.product');

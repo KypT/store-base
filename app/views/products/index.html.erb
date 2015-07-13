@@ -1,5 +1,7 @@
 <div class = 'store-controls'>
-  <h2 class = 'store-btn'>Оплата и доставка</h2>
+  <%= link_to controller: 'pages', action: 'payment', remote: true do %>
+      <h2 class = 'store-btn'>Оплата и доставка</h2>
+  <% end %>
   <div class = 'categories'>
     <h2 class = 'store-btn'>Товары</h2>
     <ul class = 'dropdown tag-buttons'>
@@ -16,8 +18,12 @@
       <li class = 'collection'>Крылатая коллекция</li>
     </ul>
   </div>
-  <h2 class = 'store-btn'>Акции</h2>
-  <h2 class = 'store-btn'>Индивидуальные заказы</h2>
+  <%= link_to controller: 'pages', action: 'specials', remote: true do %>
+      <h2 class = 'store-btn'>Акции</h2>
+  <% end %>
+  <%= link_to controller: 'pages', action: 'uniq', remote: true do %>
+      <h2 class = 'store-btn'>Индивидуальные заказы</h2>
+  <% end %>
 </div>
 <div class = 'store-controls store-controls__sub'>
   <ul class = 'tags'>

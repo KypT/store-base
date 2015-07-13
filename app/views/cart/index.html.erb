@@ -1,13 +1,13 @@
-<h1> Cart </h1>
-
-<div class = 'products'>
-  <% @products.each do |product| %>
-      <div class = 'product' data-id = <%= product.id %>>
-        <%= render product %>
-        <%= link_to 'Show', product_path(product) %>
-        <%= link_to 'Remove', cart_path(product.id), :method => 'delete', remote: true %>
-      </div>
-  <% end %>
+<div class = 'ui text container'>
+  <h1> Корзина </h1>
+  <div class = 'products'>
+    <% @products.each do |product| %>
+        <div class = 'product' data-id = <%= product.id %>>
+          <%= render product %>
+          <%= link_to 'Show', product_path(product) %>
+          <%= link_to 'Remove', cart_path(product.id), :method => 'delete', remote: true %>
+        </div>
+    <% end %>
+  </div>
+  <%= link_to 'Купить', checkout_cart_index_path %>
 </div>
-
-<%= link_to 'Checkout', checkout_cart_index_path %>
