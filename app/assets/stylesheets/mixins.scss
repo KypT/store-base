@@ -1,0 +1,20 @@
+@mixin transition($data) {
+  -webkit-transition: $data;
+  transition: $data;
+}
+
+@mixin translateY($percent) {
+  -webkit-transform: translateY($percent);
+  -moz-transform: translateY($percent);
+  -ms-transform: translateY($percent);
+  -o-transform: translateY($percent);
+  transform: translateY($percent);
+}
+
+@mixin translateX($percent) {
+  -webkit-transform: translateX($percent);
+  -moz-transform: translateX($percent);
+  -ms-transform: translateX($percent);
+  -o-transform: translateX($percent);
+  transform: translateX($percent);
+}

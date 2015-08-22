@@ -1,0 +1,8 @@
+<% if not defined?(context) %>
+    <h2><%= category.name %></h2>
+    <div class = 'ui equal width doubling stackable grid store-products'>
+        <%= render partial: category.products, layout: 'products/grid', locals: {grid_size: ''} %>
+    </div>
+<% elsif context == 'store' %>
+    <li class = 'collection' data-id = '<%= category.id %>'><%= category.name %></li>
+<% end %>

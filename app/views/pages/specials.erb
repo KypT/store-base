@@ -1,4 +1,9 @@
-<div class = 'ui text container'>
-  <h1>Акции и специальные предложения</h1>
-  <p>Акций пока нет</p>
+<div class='ui text container'>
+  <div class='specials'>
+  <%= image_tag 'arrow-left-active.png', class: 'prev-special' %>
+    <% @specials.each do |file| %>
+        <%= render file: file %>
+    <% end %>
+  <%= image_tag 'arrow-right-active.png', class: 'next-special' %>
+  </div>
 </div>

@@ -1,8 +1,8 @@
-//= require store/Content
-//= require store/TagSystem
-//= require store/Controls
+//= require store/Content.js
+//= require store/UI.js
+//= require store/specials.js
 
 $(function() {
-    Controls.init();
-    Content.init();
+    UI.init();
+    Content.load();
 });

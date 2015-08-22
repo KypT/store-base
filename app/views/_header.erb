@@ -1,31 +1,20 @@
-<nav class='navigation'>
-  <div class = 'profile icon'>
-    <%= link_to destroy_user_session_path, method: :delete do %>
-        <%= image_tag 'profile.png' %>
-    <% end %>
-  </div>
-  <div class = 'cart icon'>
-    <%= link_to cart_index_path do %>
-        <%= image_tag 'cart.png' %>
-    <% end %>
-  </div>
-  <ul class='ui grid'>
-    <li class='nav-item three wide column'>
-      <h3><%= link_to 'Магазин', products_path %></h3>
-    </li>
-    <li class='nav-item three wide column'>
-      <h3><%= link_to 'Корзина', cart_index_path %></h3>
-    </li>
-    <li class='nav-item four wide column'>
-      <%= link_to root_path do %>
-          <%= image_tag 'logo.png', class: 'logo' %>
+<nav>
+  <ul>
+    <li class = 'cart'>
+      <%= link_to '/hot' do %>
+          <%= image_tag 'cart.png' %>
+          <div class="items-counter <%= show_cart_counter %>"><%= @cart.count %></div>
       <% end %>
     </li>
-    <li class='nav-item three wide column'>
-      <h3><%= link_to 'Заказы', orders_path %></h3>
+    <li class = 'logo'>
+      <%= link_to root_path do %>
+          <%= image_tag 'logo.png' %>
+      <% end %>
     </li>
-    <li class='nav-item three wide column'>
-      <h3><%= link_to 'Войти', new_user_session_path %></h3>
+    <li>
+      <%= link_to '/hot' do %>
+          <%= image_tag 'profile.png' %>
+      <% end %>
     </li>
   </ul>
 </nav>

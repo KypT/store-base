@@ -1,0 +1,24 @@
+@import url(http://fonts.googleapis.com/css?family=Lobster|Roboto+Condensed&subset=latin,cyrillic);
+
+@font-face {
+  font-family: Cuprum;
+  src: font-url('Cuprum-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Karmina;
+  src: font-url('Karmina.otf') format('opentype');
+}
+
+.regular {
+  font-family: 'Cuprum', sans-serif;
+  font-weight: normal;
+  font-size: 20px;
+}
+
+.font-accent {
+  font-family: 'Karmina';
+  font-weight: normal;
+  font-size: 30px;
+}
+

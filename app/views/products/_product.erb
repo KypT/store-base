@@ -1,3 +1,34 @@
-<div class = 'four wide column product' title = '<%= product.name %>' data-id = '<%= product.id %>'>
-    <div class = 'product-data' style = 'background-image: url(<%= image_for product %>)'>&nbsp;</div>
-</div>
+<% if not defined?(context) %>
+    <div class='product product-data' data-id='<%= product.id %>'>
+      <img class='product-image' src="<%= images_for(product)[0] %>" alt="<%= product.name %>"/>
+      <div class="product-info">
+        <h3><%= product.name %></h3>
+        <p>Цена: <%= product.price %></p>
+        <img class='learn-more' src="<%= image_url 'arrow.png' %>" alt="<%= product.name %>"/>
+      </div>
+    </div>
+<% elsif context == 'cart' %>
+    <div class="cart product" data-id = '<%= product.id %>'>
+      <div class='img-container'>
+        <img src="<%= images_for(product)[0] %>" alt="<%= product.name %>"/>
+      </div>
+      <div class="details">
+        <h4 class="title">
+          <%= product.name %>
+          <%= link_to cart_path(id: product.id, type: type), remote: true, method: 'delete' do %>
+            <img class='remove' src="<%= image_url 'cross.png' %>" alt=""/>
+          <% end %>
+        </h4>
+        <div class="amount-control">
+          <%= link_to new_cart_path(id: product.id, type: type), remote: true, data: {target: "##{type + product.id.to_s}" } do %>
+            <span data-target="<%= "##{type + product.id.to_s}" %>" class='less-amount'>—</span>
+          <% end %>
+          <span id='<%= "#{type + product.id.to_s}" %>' class='amount-counter'><%= amounts[product.id] %></span>
+          <%= link_to new_cart_path(id: product.id, type: type), remote: true, data: {target: "##{type + product.id.to_s}" } do %>
+            <span data-target="<%= "##{type + product.id.to_s}" %>" class='more-amount'>+</span>
+          <% end %>
+        </div>
+        <span class='price'><%= product.price %></span>
+      </div>
+    </div>
+<% end %>

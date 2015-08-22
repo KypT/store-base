@@ -1,1 +1,3 @@
-$('.product[data-id="<%= @product.id %>"]').toggle();
+Cart.updateProduct(<%= @product.id %>, '<%= @type %>', 0);
+Cart.updateIcon(<%= @cart.count %>);
+Cart.updateTotal(<%= @total %>);

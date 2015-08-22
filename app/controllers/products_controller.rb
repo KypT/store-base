@@ -4,17 +4,28 @@ class ProductsController < ApplicationController
 
   def index
     @tags = Tag.all
+    @collections = Category.all
+    render partial: 'products/store', layout: false if request.xhr?
+  end
+
+  def hot
+    @collection = Category.first
+    @products = Product.all
+    @special = Special.first
   end
 
   def show
   end
 
   def get
-    tags = params[:tags] || []
+    tags = (params[:tags] || []).map(&:to_i)
+    category = Category.find_by_id params[:category]
     offset = params[:offset].to_i || 0
     limit = params[:limit].to_i || 8
+    @page = offset / limit
 
-    @products = products_with(tags).sort[offset, limit]
+    @products = (category ? category.products : Product.all).includes :images
+    @products = tagged_with(@products, tags).sort[offset, limit]
     render nothing: true and return until @products
     render layout: false
   end
@@ -27,6 +38,7 @@ class ProductsController < ApplicationController
   def update
     add_image if params[:image]
     update_tags if params[:tags]
+    update_category if params[:category]
     @product.update(product_params)
     render nothing: true
   end
@@ -47,13 +59,15 @@ class ProductsController < ApplicationController
       tag = Tag.find_by_name(tag_name) || Tag.create(name: tag_name)
       @product.tags << tag
     end
-    clear_tags
+    Tag.cleanup
   end
 
-  def clear_tags
-    Tag.find_each do | tag |
-      tag.destroy if tag.products.empty?
-    end
+  def update_category
+    category = Category.find_by_name params[:category]
+    category = Category.create name: params[:category] unless category
+    @product.category = category
+    @product.save
+    Category.cleanup
   end
 
   def add_image
@@ -65,17 +79,10 @@ class ProductsController < ApplicationController
     params.permit(:name, :price)
   end
 
-  def products_with(tags)
-    return Product.all if tags.empty?
-    first_tag = Tag.find_by_name tags.first
-    products = first_tag.products
-    return products if tags.length == 1
-    tagged_products = []
-    products.each do | product |
-      if tags - product.tags.map(&:name) == []
-        tagged_products << product
-      end
+  def tagged_with(products, tags)
+    return products if tags.empty?
+    products.select do | product |
+      product if tags - product.tags.map(&:id) == []
     end
-    tagged_products
   end
 end

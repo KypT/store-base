@@ -1,18 +1,30 @@
 class CartController < ApplicationController
   before_action :find_product, only: [:new, :destroy]
-  before_action :get_cart
 
   def index
     @products = @cart.products
   end
 
   def new
-    @cart.put @product
+    @type = params[:type]
+    @amount = params[:amount]
+
+    if @cart.include? @product, @type
+      @action = 'update'
+      @cart.update @product, @type, @amount
+    else
+      @action = 'put'
+      @cart.put @product, @type, @amount
+    end
+
+    @total = @cart.total
     render layout: false
   end
 
   def destroy
-    @cart.remove @product
+    @type = params[:type]
+    @cart.remove @product, @type
+    @total = @cart.total
     render layout: false
   end
 
@@ -22,10 +34,6 @@ class CartController < ApplicationController
   end
 
   private
-  def get_cart
-    @cart = SessionCart.new session
-  end
-
   def find_product
     id = params[:id].to_i
     @product = Product.find id

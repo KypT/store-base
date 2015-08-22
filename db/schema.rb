@@ -11,21 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150706130754) do
+ActiveRecord::Schema.define(version: 20150814122221) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
   end
-
-  create_table "categories_products", force: :cascade do |t|
-    t.integer "product_id"
-    t.integer "category_id"
-  end
-
-  add_index "categories_products", ["category_id"], name: "index_categories_products_on_category_id"
-  add_index "categories_products", ["product_id"], name: "index_categories_products_on_product_id"
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -41,11 +34,14 @@ ActiveRecord::Schema.define(version: 20150706130754) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
 
   create_table "images", force: :cascade do |t|
-    t.integer  "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "file"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
   end
+
+  add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
 
   create_table "labels", force: :cascade do |t|
     t.integer  "tag_id"
@@ -70,6 +66,7 @@ ActiveRecord::Schema.define(version: 20150706130754) do
     t.text     "description",                         default: ""
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
+    t.integer  "category_id"
   end
 
   create_table "products_tags", force: :cascade do |t|
@@ -79,6 +76,17 @@ ActiveRecord::Schema.define(version: 20150706130754) do
 
   add_index "products_tags", ["product_id"], name: "index_products_tags_on_product_id"
   add_index "products_tags", ["tag_id"], name: "index_products_tags_on_tag_id"
+
+  create_table "specials", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+  end
+
+  add_index "specials", ["imageable_type", "imageable_id"], name: "index_specials_on_imageable_type_and_imageable_id"
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"

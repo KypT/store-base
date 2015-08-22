@@ -1,0 +1,45 @@
+<% content_for :stylesheets do %>
+    <%= stylesheet_link_tag 'hot' %>
+<% end %>
+
+<div class="ui stackable grid hot container">
+  <div class="five wide column">
+    <div class="collection image-container" style='background-image: url(<%= image_for @collection %>)'></div>
+    <div class="collection-info">
+      <h2><%= @collection.name %></h2>
+      <p><%= @collection.description %></p>
+    </div>
+    <div class="button-container">
+      <a href="<%= url_for @collection %>" class='button next-collection' data-remote="true">Следующая коллекция</a>
+    </div>
+  </div>
+  <div class="six wide column">
+    <div class="brick half-height">
+      <div class="brick half-width stick-to-right"><%= render @products[0] %></div>
+      <div class="brick half-width"><%= render @products[1] %></div>
+    </div>
+    <div class="brick half-height">
+      <div class="brick half-width stick-to-right"><%= render @products[2] %></div>
+      <div class="brick half-width"><%= render @products[3] %></div>
+    </div>
+    <div class="button-container">
+      <a href="<%= products_url %>">
+        <span class='link-to-store'> Просмотр каталога </span>
+      </a>
+    </div>
+  </div>
+  <div class="five wide column">
+    <div class="special image-container" style='background-image: url(<%= image_for @special %>)'></div>
+    <div class="special-info">
+      <h2><%= @special.title %></h2>
+      <p><%= @special.description %></p>
+    </div>
+    <div class="button-container">
+      <a href="<%= url_for @special %>" class='button next-specials' data-remote="true">Следующая акция</a>
+    </div>
+  </div>
+</div>
+<%= render partial: 'products/productModal' %>
+<% content_for :javascripts do %>
+    <%= render partial: 'products/json', locals: {products: @products} %>
+<% end %>

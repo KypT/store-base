@@ -1,0 +1,61 @@
+.collection.image-container,
+.special.image-container{
+  width: 30vh;
+  height: 30vh;
+  margin: auto;
+  background-size: cover;
+  background-position: center;
+}
+
+.grid.fluid {
+  margin: 0 !important;
+}
+
+.hot.container {
+  padding: 40px !important;
+  .column {
+    overflow: hidden;
+  }
+  .product {
+    height: 15vw;
+    width: 15vw;
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
+.brick.half-width {
+  padding: 5px;
+}
+
+.stick-to-right .product {
+  margin: auto 5px auto auto;
+}
+
+.special-info,
+.collection-info {
+  padding: 10px 0;
+  h2 {
+    text-align: center;
+  }
+}
+
+.button-container {
+  clear: both;
+  text-align: center;
+  padding: 10px 0;
+
+  .link-to-store {
+    margin: auto;
+    width: 50%;
+    padding: 20px 40px;
+    display: block;
+    text-align: center;
+    background-color: red;
+    font-size: 22px;
+  }
+}
+
+.ui.hot.container {
+  width: calc( 1480px + 2em ) !important;
+}

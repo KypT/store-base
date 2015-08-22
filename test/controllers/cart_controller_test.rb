@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CartControllerTest < ActionController::TestCase
   test "should get index" do
-    get :index
+    get :catalog
     assert_response :success
   end
 

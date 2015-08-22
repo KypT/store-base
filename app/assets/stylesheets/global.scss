@@ -1,13 +1,11 @@
-$brand-bg-color-1: #B69F8D;
-$brand-bg-color-2: #C0DEC2;
-$brand-bg-color-3: #F5FFED;
-$brand-text-color-1: #756651;
-$brand-text-color-2: #B7A08E;
-$brand-hover-color: #4f4337;
-$band-selected-color: #94D6BA;
+@import "variables";
+@import "mixins";
+@import "fonts";
 
 body {
+  @extend .regular;
   background: $brand-bg-color-3;
+  color: #8B8379;
 }
 
 a {
@@ -17,6 +15,44 @@ a {
     color: inherit;
   }
   &:hover {
-    color: $brand-hover-color;
+    color: black;
   }
+}
+
+.button {
+  display: inline-block;
+  cursor: pointer;
+  color: black;
+  padding: 8px 12px;
+  font-size: 18px;
+  border-radius: 3px;
+  background-color: $button-bg-color;
+  &:hover {
+    background-color: $button-bg-color__hover;
+  }
+}
+
+.hide {
+  display: none !important;
+}
+
+p {
+  text-align: justify;
+  font-size: 20px;
+}
+
+.image-container {
+  img {
+    width: 100%;
+  }
+}
+
+.clear:after {
+  content:"";
+  display:table;
+  clear:both;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @extend .regular;
 }

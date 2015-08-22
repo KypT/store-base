@@ -1,0 +1,27 @@
+.specials {
+  position: relative;
+  .special {
+    position: absolute;
+    display: none;
+  }
+  .special.current {
+    position: static;
+    display: block;
+  }
+}
+
+.prev-special,
+.next-special {
+  cursor: pointer;
+  position: absolute;
+  top: 75px;
+  width: 50px;
+}
+
+.prev-special {
+  left: -75px;
+}
+
+.next-special {
+  right: -75px;
+}

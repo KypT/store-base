@@ -1,3 +1,129 @@
-// Place all the styles related to the cart controller here.
-// They will automatically be included in application.css.scss.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.modal-wrapper {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: transparent;
+  @include transition(all 0.3s);
+
+  &.show {
+    background-color: rgba(255, 255, 255, 0.71);
+    display: block;
+    .cart.modal {
+      right: 0;
+    }
+  }
+}
+
+.cart.modal {
+  @extend .no-select;
+  position: absolute;
+  width: 500px;
+  height: calc(100% - 205px);
+  top: 205px;
+  right: -500px;
+  background-color: #F7FCFA;
+  z-index: 10;
+  overflow-y: scroll;
+  @include transition(all 0.3s);
+
+  .section {
+    h3 {
+      @extend .font-accent;
+      margin: 0;
+      text-align: center;
+      font-size: 26px;
+      background-color: $brand-color-1;
+    }
+  }
+
+  .products {
+    padding: 20px 43px;
+  }
+
+  .total-container {
+    position: relative;
+    font-size: 19px;
+    padding: 7px;
+    text-align: left;
+    background-color: $brand-color-1;
+    .total {
+      @extend .font-accent;
+      position: absolute;
+      right: 10px;
+      text-align: right;
+    }
+  }
+  .make-order {
+    @extend .font-accent;
+    background-color: $brand-color-3;
+    color: white;
+    font-size: 34px;
+    padding: 26px;
+    text-align: center;
+    cursor: pointer;
+  }
+}
+
+.cart.product {
+  margin-top: 5px;
+  .img-container {
+    display: inline-block;
+    position: relative;
+    width: 150px;
+    height: 90px;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
+  }
+  .details {
+    vertical-align: top;
+    display: inline-block;
+
+    h4 {
+      position: relative;
+      font-size: 16px;
+      margin-bottom: 6px;
+      padding: 7px 5px;
+      text-align: left;
+      background-color: #EDB78E;
+    }
+
+    .amount-control {
+      vertical-align: top;
+      display: inline-block;
+
+      span {
+        vertical-align: top;
+      }
+
+      .less-amount,
+      .more-amount {
+        font-size: 24px;
+      }
+    }
+
+    .price {
+      @extend .font-accent;
+      font-size: 20px;
+      display: inline-block;
+      vertical-align: top;
+      line-height: 50px;
+      text-align: center;
+      width: 60px;
+      background-color: #C8DDD6;
+    }
+    .remove {
+      position: absolute;
+      right: 10px;
+      display: inline-block;
+      cursor: pointer;
+      height: 20px;
+      vertical-align: middle;
+    }
+  }
+}

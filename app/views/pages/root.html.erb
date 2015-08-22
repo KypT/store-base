@@ -1,4 +1,33 @@
-<div class = 'ui text container'>
-  <h1>Добро пожаловать в мятный домик!</h1>
-  <p>Здесь вы сможете приобрести украшения и акксесуары ручной работы</p>
+<div class="layout">
+  <div class='top-half'>
+    <%= render partial: '/header' %>
+  </div>
+  <div class='bottom-half'>
+    <div class="brick quarter-width">
+      <div class="brick half-height">
+        <div class="brick half-width"><%= render partial: @products[0] %></div>
+        <div class="brick half-width"><%= render partial: @products[1] %></div>
+      </div>
+      <div class="brick half-height"><%= render partial: @products[2] %></div>
+    </div>
+    <div class="brick quarter-width"><%= render partial: @products[3] %></div>
+    <div class="brick quarter-width">
+      <div class="brick half-height"><%= render partial: @products[4] %></div>
+      <div class="brick half-height">
+        <div class="brick half-width"><%= render partial: @products[5] %></div>
+        <div class="brick half-width"><%= render partial: @products[6] %></div>
+      </div>
+    </div>
+    <div class="brick quarter-width">
+      <div class="brick half-height">
+        <div class="brick half-width"><%= render partial: @products[7] %></div>
+        <div class="brick half-width"><%= render partial: @products[8] %></div>
+      </div>
+      <div class="brick half-height"><%= render partial: @products[9] %></div>
+    </div>
+  </div>
 </div>
+<%= render partial: 'products/productModal' %>
+<% content_for :javascripts do %>
+    <%= render partial: 'products/json', locals: {products: @products} %>
+<% end %>

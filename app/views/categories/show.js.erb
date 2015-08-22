@@ -1,0 +1,3 @@
+$('.collection.image-container').css('background-image', 'url(<%= image_for @category %>)');
+$('.collection-info p').text('<%= @category.description %>');
+$('.button.next-collection').attr('href', '<%= url_for @category %>');

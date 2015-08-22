@@ -14,7 +14,7 @@ function activateAdminMode() {
             var $this = $(this),
                 url = $this.attr('data-url'),
                 attr = $this.attr('data-attr'),
-                val = $this.html();
+                val = $.trim($this.text());
 
             updateAttribute(url, attr, val);
         })

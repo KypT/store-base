@@ -1,66 +1,47 @@
 window.Content = (function() {
-    var $container = $('.store-products'),
-        loadAmount = 8,
-        lowerBound = 0,
-        upperBound = 999,
-        offset = 0,
-        tags = [],
-        products = [],
-        images = [];
-
-    function loadProducts() {
-        $.get('/store/get?offset=' + offset + '&limit=' + loadAmount,
-            {
-                offset: offset,
-                limit: loadAmount,
-                tags: tags
-            });
-    }
+    var tags = [],
+        category = null,
+        searchQuery = null,
+        pageCapacity = 8;
 
     return {
-        setLoadAmount: function(val) { loadAmount = val; },
-        setUpperBound: function(val) { upperBound = val; },
-
-        displayResults: function(data) {
-        if (data.length > 0)
-            $container.html(data);
-        else
-            offset -= loadAmount;
+        page: 0,
+        tag: function(tag) {
+            if (!this.tagged(tag))
+                tags.push(tag);
+            this.load();
         },
-
-        initProducts: function(data) {
-            products = JSON.parse(data);
-            Controls.initProducts();
+        untag: function(tag) {
+            tags.splice(tags.indexOf(tag), 1);
+            this.load();
         },
-
-        getProduct: function(id) {
-            return products.filter(function(val){ return val.id == id })[0];
+        tagged: function(tag) {
+            return tags.indexOf(tag) > -1;
         },
-
-        initImages: function(data) {
-            images = JSON.parse(data);
+        category: function (cat) {
+            if (arguments.length == 0) return category;
+            category = cat;
+            this.load();
         },
-
-        getImage: function(id) {
-            return images.filter(function(val) { return val[0] == id })[0][1];
+        like: function(words) {
+            searchQuery = words;
+            this.load();
         },
-
-        loadNextProducts: function() {
-            if (offset + loadAmount <= upperBound) {
-                offset += loadAmount;
-                loadProducts();
-            }
+        reset: function() {
+            tags = [];
+            category = null;
+            searchQuery = null;
+            pageCapacity = 8;
+            this.load();
         },
-        loadPrevProducts: function() {
-            if (offset - loadAmount >= lowerBound) {
-                offset -= loadAmount;
-                loadProducts();
-            }
-        },
-        init: function(_tags) {
-            tags = _tags;
-            offset = 0;
-            loadProducts();
+        load: function(page) {
+            page = page || 0;
+            if (page < 0) page = 0;
+            $.get('/store/get', {
+                    offset: page * pageCapacity, limit: pageCapacity,
+                    tags: tags, category: category,
+                    search: searchQuery
+                });
         }
     }
 }());
