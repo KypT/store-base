@@ -1,9 +1,9 @@
 Rails.application.config.assets.version = '1.0'
 
-controllers = %w( products pages cart specials )
+pages = %w( hot store root )
 
-controllers.each do | controller |
-  Rails.application.config.assets.precompile += %W( #{controller}.js )
+pages.each do | page |
+  Rails.application.config.assets.precompile += %W( pages/#{page}.js )
 end
 
-Rails.application.config.assets.precompile += %w( admin.js freewall/freewall.js store/main.js hot.css )
+Rails.application.config.assets.precompile += %w( admin.js store/main.js hot.css )

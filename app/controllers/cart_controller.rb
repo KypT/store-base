@@ -7,7 +7,7 @@ class CartController < ApplicationController
 
   def new
     @type = params[:type]
-    @amount = params[:amount]
+    @amount = params[:amount].to_i
 
     if @cart.include? @product, @type
       @action = 'update'

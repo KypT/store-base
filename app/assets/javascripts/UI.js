@@ -1,141 +1,119 @@
-window.Products = (function () {
-    var $productModal = $('.products.modal');
-
-    function getProduct(id) {
-        for (var i = 0; i < products.length; i++)
-            if (products[i].id == id) return products[i];
-    }
-
-    function imageFor(item) {
-        if (item.images.length > 0)
-            return item.images[0].file.url;
-        return '';
-    }
-
-    function showProductModal() {
-        var productId = this.getAttribute('data-id'),
-            product = getProduct(productId);
-        $productModal.modal('show');
-        $productModal.find('.modal-product-name').text(product.name);
-        $productModal.find('.modal-product-price span').text(product.price);
-        $productModal.find('.more-amount').data('target', '.cart-counter-' + product.id);
-        $productModal.find('.less-amount').data('target', '.cart-counter-' + product.id);
-        $productModal.find('.amount-counter').addClass('cart-counter-' + product.id);
-        $productModal.find('.modal-product-images').css('background-image', 'url(' + imageFor(product) + ')');
-        $productModal.find('.buy-button')[0].search = "?id=" + product.id + '&type=stocked';
-        $productModal.find('.order-button')[0].search = "?id=" + product.id + '&type=copy';
-    }
-
+window.UI = (function () {
     return {
-        init: function () {
-            var $products = $('.product.product-data');
-            setTimeout( function () {$products.addClass('show');}, 300);
-            $products.click( showProductModal );
-        }
-    }
-}());
-
-window.Cart = (function() {
-    var $cart = $('.cart.modal'),
-        $wrapper = $('.modal-wrapper'),
-        $cartCounter = $('.cart .items-counter');
-
-    $(document).click(function(e) {
-        if ($(e.target).hasClass('modal-wrapper'))
-            hide();
-    });
-
-    $('.close-cart').click(hide);
-
-    $cart.find('.section').each(function(_, s) {
-        var $section = $(s);
-        if (sectionIsEmpty($section))
-            hideSection($section);
-    });
-
-
-    function visible() {
-        return $wrapper.hasClass('show');
-    }
-
-    function hide() {
-        $wrapper.removeClass('show');
-        setTimeout(function () { $wrapper.css({display: 'none'})}, 300);
-    }
-
-    function show() {
-        $wrapper.css({display: 'block'});
-        setTimeout(function() { $wrapper.addClass('show')}, 0);
-    }
-
-    function hideProduct(id, type) {
-        $cart.find('.' + type + ' .cart.product[data-id="' + id +'"]').remove();
-    }
-
-    function hideSection($section) {
-        $section.addClass('hide');
-        updateCart();
-    }
-
-    function showSection($section) {
-        $section.removeClass('hide');
-        updateCart();
-    }
-
-    function sectionIsEmpty($section) {
-        return $section.find('.product').length == 0;
-    }
-
-    function updateCart() {
-        if ($cart.find('.product').length == 0)
-            showEmptyCartMessage();
-        else
-            hideEmptyCartMessage();
-    }
-
-    function showEmptyCartMessage() {
-        $cart.find('.empty-cart-message').removeClass('hide');
-        $cart.find('.checkout').addClass('hide');
-    }
-
-    function hideEmptyCartMessage() {
-        $cart.find('.empty-cart-message').addClass('hide');
-        $cart.find('.checkout').removeClass('hide');
-    }
-
-    return {
-        toggle: function() {
-            if (visible()) hide();
-            else show();
+        initModal4Products: function ($products, $modal) {
+            var modal = UI.Modal.create($modal);
+            $products.click(modal.show);
+            return modal;
         },
 
-        addProduct: function(html, type) {
-            var $section = $cart.find('.' + type);
-            $section.find('.products').append(html);
-            if (!sectionIsEmpty($section))
-                showSection($section);
+        addShowEffectToProducts: function ($products) {
+            setTimeout(function () {
+                $products.addClass('show');
+            }, 300);
         },
 
-        updateProduct: function(id, type, amount) {
-            var $section = $cart.find('.' + type);
-            if (amount == 0) hideProduct(id, type);
-            $section.find('#cart-counter-' + id).text(amount);
-            if (sectionIsEmpty($section))
-                hideSection($section);
-        },
-
-        updateTotal: function(total) {
-            $cart.find('.total').text(total);
-        },
-
-        updateIcon: function(count) {
-            if (count == 0) {
-                $cartCounter.addClass('hide');
+        Counter: (function () {
+            function addAmountToRequest(_, request, options) {
+                var count = parseInt($(this.getAttribute('data-target')).text());
+                options.url += '&amount=' + count;
             }
-            else {
-                $cartCounter.removeClass('hide');
-                $cartCounter.text(count);
+
+            function getCount($counter) {
+                return parseInt($counter.text());
             }
-        }
+
+            function initDecreaseBtn($btn, min) {
+                $btn.click(decreaseCounter(min));
+            }
+
+            function initIncreaseBtn($btn) {
+                $btn.click(increaseCounter);
+            }
+
+            function decreaseCounter(min) {
+                return function() {
+                    var $counter = $(this.getAttribute('data-target')),
+                        count = getCount($counter);
+                    if (--count < min) count = min;
+                    $counter.text(count);
+                }
+            }
+
+            function increaseCounter() {
+                var $counter = $(this.getAttribute('data-target'));
+                $counter.text(getCount($counter) + 1);
+            }
+
+            return {
+                modal: function ($counter) {
+                    initIncreaseBtn($counter.find('.more-amount'));
+                    initDecreaseBtn($counter.find('.less-amount'), 1);
+                },
+                cart: function ($counter) {
+                    initIncreaseBtn($counter.find('.more-amount'));
+                    initDecreaseBtn($counter.find('.less-amount'), 0);
+                    $counter.find('a').bind('ajax:beforeSend', addAmountToRequest);
+                }
+            }
+        }()),
+
+        Dropdown: (function () {
+            return {
+                create: function ($dropdown, $trigger) {
+                    var onmouseleave = function () {
+                        var $this = $(this),
+                            timeoutId = setTimeout(function () {
+                                $dropdown.fadeOut(200);
+                            }, 200);
+                        $trigger.data('timeoutId', timeoutId);
+                    };
+                    var onmouseenter = function () {
+                        clearTimeout($trigger.data('timeoutId'));
+                        $dropdown.fadeIn(200);
+                    };
+                    $dropdown.mouseleave(onmouseleave);
+                    $dropdown.mouseenter(onmouseenter);
+                    $trigger.mouseleave(onmouseleave);
+                    $trigger.mouseenter(onmouseenter);
+                }
+            }
+        }()),
+
+        Modal: (function () {
+            function addAmountToRequest(_, request, options) {
+                var count = parseInt($(this.getAttribute('data-target')).text());
+                options.url += '&amount=' + count;
+            }
+
+            return {
+                create: function ($modal) {
+                    var modalCounter = $modal.find('.amount-control'),
+                        modalBuyButton = $modal.find('.buy-button'),
+                        modalOrderButton = $modal.find('.order-button');
+
+                    UI.Counter.modal(modalCounter);
+                    modalBuyButton.bind('ajax:beforeSend', addAmountToRequest);
+                    modalOrderButton.bind('ajax:beforeSend', addAmountToRequest);
+
+                    return {
+                        show: function () {
+                            var productId = this.getAttribute('data-id'),
+                                product = Products.get(productId);
+                            $modal.find('*[contenteditable="true"]').attr('data-url', '/store/' + product.name);
+                            $modal.find('.modal-product-name').text(product.name);
+                            $modal.find('.modal-product-price span').text(product.price);
+                            $modal.find('.more-amount').data('target', '.cart-counter-' + product.id);
+                            $modal.find('.modal-product-description > p').text(product.description);
+                            $modal.find('.less-amount').data('target', '.cart-counter-' + product.id);
+                            $modal.find('.amount-counter').addClass('cart-counter-' + product.id).text(1);
+                            $modal.find('.modal-product-images').css('background-image', 'url(' + Products.imageFor(product) + ')');
+                            $modal.find('.buy-button')[0].search = "?id=" + product.id + '&type=stocked';
+                            $modal.find('.order-button')[0].search = "?id=" + product.id + '&type=copy';
+                            $modal.modal('show');
+                        }
+                    }
+                }
+            }
+        }())
     }
 }());

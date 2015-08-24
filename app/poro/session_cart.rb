@@ -23,10 +23,12 @@ class SessionCart
   end
 
   def put(product, type, amount)
+    return if amount <= 0
     @session[:products] << { 'id' => product.id, 'type' => type, 'amount' => amount } unless include? product, type
   end
 
   def update(product, type, amount)
+    remove product, type and return if amount <= 0
     ind = @session[:products].find_index { | p | p['id'] == product.id and p['type'] == type }
     @session[:products][ind] = { 'id' => product.id, 'type' => type, 'amount' => amount }
   end
@@ -40,13 +42,16 @@ class SessionCart
     @session[:products].delete p if p
   end
 
-  def checkout
-    Order.create products: self.products
-    self.clear
+  def make_order
+    order = Order.new
+    @session[:products].each do | p |
+      order.cart_entries << CartEntry.create(product: Product.find(p['id']), amount: p['amount'], order_type: p['type'])
+    end
+    order
   end
 
   def count
-    @session[:products].count || 0
+    @session[:products] ? @session[:products].count : 0
   end
 
   private

@@ -167,7 +167,7 @@
     background-color: $brand-color-2;
     background-size: cover;
     background-position: center;
-    min-height: 400px;
+    min-height: 320px;
   }
   .modal-product-description {
     position: relative;
@@ -175,7 +175,7 @@
     text-align: justify;
     padding: 10px;
     margin: 0;
-    &>p {
+    & > p {
       float: left;
       padding: 0 40px;
       width: calc(100% - 200px);
@@ -186,7 +186,7 @@
     width: 200px;
     .amount-info {
       text-align: center;
-      color: $font-color-1;
+      color: $font-color-2;
       font-size: 20px;
       margin-bottom: 0;
     }
@@ -248,8 +248,10 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.49);
   transition: opacity 0.3s;
+  background-color: rgba(255, 255, 255, 0.49);
+  background-size: cover;
+  background-position: center;
 }
 
 .product .product-info {

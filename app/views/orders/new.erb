@@ -1,0 +1,43 @@
+<div class="ui container">
+    <div class="create-order">
+      <%= form_tag orders_path, class: 'new-order' do %>
+          <h1 class="font-accent">Оформление заказа</h1>
+          <div class="field">
+            <%= label :order, :name, 'Ваше имя' %>
+            <%= text_field :order, :name %>
+          </div>
+          <div class="field">
+            <%= label :order, :surname, 'Фамилия' %>
+            <%= text_field :order, :surname %>
+          </div>
+          <div class="field">
+            <%= label :order, :phone, 'Телефон' %>
+            <%= phone_field :order, :phone %>
+          </div>
+          <div class="field">
+            <%= label :order, :email, 'Email' %>
+            <%= email_field :order, :email %>
+          </div>
+          <div class="field">
+            <%= label :order, :country, 'Страна' %>
+            <%= text_field :order, :country %>
+          </div>
+          <div class="field">
+            <%= label :order, :city, 'Город' %>
+            <%= text_field :order, :city %>
+          </div>
+          <div class="field">
+            <%= label :order, :address, 'Адрес' %>
+            <%= text_field :order, :address %>
+          </div>
+          <div class="field">
+            <%= label :order, :post_code, 'Индекс' %>
+            <%= number_field :order, :post_code %>
+          </div>
+          <%= submit_tag 'Продолжить →' %>
+      <% end %>
+    </div>
+    <div class="order-summary">
+      <%= render partial: 'orders/summary', locals: { order: @order } %>
+    </div>
+</div>

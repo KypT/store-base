@@ -29,9 +29,11 @@
         <span>Общая сумма ваших покупок:</span>
         <span class='total'><%= cart.total %></span>
       </div>
-      <div class='make-order'>
-        Перейти к оформлению заказа &#8594;
-      </div>
+      <%= link_to new_order_path do %>
+          <div class='make-order'>
+            Заказать &#8594;
+          </div>
+      <% end %>
     </div>
   </div>
 </div>

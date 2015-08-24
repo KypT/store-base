@@ -36,7 +36,12 @@ class ProductsController < ApplicationController
   end
 
   def update
-    add_image if params[:image]
+    begin
+      add_image
+      redirect_to product_path(@product)
+      return
+    end if params[:image]
+
     update_tags if params[:tags]
     update_category if params[:category]
     @product.update(product_params)
@@ -76,7 +81,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.permit(:name, :price)
+    params.permit(:name, :price, :description)
   end
 
   def tagged_with(products, tags)

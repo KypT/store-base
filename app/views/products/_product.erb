@@ -1,6 +1,6 @@
 <% if not defined?(context) %>
     <div class='product product-data' data-id='<%= product.id %>'>
-      <img class='product-image' src="<%= images_for(product)[0] %>" alt="<%= product.name %>"/>
+      <div class="product-image" style ='background-image: url(<%= images_for(product)[0] %>)'></div>
       <div class="product-info">
         <h3><%= product.name %></h3>
         <p>Цена: <%= product.price %></p>

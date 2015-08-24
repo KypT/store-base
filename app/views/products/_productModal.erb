@@ -1,13 +1,13 @@
 <div class="ui products modal">
-  <h2 class='modal-product-name'></h2>
+  <h2 class='modal-product-name' <%= editable 'name', '#' %> ></h2>
   <div class='modal-product-images'></div>
   <div class='modal-product-description clear'>
-    <p><%= lorem %></p>
+    <p <%= editable 'description', '#' %>></p>
     <div class='modal-product-actions no-select'>
       <div class='modal-product-price'>
-        <span>0</span>
+        <span <%= editable 'price', '#' %> >0</span>
       </div>
-      <p class='amount-info'>в наличии: <span class='stock-amount'>0</span></p>
+      <p class='amount-info'>в наличии: <span class='stock-amount' <%= editable 'stock', '#' %> >0</span></p>
       <div class="amount-control">
         <span data-target = '#modal-counter' class='less-amount'>-</span>
         <span id = 'modal-counter' class='amount-counter'>0</span>
@@ -17,5 +17,4 @@
       <%= link_to 'Заказать', new_cart_path(id: nil), remote: true, class: 'btn order-button', data: {target: '#modal-counter'} %>
     </div>
   </div>
-  <div class='info'></div>
 </div>

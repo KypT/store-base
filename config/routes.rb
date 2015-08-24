@@ -19,6 +19,6 @@ Rails.application.routes.draw do
     get 'checkout', on: :collection
   end
 
-  resources :orders, except: [:new, :update, :edit, :update]
+  resources :orders, except: [:update, :edit]
 
 end

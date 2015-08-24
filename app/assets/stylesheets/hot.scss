@@ -43,15 +43,14 @@
 .button-container {
   clear: both;
   text-align: center;
-  padding: 10px 0;
+  padding: 10px 8px;
 
   .link-to-store {
     margin: auto;
-    width: 50%;
-    padding: 20px 40px;
+    padding: 5px 10px;
     display: block;
     text-align: center;
-    background-color: red;
+    background-color: $brand-color-3;
     font-size: 22px;
   }
 }

@@ -22,7 +22,7 @@ class SpecialsController < ApplicationController
   def create
     @special = Special.new(special_params)
     if @special.save
-      redirect_to @special, notice: 'Special was successfully created.'
+      redirect_to specials_path, notice: 'Special was successfully created.'
     else
       render :edit
     end

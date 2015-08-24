@@ -11,7 +11,7 @@
 <body>
     <%= yield :header %>
     <%= yield %>
-    <%= javascript_include_tag 'application', params[:controller]%>
+    <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag 'admin' if user_signed_in? %>
     <%= yield :javascripts %>
 </body>

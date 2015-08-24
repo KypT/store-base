@@ -1,0 +1,35 @@
+<div class="order summary">
+  <h3 class="font-accent">Детали заказа</h3>
+
+  <% stocked_entries = order.entries_with('stocked') %>
+  <% unless stocked_entries.empty? %>
+      <div class="section stocked">
+        <h4>Покупка</h4>
+        <div class="entries">
+          <%= render partial: stocked_entries %>
+        </div>
+      </div>
+  <% end %>
+
+  <% copy_entries = order.entries_with('copy') %>
+  <% unless copy_entries.empty? %>
+      <div class="section copy">
+        <h4>Повторы</h4>
+        <div class="entries">
+          <%= render partial: copy_entries %>
+        </div>
+      </div>
+  <% end %>
+
+  <% order_entries = order.entries_with('order') %>
+  <% unless order_entries.empty? %>
+      <div class="section order">
+        <h4>Заказы</h4>
+        <div class="entries">
+          <%= render partial: order_entries %>
+        </div>
+      </div>
+  <% end %>
+
+  <h3>Сумма заказа: <%= order.total %></h3>
+</div>

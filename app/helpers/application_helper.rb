@@ -9,6 +9,12 @@ module ApplicationHelper
     end
   end
 
+  def editable(attr, url)
+    if admin_signed_in?
+      "contenteditable=true data-url=#{url} data-attr=#{attr}"
+    end
+  end
+
   def show_cart_counter
     'hide' unless @cart.count > 0
   end
@@ -26,6 +32,7 @@ module ApplicationHelper
   end
 
   def image_for(thing)
+    return image_url('missing-image.png') unless thing
     thing.image ? thing.image.file.url : image_url('missing-image.png')
   end
 end

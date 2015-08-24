@@ -1,5 +1,3 @@
-//= require util.js
-
 function updateAttribute(url, attr, value) {
     var data = {};
     data[attr] = value;
@@ -7,7 +5,7 @@ function updateAttribute(url, attr, value) {
 }
 
 function activateAdminMode() {
-    var $editables = $('.editable');
+    var $editables = $('*[contenteditable=true]');
 
     if ($editables.length > 0) {
         $editables.blur(function() {

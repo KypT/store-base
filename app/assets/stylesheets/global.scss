@@ -5,7 +5,7 @@
 body {
   @extend .regular;
   background: $brand-bg-color-3;
-  color: #8B8379;
+  color: $font-color-1;
 }
 
 a {
@@ -25,10 +25,9 @@ a {
   color: black;
   padding: 8px 12px;
   font-size: 18px;
-  border-radius: 3px;
-  background-color: $button-bg-color;
+  background-color: $brand-color-3;
   &:hover {
-    background-color: $button-bg-color__hover;
+    background-color: $brand-color-3;
   }
 }
 
@@ -56,3 +55,20 @@ p {
 h1, h2, h3, h4, h5, h6 {
   @extend .regular;
 }
+
+input {
+  outline: none;
+}
+
+.bordered {
+  border: 1px solid $font-color-1;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='number'],
+input[type=submit] {
+  @extend .bordered;
+}
+

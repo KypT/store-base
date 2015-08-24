@@ -1,5 +1,5 @@
-<% content_for :stylesheets do %>
-    <%= stylesheet_link_tag 'hot' %>
+<% content_for :javascripts do %>
+    <%= javascript_include_tag 'pages/hot' %>
 <% end %>
 
 <div class="ui stackable grid hot container">
@@ -7,6 +7,7 @@
     <div class="collection image-container" style='background-image: url(<%= image_for @collection %>)'></div>
     <div class="collection-info">
       <h2><%= @collection.name %></h2>
+
       <p><%= @collection.description %></p>
     </div>
     <div class="button-container">
@@ -22,21 +23,24 @@
       <div class="brick half-width stick-to-right"><%= render @products[2] %></div>
       <div class="brick half-width"><%= render @products[3] %></div>
     </div>
-    <div class="button-container">
-      <a href="<%= products_url %>">
-        <span class='link-to-store'> Просмотр каталога </span>
-      </a>
-    </div>
+    <a href="<%= products_url %>">
+      <div class="button-container">
+        <span class='link-to-store'>Просмотр каталога →</span>
+      </div>
+    </a>
   </div>
   <div class="five wide column">
-    <div class="special image-container" style='background-image: url(<%= image_for @special %>)'></div>
-    <div class="special-info">
-      <h2><%= @special.title %></h2>
-      <p><%= @special.description %></p>
-    </div>
-    <div class="button-container">
-      <a href="<%= url_for @special %>" class='button next-specials' data-remote="true">Следующая акция</a>
-    </div>
+    <% if @special %>
+        <div class="special image-container" style='background-image: url(<%= image_for @special %>)'></div>
+        <div class="special-info">
+          <h2><%= @special.title %></h2>
+
+          <p><%= @special.description %></p>
+        </div>
+        <div class="button-container">
+          <a href="<%= url_for @special %>" class='button next-specials' data-remote="true">Следующая акция</a>
+        </div>
+    <% end %>
   </div>
 </div>
 <%= render partial: 'products/productModal' %>

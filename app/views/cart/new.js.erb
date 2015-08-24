@@ -1,8 +1,7 @@
 <% if @action == 'put' %>
-    Cart.addProduct('<%=j render partial: @product, locals: { context: 'cart', amounts: { @product.id => @amount }, type: @type } %>', '<%= @type %>');
+Cart.addProduct('<%=j render partial: @product, locals: { context: 'cart', amounts: { @product.id => @amount }, type: @type } %>', '<%= @type %>');
 <% elsif @action == 'update' %>
-    Cart.updateProduct(<%= @product.id %>, '<%= @type %>', <%= @amount %>);
+Cart.updateProduct(<%= @product.id %>, '<%= @type %>', <%= @amount %>);
 <% end %>
-
 Cart.updateIcon(<%= @cart.count %>);
 Cart.updateTotal(<%= @total %>);

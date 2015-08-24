@@ -1,0 +1,100 @@
+.create-order,
+.order-details {
+  float: left;
+  width: calc(100% - 400px);
+}
+
+.create-order,
+.order-details,
+.order-summary {
+  margin: 20px 0;
+  @media (max-width: 992px) {
+    float: none;
+    width: 100%;
+  }
+}
+
+.order-summary {
+  float: right;
+}
+
+.order-details table {
+  width: 100%;
+}
+
+form.new-order {
+  padding: 0 10px;
+
+  h1 {
+    margin-top: 0;
+  }
+
+  .field {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 0.2em;
+
+    label {
+      width: 20%;
+      float: left;
+    }
+    input {
+      width: 80%;
+      float: right;
+    }
+  }
+  input[type=submit] {
+    background-color: $brand-color-3;
+  }
+}
+
+.order.summary {
+  @extend .bordered;
+  margin: auto;
+  width: 400px;
+  border-radius: 5px;
+  overflow: hidden;
+
+  h3 {
+    margin: 0;
+    padding: 0 10px;
+    background-color: $brand-color-3;
+  }
+
+  .section {
+    h4 {
+      margin: 0;
+      text-align: center;
+      background-color: $brand-color-1;
+    }
+    .entries {
+      padding: 20px 20px;
+    }
+  }
+}
+
+.cart-entry {
+  padding: .2em 4em .2em 6em;
+
+  .image {
+    display: inline-block;
+    width: 5em;
+    height: 5em;
+    margin-left: -6em;
+    float: left;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .details {
+    margin-top: 1em;
+    float: left;
+  }
+
+  .subtotal {
+    margin-top: 1em;
+    float: right;
+    margin-right: -3em;
+  }
+
+}
