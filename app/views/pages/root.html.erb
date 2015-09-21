@@ -1,35 +1,42 @@
-<% content_for(:javascripts) { javascript_include_tag 'pages/root'} %>
+<header class="root">
+  <%= image_tag 'logo.png', alt: 'Мятный домик', title: 'Мятный домик' %>
+</header>
 
-<div class="layout">
-  <div class='top-half'>
-    <%= render partial: '/header' %>
+<section class="text-container intro">
+  <p>
+    Добро пожаловать в наш маленький и теплый Мятный Домик. Здесь вы найдете деревянные украшения ручной работы, и,
+    поверьте, каждое изделие имеет душу.
+  </p>
+  <p>
+    Надеюсь, вы увидите здесь что-нибудь, что приглянется именно вам! А если нет - не спешите убегать: оставайтесь.
+    Мы порадуем вас уютной дружеской атмосферой и обязательно найдем что-нибудь по душе)
+  </p>
+  <p>
+    Взгляните на некоторые мои работы или посетите <a href="<%= store_path %>" class="link">каталог</a>
+  </p>
+  <div class="products clear">
+    <%= render partial: @products %>
   </div>
-  <div class='bottom-half'>
-    <div class="brick quarter-width">
-      <div class="brick half-height">
-        <div class="brick half-width"><%= render partial: @products[0] %></div>
-        <div class="brick half-width"><%= render partial: @products[1] %></div>
-      </div>
-      <div class="brick half-height"><%= render partial: @products[2] %></div>
-    </div>
-    <div class="brick quarter-width"><%= render partial: @products[3] %></div>
-    <div class="brick quarter-width">
-      <div class="brick half-height"><%= render partial: @products[4] %></div>
-      <div class="brick half-height">
-        <div class="brick half-width"><%= render partial: @products[5] %></div>
-        <div class="brick half-width"><%= render partial: @products[6] %></div>
-      </div>
-    </div>
-    <div class="brick quarter-width">
-      <div class="brick half-height">
-        <div class="brick half-width"><%= render partial: @products[7] %></div>
-        <div class="brick half-width"><%= render partial: @products[8] %></div>
-      </div>
-      <div class="brick half-height"><%= render partial: @products[9] %></div>
-    </div>
+  <p>
+    Вы также можете оставтиь заявку на выполнение <a href="<%= personal_order_path %>" class="link">индивидуального заказа</a>.
+  </p>
+</section>
+
+<section class="text-container reviews">
+  <h2>Отзывы:</h2>
+  <%= render partial: @reviews %>
+  <%= link_to 'Все отзывы...', reviews_path, class: 'link' %>
+</section>
+
+<section class="author text-container">
+  <div class="img-container">
+    <img src="https://pp.vk.me/c616222/v616222048/fa41/6WGrobzZ39A.jpg" alt="Александра Тоботрас"/>
   </div>
-</div>
-<%= render partial: 'products/productModal' %>
+  <h1>Александра тоботрас</h1>
+  <p>Несколько солв об авторе...</p>
+  <a href="<%= about_path %>" class="link">Подробнее</a>
+</section>
+
 <% content_for :javascripts do %>
-    <%= render partial: 'products/json', locals: {products: @products} %>
+    <%= render partial: 'store/json', locals: {products: @products} %>
 <% end %>

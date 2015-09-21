@@ -1,15 +1,16 @@
 class CategoriesController < ApplicationController
+  include StoreConcern
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   def index
-    @categories = Category.all
+    @collections = Category.all
+    @tab = 'collections'
   end
 
   def show
     @id = params[:id].to_i
-    @categories = Category.order(:id).reject { |cat| cat.id <= @id }
-    @category = @categories.empty? ? Category.order(:id).first : @categories.first
-    render :layout => false
+    @category = Category.find(@id)
+    @tab = 'collections'
   end
 
   def new
@@ -31,11 +32,8 @@ class CategoriesController < ApplicationController
 
   def update
     add_image if params[:image]
-    if @category.update(category_params)
-      render :edit, notice: 'Category was successfully updated.'
-    else
-      render :edit
-    end
+    @category.update(category_params)
+    render nothing: true
   end
 
   def destroy

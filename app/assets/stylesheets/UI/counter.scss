@@ -1,0 +1,20 @@
+.counter {
+  @extend .font-accent;
+  text-align: justify;
+  height: 50px;
+  line-height: 50px;
+  font-size: 20px;
+
+  span {
+    cursor: pointer;
+    width: 40px;
+    display: inline-block;
+    text-align: center;
+    background-color: #E1DAD5;
+  }
+
+  .count {
+    width: 90px;
+    background-color: #F8F2EE;
+  }
+}

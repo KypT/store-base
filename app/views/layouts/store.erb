@@ -1,0 +1,28 @@
+<% content_for :javascripts  do %>
+    <% if @product %>
+        <script> window.product = <%= @product.to_json(include: [:images, :tags, :category]).html_safe %>; </script>
+    <% end %>
+    <%= render partial: 'store/json', locals: {products: @products} %>
+<% end %>
+
+<%= content_for :store do %>
+    <div class="store-controls no-select">
+      <ul class='tabs clear'>
+        <li class="tags btn <%= active_tab 'tags' %>" id="tags-tab">Товары</li>
+        <li data-url='<%= categories_path %>' class="collections btn <%= active_tab 'collections' %>" id="collections-tab">Коллекции</li>
+        <li data-url="<%= specials_path %>" class="specials btn <%= active_tab 'specials' %>" id="specials-tab">Акции</li>
+      </ul>
+      <div class="sub-menu">
+        <ul class="tags cloud">
+          <%= render partial: @tags %>
+        </ul>
+        <input type="search" placeholder="Поиск">
+      </div>
+    </div>
+<% end %>
+
+<%= content_for :modals do %>
+    <%= render partial: 'store/productModal' %>
+<% end %>
+
+<%= render template: 'layouts/headered' %>

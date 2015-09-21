@@ -1,0 +1,5 @@
+<div class="counter" <%= "id=#{id}" if defined?(id) %>>
+    <span class='less-btn'>-</span>
+    <span class='count'><%= defined?(val)? val : 0 %></span>
+    <span class='more-btn'>+</span>
+</div>

@@ -12,7 +12,7 @@ class Product < ActiveRecord::Base
   belongs_to :category
 
   def self.default
-    Product.create name: 'Назови меня', price: 0
+    Product.create name: 'Назови меня', price: 0, stock: 0
   end
 
   def <=>(this)

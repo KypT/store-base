@@ -1,15 +1,16 @@
 class SpecialsController < ApplicationController
+  include StoreConcern
   before_action :set_special, only: [:show, :edit, :update, :destroy]
 
   def index
     @specials = Special.all
+    @tab = 'specials'
   end
 
   def show
-    @id = params[:id].to_i
-    @specials = Special.order(:id).reject { |cat| cat.id <= @id }
-    @special = @specials.empty? ? Special.order(:id).first : @specials.first
-    render :layout => false
+    id = params[:id].to_i
+    @special = Special.find(id)
+    @tab = 'specials'
   end
 
   def new

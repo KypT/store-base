@@ -1,24 +1,31 @@
 Rails.application.routes.draw do
-  resources :specials
-
   root 'pages#root'
   get 'payment' => 'pages#payment'
-  get 'uniq' => 'pages#uniq'
-  get 'specials' => 'pages#specials'
-  get 'hot' => 'products#hot'
-  devise_for :users
+  get 'personal-order' => 'pages#uniq', as: 'personal_order'
+  get 'about' => 'pages#about', as: 'about'
+  get 'items/:name' => 'store#index'
+  get 'blog' => 'blog#index', as: 'blog'
+  get 'blog/article/:id' => 'blog#show'
 
-  resources :categories
-
-  resources :products, path: 'store', except: [:edit, :create] do
+  resources :products, path: 'items', except: [:edit, :create] do
     post '' => 'products#update', on: :member
     get 'get', on: :collection
+  end
+
+  scope :store do
+    get '' => 'store#index', as: :store
+    get 'get' => 'store#get'
+    resources :categories, path: 'collections'
+    resources :specials
   end
 
   resources :cart, only: [:index, :new, :destroy] do
     get 'checkout', on: :collection
   end
 
-  resources :orders, except: [:update, :edit]
+  resources :reviews, only:  [:index, :create, :destroy]
 
+  resources :orders, except: [:update, :edit]
+  resources :articles
+  devise_for :users
 end

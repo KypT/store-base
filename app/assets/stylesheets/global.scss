@@ -36,7 +36,6 @@ a {
 }
 
 p {
-  text-align: justify;
   font-size: 20px;
 }
 
@@ -56,8 +55,16 @@ h1, h2, h3, h4, h5, h6 {
   @extend .regular;
 }
 
-input {
+input,
+textarea {
   outline: none;
+}
+
+img.cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
 }
 
 .bordered {
@@ -68,7 +75,29 @@ input[type='text'],
 input[type='email'],
 input[type='tel'],
 input[type='number'],
-input[type=submit] {
+input[type=submit],
+textarea {
   @extend .bordered;
 }
 
+.square {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  &:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+}
+
+.link {
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

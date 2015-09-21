@@ -1,0 +1,21 @@
+<%= form_tag reviews_path, multipart: true, class: 'new-review' do %>
+
+    <h1 class="info font-accent">Оставить отзыв</h1>
+
+    <%= token_tag %>
+
+    <div class="field">
+      <%= text_field :review, :author, placeholder: 'Имя', required: true %>
+    </div>
+    <div class="field">
+      <%= text_area :review, :review, placeholder: 'Отзыв', required: true %>
+    </div>
+    <div class="field">
+      <%= file_field :image, :file %>
+    </div>
+
+    <div class="field">
+      <%= submit_tag 'Оставить отзыв' %>
+    </div>
+
+<% end %>

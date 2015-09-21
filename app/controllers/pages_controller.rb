@@ -1,14 +1,19 @@
 class PagesController < ApplicationController
-  layout 'application'
+  layout 'headered'
 
   def root
-    @products = Product.all
+    @products = Product.order(created_at: :desc).limit 10
+    @reviews = Review.order(created_at: :desc).limit 5
+    render layout: 'application'
   end
 
   def payment
   end
 
   def uniq
+  end
+
+  def about
   end
 
   def specials

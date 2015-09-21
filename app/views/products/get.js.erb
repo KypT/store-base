@@ -1,3 +1,0 @@
-Products.set( <%= @products.to_json(include: :images).html_safe %> );
-Content.page = <%= @page %>;
-Store.displayProducts('<%=j render partial: search_result(@products), layout: 'products/grid', locals: { grid_size: 'four wide' } %>');

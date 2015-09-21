@@ -1,3 +1,1 @@
-$('.special.image-container').css('background-image', 'url(<%= image_for @special %>)');
-$('.special-info p').text('<%=j @special.description.html_safe %>');
-$('.button.next-specials').attr('href', '<%= url_for @special %>');
+Store.displayContent( '<%=j render partial: @special %>', '<%= url_for @special %>');

@@ -1,8 +1,24 @@
 <% if not defined?(context) %>
-    <h2><%= category.name %></h2>
-    <div class = 'ui equal width doubling stackable grid store-products'>
-        <%= render partial: category.products, layout: 'products/grid', locals: {grid_size: ''} %>
+    <div class="collection">
+      <h1 class='font-accent' <%= editable 'category[name]', url_for(category) %>><%= category.name %></h1>
+
+      <div class="img-container">
+        <img class="cover" src="<%= image_for category %>" alt="<%= category.name %>">
+      </div>
+      <p class='description' <%= editable 'category[description]', url_for(category) %>><%= category.description %></p>
+
+      <div class="products">
+        <%= render partial: category.products %>
+      </div>
     </div>
-<% elsif context == 'store' %>
-    <li class = 'collection' data-id = '<%= category.id %>'><%= category.name %></li>
+<% elsif context == 'thumb' %>
+    <%= link_to category, remote: true do %>
+        <div class="collection thumb">
+          <h1 class='font-accent' <%= editable 'category[name]', url_for(category) %>><%= category.name %></h1>
+
+          <div class="img-container">
+            <img class="cover" src="<%= image_for category %>" alt="<%= category.name %>">
+          </div>
+        </div>
+    <% end %>
 <% end %>

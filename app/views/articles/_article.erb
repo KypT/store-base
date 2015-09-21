@@ -1,0 +1,5 @@
+<article class="article" data-id="<%= article.id %>">
+  <h1 class="title"><%= article.title %></h1>
+  <time datetime="<%= article.created_at %>"> <%= article.created_at.strftime('%d.%m.%Y') %></time>
+  <p class="content"><%= article.content %></p>
+</article>

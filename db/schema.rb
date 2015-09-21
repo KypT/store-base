@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150823103131) do
+ActiveRecord::Schema.define(version: 20150921080356) do
+
+  create_table "articles", force: :cascade do |t|
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "cart_entries", force: :cascade do |t|
     t.integer  "product_id"
@@ -81,6 +88,7 @@ ActiveRecord::Schema.define(version: 20150823103131) do
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
     t.integer  "category_id"
+    t.integer  "stock"
   end
 
   create_table "products_tags", force: :cascade do |t|
@@ -90,6 +98,14 @@ ActiveRecord::Schema.define(version: 20150823103131) do
 
   add_index "products_tags", ["product_id"], name: "index_products_tags_on_product_id"
   add_index "products_tags", ["tag_id"], name: "index_products_tags_on_tag_id"
+
+  create_table "reviews", force: :cascade do |t|
+    t.string   "author"
+    t.text     "review"
+    t.integer  "imageable_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "specials", force: :cascade do |t|
     t.string   "title"

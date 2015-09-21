@@ -1,90 +1,112 @@
 @import 'specials';
-
-.categories,
-.collections {
-  display: inline-block;
-  position: relative;
-}
-
-.store-content {
-  position: relative;
-}
-
-.get-prev,
-.get-next {
-  cursor: pointer;
-  position: absolute;
-  top: 235px;
-  opacity: 0.6;
-  width: 40px;
-  &:hover {
-    opacity: 1.0;
-  }
-}
-
-.get-prev {
-  left: 20px;
-}
-
-.get-next {
-  right: 20px;
-}
-
-.store-btn {
-  @extend .font-accent;
-  padding: 10px;
-  margin: 0;
-  display: inline-block;
-  text-transform: uppercase;
-  cursor: pointer;
-  color: #756651;
-  &:hover {
-    color: $brand-hover-color;
-  }
-;
-}
+@import 'product-modal';
 
 .store-controls {
-  text-align: center;
-  background-color: #B69F8D;
-}
-
-.store-controls__sub {
-  background-color: #C0DEC2;
-  h2 {
-    padding: 3px 0;
-  }
-}
-
-.store-products {
-  margin: 0 !important;
-  padding: 10px 80px !important;
-  .column {
-    padding: 5px !important;
-  }
-  .product {
-    height: 250px;
-  }
-}
-
-.product.product-data {
   position: relative;
-  left: 20px;
-  opacity: 0;
-  text-align: center;
-  background-size: cover;
-  background-position: center;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .tabs {
+    background-color: $brand-bg-color-1;
+
+    li {
+      @extend .font-accent;
+      padding-top: 0.2em;
+      padding-bottom: 0.35em;
+      margin: 0;
+      display: block;
+      width: 33.333333%;
+      float: left;
+      text-align: center;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: darken($brand-hover-color, 20);
+
+      &:hover {
+        background-color: darken($brand-bg-color-1, 10);
+      }
+    }
+
+    li.collections {
+      border-left: 1px solid black;
+      border-right: 1px solid black;
+    }
+
+    li.active {
+      cursor: default;
+      background-color: darken($brand-bg-color-1, 20);
+    }
+  }
+
+  .sub-menu {
+    position: relative;
+    text-align: center;
+    padding: 0.5em 10em;
+    background-color: $brand-bg-color-2;
+
+    ul.tags.cloud {
+
+      li {
+        display: inline-block;
+        font-size: 1em;
+        padding: 0 0.4em;
+        cursor: pointer;
+        text-transform: uppercase;
+        color: white;
+        &:hover {
+          background-color: $band-selected-color;
+        }
+        &.active {
+          display: inline-block !important;
+        }
+      }
+    }
+    input[type='search'] {
+      position: absolute;
+      right: 0.5em;
+      top: 0.5em;
+      width: 180px;
+    }
+  }
+}
+
+.product {
+  position: relative;
   overflow: hidden;
-  border-radius: 3px;
+  float: left;
+  width: 20%;
+  opacity: 0;
   @include transition(all 0.3s);
+
+  .product-data {
+    position: absolute;
+    padding: 2px 4px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
   &.show {
     opacity: 1;
     left: 0;
   }
+
+  &:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+
   h3 {
     color: #155254;
     z-index: 1;
   }
+
   &:hover h3 {
     opacity: 1;
     @include translateY(0);
@@ -100,7 +122,6 @@
   }
 }
 
-
 .dropdown {
   display: none;
   position: absolute;
@@ -114,146 +135,6 @@
   z-index: 10;
 }
 
-.tag-buttons .tag,
-.collection-buttons .collection {
-  display: block;
-  font-size: 20px;
-  padding: 4px 10px;
-  cursor: pointer;
-  text-transform: uppercase;
-  color: white;
-  &:hover {
-    background-color: $band-selected-color;
-  }
-}
-
-.tags {
-  margin: 0;
-  transition: height, 2s;
-}
-
-.tags li {
-  display: none;
-  font-size: 20px;
-  padding: 4px 10px;
-  cursor: pointer;
-  text-transform: uppercase;
-  color: white;
-  &:hover {
-    background-color: $band-selected-color;
-  }
-  &.active {
-    display: inline-block !important;
-  }
-}
-
-.tag.active {
-  display: inline-block !important;
-}
-
-.products.modal {
-  background-color: white;
-  padding-bottom: 10px;
-
-  h2 {
-    @extend .font-accent;
-    text-align: center;
-    font-size: 36px;
-    margin: 0;
-    background-color: $brand-color-1;
-  }
-
-  .modal-product-images {
-    background-color: $brand-color-2;
-    background-size: cover;
-    background-position: center;
-    min-height: 320px;
-  }
-  .modal-product-description {
-    position: relative;
-    font-size: 24px;
-    text-align: justify;
-    padding: 10px;
-    margin: 0;
-    & > p {
-      float: left;
-      padding: 0 40px;
-      width: calc(100% - 200px);
-    }
-  }
-  .modal-product-actions {
-    float: right;
-    width: 200px;
-    .amount-info {
-      text-align: center;
-      color: $font-color-2;
-      font-size: 20px;
-      margin-bottom: 0;
-    }
-    .btn {
-      @extend .font-accent;
-      text-transform: uppercase;
-      display: block;
-      color: #8B8379;
-      padding: 4px 10px 0 10px;
-      margin-top: 5px;
-      text-align: center;
-      font-size: 32px;
-    }
-    .buy-button {
-      background-color: $brand-color-3;
-    }
-    .order-button {
-      background-color: $brand-color-1;
-    }
-  }
-  .modal-product-price {
-    text-align: center;
-    span {
-      @extend .font-accent;
-      font-size: 34px;
-      display: inline-block;
-      padding: 5px 10px;
-      background-color: $brand-color-1;
-    }
-  }
-  .modal-product-actions {
-    padding: 0 10px;
-    text-align: center;
-  }
-}
-
-.amount-control {
-  @extend .font-accent;
-  text-align: justify;
-  height: 50px;
-  line-height: 50px;
-  font-size: 20px;
-  span {
-    cursor: pointer;
-    width: 40px;
-    display: inline-block;
-    text-align: center;
-    background-color: #E1DAD5;
-  }
-  .amount-counter {
-    width: 90px;
-    background-color: #F8F2EE;
-  }
-}
-
-.product .product-image {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: opacity 0.3s;
-  background-color: rgba(255, 255, 255, 0.49);
-  background-size: cover;
-  background-position: center;
-}
-
 .product .product-info {
   width: 100%;
   text-align: center;
@@ -263,7 +144,8 @@
   opacity: 0;
 
   .learn-more {
-    width: 50px;
+    width: 35px;
+    cursor: pointer;
   }
 
   @include transition(all 0.3s);
@@ -278,4 +160,8 @@
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+}
+
+.disabled {
+  background-color: $disabled-color !important;
 }

@@ -1,20 +1,35 @@
-<nav>
-  <ul>
-    <li class = 'cart'>
-      <%= link_to '/hot' do %>
-          <%= image_tag 'cart.png' %>
-          <div class="items-counter <%= show_cart_counter %>"><%= @cart.count %></div>
-      <% end %>
-    </li>
-    <li class = 'logo'>
-      <%= link_to root_path do %>
-          <%= image_tag 'logo.png' %>
-      <% end %>
-    </li>
-    <li>
-      <%= link_to '/hot' do %>
-          <%= image_tag 'profile.png' %>
-      <% end %>
-    </li>
-  </ul>
-</nav>
+<header class = "<%= 'big' if defined?(big) %>">
+  <nav>
+    <ul>
+      <li>
+        <%= link_to blog_path do %>
+            <%= image_tag 'megaphone.png', title: 'Блог', alt: 'Блог' %>
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to store_path do %>
+            <%= image_tag 'shop.png', title: 'Каталог', alt:  'Каталог' %>
+        <% end %>
+      </li>
+
+      <li class='logo'>
+        <%= link_to root_path do %>
+            <%= image_tag 'logo.png', title: 'На главную', alt: 'На главную' %>
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to about_path do %>
+            <%= image_tag 'profile.png', title: 'Об авторе', alt: 'Об авторе' %>
+        <% end %>
+      </li>
+
+      <li class='cart-icon'>
+        <%= image_tag 'cart.png', title: 'Корзина', alt:  'Корзина' %>
+        <div class="items-counter <%= show_cart_counter %>"><%= @cart.count %></div>
+      </li>
+
+    </ul>
+  </nav>
+</header>

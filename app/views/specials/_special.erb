@@ -1,0 +1,26 @@
+<% if not defined?(context) %>
+    <div class="special">
+      <h1 class='font-accent' <%= editable 'special[name]', url_for(special) %>><%= special.title %></h1>
+
+      <div class="img-container">
+        <img class="cover" src="<%= image_for special %>" alt="<%= special.title %>">
+      </div>
+      <p class='description' <%= editable 'special[description]', url_for(special) %>><%= special.description %></p>
+
+      <div class="products">
+        <%= render partial: Product.all %>
+      </div>
+    </div>
+<% elsif context == 'thumb' %>
+    <%= link_to special, remote: true do %>
+        <div class="special thumb clear">
+          <h1 class='font-accent' <%= editable 'special[name]', url_for(special) %>><%= special.title %></h1>
+          <div class="img-container">
+            <img src="<%= image_for special %>" alt="<%= special.title %>" class="cover"/>
+          </div>
+          <div class="description">
+            <p class='description' <%= editable 'special[description]', url_for(special) %>><%= special.description %></p>
+          </div>
+        </div>
+    <% end %>
+<% end %>

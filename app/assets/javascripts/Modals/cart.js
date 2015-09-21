@@ -1,16 +1,19 @@
-window.Cart = (function() {
+function CartModal() {
     var $cart = $('.cart.modal'),
-        $wrapper = $('.modal-wrapper'),
-        $cartCounter = $cart.find('.items-counter');
+        UIModal = UI.Modal.create($cart),
+        $cartCounter = $('.items-counter');
+
+    $('.close-cart').click(hide);
+    $('.cart-icon').click(toggle);
 
     $(document).click(function(e) {
         if ($(e.target).hasClass('modal-wrapper'))
             hide();
     });
 
-    $('.close-cart').click(hide);
-
-    UI.Counter.cart($cart.find('.amount-control'));
+    $cart.find('.cart-product').each(function(ind, val) {
+        initCartCounter($(val));
+    });
 
     $cart.find('.section').each(function(_, s) {
         var $section = $(s);
@@ -18,22 +21,44 @@ window.Cart = (function() {
             hideSection($section);
     });
 
+    function toggle() {
+        if (visible()) hide();
+        else show();
+    }
+
+    function initCartCounter($product) {
+        var $counter = $product.find('.counter'),
+            product = Products.get(parseInt($product.data('id'))),
+            type = $product.data('type'),
+            options = {};
+
+        if (type == 'stocked')
+            options = {max: product.stock};
+
+        var counter = UI.Counter.create($counter, options);
+
+        $counter.find('.less-btn, .more-btn').on('click', function() {
+            $.get('/cart/new', { id: product.id, type: type, amount:  counter.val()});
+        });
+    }
+
     function visible() {
-        return $wrapper.hasClass('show');
+        return UIModal.visible();
     }
 
     function hide() {
-        $wrapper.removeClass('show');
-        setTimeout(function () { $wrapper.css({display: 'none'})}, 300);
+        if (!UIModal.visible()) return;
+        $cart.animate({right: -500}, 300, 'swing');
+        UIModal.hide();
     }
 
     function show() {
-        $wrapper.css({display: 'block'});
-        setTimeout(function() { $wrapper.addClass('show')}, 0);
+        $cart.animate({right: 0}, 300, 'swing');
+        UIModal.show();
     }
 
     function hideProduct(id, type) {
-        $cart.find('.' + type + ' .cart.product[data-id="' + id +'"]').remove();
+        $cart.find('.' + type + ' .cart-product[data-id="' + id +'"]').remove();
     }
 
     function hideSection($section) {
@@ -47,11 +72,11 @@ window.Cart = (function() {
     }
 
     function sectionIsEmpty($section) {
-        return $section.find('.product').length == 0;
+        return $section.find('.cart-product').length == 0;
     }
 
     function updateCart() {
-        if ($cart.find('.product').length == 0)
+        if ($cart.find('.cart-product').length == 0)
             showEmptyCartMessage();
         else
             hideEmptyCartMessage();
@@ -68,16 +93,14 @@ window.Cart = (function() {
     }
 
     return {
-        toggle: function() {
-            if (visible()) hide();
-            else show();
-        },
+        toggle: toggle,
 
         addProduct: function(html, type) {
             var $section = $cart.find('.' + type),
                 $product = $(html);
+
             $section.find('.products').append($product);
-            UI.Counter.cart($product.find('.amount-control'));
+            initCartCounter($product);
             if (!sectionIsEmpty($section))
                 showSection($section);
         },
@@ -97,6 +120,7 @@ window.Cart = (function() {
         updateIcon: function(count) {
             if (count == 0) {
                 $cartCounter.addClass('hide');
+                $cartCounter.text(count);
             }
             else {
                 $cartCounter.removeClass('hide');
@@ -104,4 +128,4 @@ window.Cart = (function() {
             }
         }
     }
-}());
+}

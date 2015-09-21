@@ -1,51 +1,29 @@
-$base-size: 80px;
-
-.layout {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 20px;
-  .top-half,
-  .bottom-half {
-    position:relative;
-    height: 50%;
+header.root {
+  text-align: center;
+  img {
+    width: 15%;
   }
 }
 
-.brick {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  float: left;
-  .product {
-    height: 100%;
+section.intro,
+section.author,
+section.reviews {
+  margin-top: 2em;
+  padding: 1em;
+  background-color: $brand-color-2;
+}
+
+.author {
+  .img-container {
+    text-align: center;
+    img {
+      width: 60%;
+    }
   }
 }
 
-.brick.half-width {
-  width: 50%;
+.text-container {
+  width: 900px;
+  margin: auto;
 }
 
-.brick.half-height {
-  height: 50%;
-}
-
-.brick.quarter-width {
-  width: 25%;
-}
-
-.bottom-half {
-  .brick {
-    padding: 1px;
-  }
-}
-
-.top-half ul {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}

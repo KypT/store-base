@@ -1,27 +1,29 @@
-.specials {
-  position: relative;
+.specials.container {
+  padding: 1em 2em;
+
   .special {
-    position: absolute;
-    display: none;
+    background-color: $disabled-color;
+    margin-bottom: 2em;
+
+    .img-container {
+      width: 10em;
+      height: 10em;
+      float: left;
+    }
+
+    .description {
+      width: calc(100% - 10em);
+      float: right;
+
+      p {
+        padding: 0 2em;
+      }
+
+      h1 {
+        margin: 0;
+        text-align: center;
+        background-color: $brand-color-1;
+      }
+    }
   }
-  .special.current {
-    position: static;
-    display: block;
-  }
-}
-
-.prev-special,
-.next-special {
-  cursor: pointer;
-  position: absolute;
-  top: 75px;
-  width: 50px;
-}
-
-.prev-special {
-  left: -75px;
-}
-
-.next-special {
-  right: -75px;
 }

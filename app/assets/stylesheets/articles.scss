@@ -1,0 +1,29 @@
+.article {
+  @extend .bordered;
+
+  margin-bottom: 1em;
+
+  .title {
+    @extend .font-accent;
+    background-color: $brand-color-3;
+    padding: 0 8px 2px 8px;
+    font-size: 1.6em;
+    margin: 0;
+  }
+
+  time {
+    background-color: $brand-color-3;
+    display: block;
+    padding: 0 8px;
+    font-size: 0.8em;
+  }
+
+  .content {
+    padding: 8px;
+    font-size: 1em;
+  }
+}
+
+.articles {
+  padding: 1em 0;
+}

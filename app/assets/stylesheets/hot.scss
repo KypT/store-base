@@ -7,25 +7,28 @@
   background-position: center;
 }
 
-.grid.fluid {
-  margin: 0 !important;
+.products-cnt,
+.special-cnt,
+.collection-cnt {
+  float: left;
+  width: 28%;
+}
+
+.products-cnt {
+  width: 44%;
+  padding: 0 1em;
+
+  .product {
+    width: 50%;
+  }
 }
 
 .hot.container {
   padding: 40px !important;
   .column {
+    padding: 0.2em !important;
     overflow: hidden;
   }
-  .product {
-    height: 15vw;
-    width: 15vw;
-    max-height: 100%;
-    max-width: 100%;
-  }
-}
-
-.brick.half-width {
-  padding: 5px;
 }
 
 .stick-to-right .product {
@@ -43,6 +46,7 @@
 .button-container {
   clear: both;
   text-align: center;
+  margin-top: 5px;
   padding: 10px 8px;
 
   .link-to-store {
@@ -50,11 +54,7 @@
     padding: 5px 10px;
     display: block;
     text-align: center;
-    background-color: $brand-color-3;
+    background-color: #EDB78E;
     font-size: 22px;
   }
-}
-
-.ui.hot.container {
-  width: calc( 1480px + 2em ) !important;
 }

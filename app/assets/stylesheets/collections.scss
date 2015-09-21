@@ -1,0 +1,41 @@
+.collections.container,
+.specials.container{
+  padding: 1em 0.75em;
+}
+
+.collection,
+.special {
+  background-color: $disabled-color;
+  margin-bottom: 0.5em;
+
+  h1 {
+    margin: 0;
+    text-align: center;
+    background-color: $brand-color-1;
+  }
+
+  .description {
+    background-color: $brand-color-3;
+    margin: 0;
+    padding: 0 2em;
+  }
+
+  .img-container {
+    height: 30em;
+  }
+
+  .products {
+    padding: 0.2em;
+  }
+}
+
+.collection.thumb,
+.special.thumb {
+  width: 50%;
+  float: left;
+  padding: 0 0.25em;
+
+  .img-container {
+    height: 15em;
+  }
+}

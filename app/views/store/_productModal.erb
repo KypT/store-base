@@ -1,0 +1,51 @@
+<div class="products modal">
+  <h2 class='modal-product-name' <%= editable 'name', '#' %> ></h2>
+
+  <div class="modal-top-half">
+    <div class='modal-product-images modal-left-part'>
+      <div class='img-container'>
+        <%= image_tag 'arrow-left-active.png', class: 'left' %>
+        <img src="#" class='product-image' alt=""/>
+        <%= form_tag '#', multipart: true, class: 'file-upload-zone' do %>
+            <%= file_field_tag 'images[]', multiple: true %>
+        <% end %>
+        <%= image_tag 'arrow-right-active.png', class: 'right' %>
+      </div>
+    </div>
+    <div class='product-modal-side modal-right-part'>
+      <div class='modal-product-actions no-select'>
+        <div class="buy-menu">
+          <p class='amount-info'>в наличии: <span class='stock-amount' <%= editable 'stock', '#' %> >0</span></p>
+          <span class="price" <%= editable 'price', '#' %> > 0 </span>
+          <%= render partial: 'UI/counter', locals: {id: 'buy-counter'} %>
+          <%= link_to 'Купить', new_cart_path(id: nil), remote: true, class: 'btn buy-button', data: {target: '#buy-counter'} %>
+          <p class="store-info">
+            Вы также можете оформить заказ на <span class="modal-switch">повтор</span> любого изделия.
+            При выполнении повторых работ мы учтем ваши пожелания.
+          </p>
+        </div>
+        <div class="order-menu">
+          <p class="store-info empty-stock-message">
+            К сожалению, в настоящий момент данного товара <strong>нет в наличии</strong>,
+            однако вы можете заказать повтор.
+          </p>
+          <p class="store-info">Не забудьте оставить ваши пожелания:</p>
+          <textarea id="order-comment" cols="30" rows="4" placeholder="Комментарий к заказу"></textarea>
+          <span class="price" <%= editable 'price', '#' %> > 0 </span>
+          <%= render partial: 'UI/counter', locals: {id: 'order-counter'} %>
+          <%= link_to 'Заказать', new_cart_path(id: nil), remote: true, class: 'btn order-button', daыta: {target: '#order-counter'} %>
+          <p class="store-info stock-message">Или вы можете <strong class="modal-switch">купить</strong> данный товар(он есть в наличии)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-bottom-half clear">
+    <div class='modal-product-description modal-left-part'>
+      <p <%= editable 'description', '#' %>></p>
+    </div>
+    <div class="modal-product-tags modal-right-part">
+      <div class="modal-tags"></div>
+    </div>
+  </div>
+</div>

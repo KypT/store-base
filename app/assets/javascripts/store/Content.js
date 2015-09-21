@@ -1,22 +1,25 @@
 window.Content = (function() {
-    var tags = [],
+    var tag = null,
         category = null,
         searchQuery = null,
-        pageCapacity = 8;
+        pageCapacity = 100;
+
+    function generateTags() {
+        return tag ? [tag] : [];
+    }
 
     return {
         page: 0,
-        tag: function(tag) {
-            if (!this.tagged(tag))
-                tags.push(tag);
+        tag: function(t) {
+            tag = t;
             this.load();
         },
-        untag: function(tag) {
-            tags.splice(tags.indexOf(tag), 1);
-            this.load();
+        untag: function() {
+            tag = null;
+            Content.load();
         },
-        tagged: function(tag) {
-            return tags.indexOf(tag) > -1;
+        tagged: function(t) {
+            return t == tag;
         },
         category: function (cat) {
             if (arguments.length == 0) return category;
@@ -31,7 +34,7 @@ window.Content = (function() {
             tags = [];
             category = null;
             searchQuery = null;
-            pageCapacity = 8;
+            pageCapacity = 100;
             this.load();
         },
         load: function(page) {
@@ -39,7 +42,7 @@ window.Content = (function() {
             if (page < 0) page = 0;
             $.get('/store/get', {
                     offset: page * pageCapacity, limit: pageCapacity,
-                    tags: tags, category: category,
+                    tags: generateTags(), category: category,
                     search: searchQuery
                 });
         }

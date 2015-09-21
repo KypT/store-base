@@ -1,0 +1,59 @@
+.review {
+  .img-container {
+    float: left;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 150px;
+    margin-right: 20px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .author {
+    padding-top: 15px;
+    font-size: 1.4em;
+  }
+
+  .review {
+    font-size: 1em;
+  }
+}
+
+.reviews-container {
+  width: 700px;
+  margin: auto;
+}
+
+form.new-review {
+  @extend .bordered;
+  background-color: $brand-color-1;
+  width: 500px;
+  margin: 50px auto 50px auto;
+  padding: 0 1em 1em 1em;
+
+  .info {
+    text-align: center;
+    margin: 0;
+    padding-top: 5px;
+  }
+
+  .field {
+    margin-top: 10px;
+
+    input, textarea {
+      width: 100%;
+      max-width: 100%;
+      min-width: 100%;
+    }
+
+    input[type='file'] {
+      position: relative;
+      top: -5px;
+    }
+  }
+}

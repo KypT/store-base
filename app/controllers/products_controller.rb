@@ -1,33 +1,11 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :update, :destroy]
+  before_action :set_product, only: [:update, :destroy]
   before_action :authenticate_user!, only: [:new, :update, :destroy]
-
-  def index
-    @tags = Tag.all
-    @collections = Category.all
-    render partial: 'products/store', layout: false if request.xhr?
-  end
 
   def hot
     @collection = Category.first
-    @products = Product.all
+    @products = Product.limit(4)
     @special = Special.first
-  end
-
-  def show
-  end
-
-  def get
-    tags = (params[:tags] || []).map(&:to_i)
-    category = Category.find_by_id params[:category]
-    offset = params[:offset].to_i || 0
-    limit = params[:limit].to_i || 8
-    @page = offset / limit
-
-    @products = (category ? category.products : Product.all).includes :images
-    @products = tagged_with(@products, tags).sort[offset, limit]
-    render nothing: true and return until @products
-    render layout: false
   end
 
   def new
@@ -37,10 +15,10 @@ class ProductsController < ApplicationController
 
   def update
     begin
-      add_image
-      redirect_to product_path(@product)
+      add_images
+      render nothing: true
       return
-    end if params[:image]
+    end if params[:images]
 
     update_tags if params[:tags]
     update_category if params[:category]
@@ -75,19 +53,12 @@ class ProductsController < ApplicationController
     Category.cleanup
   end
 
-  def add_image
-    @product.images.destroy_all
-    @product.images << Image.create(file: params[:image])
+  def add_images
+    images = params[:images].map { |img| Image.create file: img }
+    @product.images << images
   end
 
   def product_params
-    params.permit(:name, :price, :description)
-  end
-
-  def tagged_with(products, tags)
-    return products if tags.empty?
-    products.select do | product |
-      product if tags - product.tags.map(&:id) == []
-    end
+    params.permit(:name, :price, :description, :stock)
   end
 end

@@ -1,9 +1,17 @@
-//= require semantic/all
+//= require polyfill.object-fit.min
+//= require semantic/reset
+//= require semantic/site
 
 @import 'global';
+@import 'UI/counter';
+@import 'UI/modal';
 @import 'header';
 @import 'pages';
 @import 'cart';
 @import 'products';
 @import 'hot';
 @import 'orders';
+@import 'admin';
+@import 'collections';
+@import 'articles';
+@import 'reviews';
