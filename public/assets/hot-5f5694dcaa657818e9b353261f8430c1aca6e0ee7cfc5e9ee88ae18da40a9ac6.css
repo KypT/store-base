@@ -1,0 +1,72 @@
+/* line 1, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.collection.image-container,
+.special.image-container {
+  width: 30vh;
+  height: 30vh;
+  margin: auto;
+  background-size: cover;
+  background-position: center;
+}
+
+/* line 10, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.grid.fluid {
+  margin: 0 !important;
+}
+
+/* line 14, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.hot.container {
+  padding: 40px !important;
+}
+/* line 16, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.hot.container .column {
+  overflow: hidden;
+}
+/* line 19, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.hot.container .product {
+  height: 15vw;
+  width: 15vw;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+/* line 27, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.brick.half-width {
+  padding: 5px;
+}
+
+/* line 31, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.stick-to-right .product {
+  margin: auto 5px auto auto;
+}
+
+/* line 35, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.special-info,
+.collection-info {
+  padding: 10px 0;
+}
+/* line 38, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.special-info h2,
+.collection-info h2 {
+  text-align: center;
+}
+
+/* line 43, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.button-container {
+  clear: both;
+  text-align: center;
+  padding: 10px 8px;
+}
+/* line 48, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.button-container .link-to-store {
+  margin: auto;
+  padding: 5px 10px;
+  display: block;
+  text-align: center;
+  background-color: #EDB78E;
+  font-size: 22px;
+}
+
+/* line 58, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.ui.hot.container {
+  width: calc( 1480px + 2em ) !important;
+}

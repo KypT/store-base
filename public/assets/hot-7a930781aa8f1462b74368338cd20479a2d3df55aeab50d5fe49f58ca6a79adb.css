@@ -1,0 +1,70 @@
+/* line 1, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.collection.image-container,
+.special.image-container {
+  width: 30vh;
+  height: 30vh;
+  margin: auto;
+  background-size: cover;
+  background-position: center;
+}
+
+/* line 10, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.products-cnt,
+.special-cnt,
+.collection-cnt {
+  float: left;
+  width: 28%;
+}
+
+/* line 17, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.products-cnt {
+  width: 44%;
+  padding: 0 1em;
+}
+/* line 21, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.products-cnt .product {
+  width: 50%;
+}
+
+/* line 26, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.hot.container {
+  padding: 40px !important;
+}
+/* line 28, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.hot.container .column {
+  padding: 0.2em !important;
+  overflow: hidden;
+}
+
+/* line 34, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.stick-to-right .product {
+  margin: auto 5px auto auto;
+}
+
+/* line 38, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.special-info,
+.collection-info {
+  padding: 10px 0;
+}
+/* line 41, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.special-info h2,
+.collection-info h2 {
+  text-align: center;
+}
+
+/* line 46, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.button-container {
+  clear: both;
+  text-align: center;
+  margin-top: 5px;
+  padding: 10px 8px;
+}
+/* line 52, D:/Users/Alex/RubyMine Projects/store-base/app/assets/stylesheets/hot.scss */
+.button-container .link-to-store {
+  margin: auto;
+  padding: 5px 10px;
+  display: block;
+  text-align: center;
+  background-color: #EDB78E;
+  font-size: 22px;
+}
