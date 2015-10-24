@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: [:new]
+  before_action :authenticate_user!, except: [:create, :new]
 
   def new
     @order = @cart.make_order

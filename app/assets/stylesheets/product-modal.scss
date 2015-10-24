@@ -1,4 +1,5 @@
 .products.modal {
+  @extend .bordered;
   background-color: white;
   margin: 1em 5%;
 
@@ -12,13 +13,13 @@
 
   .modal-left-part {
     float: left;
-    width: calc(100% - 270px);
+    width: calc(100% - 280px);
     height: 100%;
   }
 
   .modal-right-part {
     float: right;
-    width: 270px;
+    width: 280px;
     height: 100%;
   }
 
@@ -31,11 +32,12 @@
 
   .modal-product-images {
     text-align: center;
-    background-color: #F8F2EE;
+    padding: 0.5em;
 
     .img-container {
+      background-color: $brand-color-4;
       position: relative;
-      display: inline-block;
+      display: block;
       padding: 0.5em 2em;
       height: 100%;
 
@@ -60,11 +62,11 @@
 
       }
       .left {
-        left: 0;
+        left: 0.5em;
       }
 
       .right {
-        right: 0;
+        right: 0.5em;
       }
 
     }
@@ -85,23 +87,27 @@
   }
 
   .modal-product-tags {
-    padding: 1em 1em;
+    padding: 0.5em;
 
     .modal-tags {
 
-      span {
+      a {
+        cursor: pointer;
         display: inline-block;
-        font-size: 1.5em;
-        padding: 0.1em 0.3em;
-        margin: 0 0.1em;
+        font-size: 1em;
+        padding: 0 0.2em;
+        margin: 0.1em;
         border-radius: 4px;
         background-color: $brand-color-1;
       }
 
       .collection {
-        background-color: $brand-color-3;
+        background-color: lighten($brand-color-2, 20%);
       }
 
+      .special {
+        background-color: $brand-color-3;
+      }
     }
   }
 
@@ -110,7 +116,7 @@
 
     .modal-product-actions {
       margin: auto;
-      width: 250px;
+      width: 260px;
       text-align: center;
 
       .buy-menu,
@@ -123,7 +129,7 @@
         .amount-info {
           display: block;
           text-align: center;
-          color: $font-color-2;
+          color: $font-color-1;
           height: 18px;
           font-size: 18px;
           margin-top: -5px;
@@ -138,26 +144,18 @@
           width: 70px;
           display: inline-block;
           padding: 9px 0 13px 0;
-          background-color: $brand-color-1;
+          background-color: $brand-color-4;
         }
       }
 
       .btn {
-        @extend .font-accent;
-        text-transform: uppercase;
         display: block;
-        color: #8B8379;
-        clear: both;
-        padding: 0 10px 5px 10px;
-        margin-top: 5px;
-        text-align: center;
-        font-size: 32px;
       }
 
       .buy-button,
       .order-button {
         background-color: $brand-color-3;
-        margin-top: 54px;
+        margin-top: 57px;
       }
 
       #order-comment {

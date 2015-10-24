@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <head>
-    <title>MintyStore</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%= yield :meta %>
-    <%= stylesheet_link_tag 'application'%>
-    <%= yield :stylesheets %>
-    <%= csrf_meta_tags %>
+  <title>MintyStore</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <%= yield :meta %>
+  <%= stylesheet_link_tag 'application' %>
+  <%= yield :stylesheets %>
+  <%= csrf_meta_tags %>
 </head>
 <body>
-    <%= yield :header %>
-    <%= yield :store %>
+<%= yield :header %>
+<%= yield :sub_header %>
 
-    <div class="content">
-        <%= yield %>
-    </div>
+<div class="main content medium container">
+  <%= yield %>
+</div>
 
-    <div class="modal-wrapper">
-        <%= yield :modals %>
-    </div>
+<div class="modal-wrapper">
+  <%= yield :modals %>
+</div>
 
-    <%= javascript_include_tag 'application' %>
-    <%= javascript_include_tag 'admin' if user_signed_in? %>
-    <%= yield :javascripts %>
+<%= javascript_include_tag 'application' %>
+<% if admin_signed_in? %>
+    <%= javascript_include_tag 'admin' if admin_signed_in? %>
+    <script src="/assets/ckeditor/ckeditor.js"></script>
+<% end %>
+<%= yield :javascripts %>
 </body>

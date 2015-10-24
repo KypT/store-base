@@ -1,79 +1,3 @@
-@import 'specials';
-@import 'product-modal';
-
-.store-controls {
-  position: relative;
-
-  ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  .tabs {
-    background-color: $brand-bg-color-1;
-
-    li {
-      @extend .font-accent;
-      padding-top: 0.2em;
-      padding-bottom: 0.35em;
-      margin: 0;
-      display: block;
-      width: 33.333333%;
-      float: left;
-      text-align: center;
-      text-transform: uppercase;
-      cursor: pointer;
-      color: darken($brand-hover-color, 20);
-
-      &:hover {
-        background-color: darken($brand-bg-color-1, 10);
-      }
-    }
-
-    li.collections {
-      border-left: 1px solid black;
-      border-right: 1px solid black;
-    }
-
-    li.active {
-      cursor: default;
-      background-color: darken($brand-bg-color-1, 20);
-    }
-  }
-
-  .sub-menu {
-    position: relative;
-    text-align: center;
-    padding: 0.5em 10em;
-    background-color: $brand-bg-color-2;
-
-    ul.tags.cloud {
-
-      li {
-        display: inline-block;
-        font-size: 1em;
-        padding: 0 0.4em;
-        cursor: pointer;
-        text-transform: uppercase;
-        color: white;
-        &:hover {
-          background-color: $band-selected-color;
-        }
-        &.active {
-          display: inline-block !important;
-        }
-      }
-    }
-    input[type='search'] {
-      position: absolute;
-      right: 0.5em;
-      top: 0.5em;
-      width: 180px;
-    }
-  }
-}
-
 .product {
   position: relative;
   overflow: hidden;
@@ -83,8 +7,9 @@
   @include transition(all 0.3s);
 
   .product-data {
+    cursor: pointer;
     position: absolute;
-    padding: 2px 4px;
+    padding: 0.125em 0.25em;
     top: 0;
     bottom: 0;
     left: 0;
@@ -103,8 +28,15 @@
   }
 
   h3 {
-    color: #155254;
+    margin: 0;
+    font-color: $font-color-2;
     z-index: 1;
+  }
+
+  p {
+    font-size: 1.2em;
+    padding-left: 0.25em;
+    margin: 0;
   }
 
   &:hover h3 {
@@ -112,7 +44,7 @@
     @include translateY(0);
   }
   &:hover .product-image {
-    opacity: 0.3;
+    opacity: 0.15;
   }
   &:hover {
     .product-info {
@@ -136,7 +68,7 @@
 }
 
 .product .product-info {
-  width: 100%;
+  width: calc(100% - .5em);
   text-align: center;
   position: absolute;
   top: 50%;
@@ -163,5 +95,5 @@
 }
 
 .disabled {
-  background-color: $disabled-color !important;
+  background-color: white !important;
 }

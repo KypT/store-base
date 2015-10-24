@@ -37,11 +37,13 @@ function ProductModal() {
 
         return {
             next: function() {
+                if (product.images.length == 0) return;
                 if (product.images.length <= ++imageId) imageId = 0;
                 setImage(product.images[imageId].file.url);
             },
 
             prev: function() {
+                if (product.images.length == 0) return;
                 if (imageId <= 0) imageId = product.images.length;
                 setImage(product.images[--imageId].file.url);
             }
@@ -49,11 +51,27 @@ function ProductModal() {
     }
 
     function tags(product) {
-        var result = product.tags.map( function(val) { return "<span class = 'tag'>" + val.name + "</span> " } );
+        function categoryTag(cat) {
+            if (cat.special) return specialTag(cat);
+            return "<a href='/store/" + cat.name + "' class = 'tag'>" + cat.name + "</a>";
+        }
+
+        function collectionTag(col) {
+            return "<a href='/store/collections/" + col.id + "' class = 'collection'>" + col.name + "</a>";
+        }
+
+        function specialTag(spe) {
+            return "<a href='/store/specials/" + spe.special_id + "' class = 'special'>" + spe.name + "</a>";
+        }
+
+        var result = '';
+
+        if (product.tags)
+            result = product.tags.map( categoryTag ).join('');
         if (product.category)
-            return result + "<span class = 'collection'>" + product.category.name + "</span>";
-        else
-            return result;
+            result += collectionTag(product.category);
+
+        return result;
     }
 
     function prepare(product) {
@@ -63,7 +81,6 @@ function ProductModal() {
         $modal.find('.modal-product-name').text(product.name);
         $modal.find('.amount-info span').text(product.stock);
         $modal.find('.price').text(product.price);
-        $modal.find('.modal-tags').html(tags(product));
         $modal.find('.more-amount').data('target', '.cart-counter-' + product.id);
 
         if (product.description.length > 0)
@@ -105,9 +122,17 @@ function ProductModal() {
         buyCounter.reset();
 
         if (window.Admin != undefined) {
-            var url = '/items/' + product.name;
+            var url = '/items/' + product.name,
+                product_tags = product.tags.map(function(val) { return val.name }).join(', '),
+                product_collection = product.category?  product.category.name : '';
             $modal.find('form.file-upload-zone').attr('action', url);
             $modal.find('*[contenteditable="true"]').attr('data-url', url);
+            $modal.find('.modal-tags input[data-attr="tags"]').val(product_tags);
+            $modal.find('.modal-tags input[data-attr="category"]').val(product_collection);
+        }
+        else
+        {
+            $modal.find('.modal-tags').html(tags(product));
         }
     }
 
@@ -129,6 +154,10 @@ function ProductModal() {
 
     return {
         show: function(product) {
+            if ($modal.length == 0) {
+                console.log('Product modal not found');
+                return;
+            }
             prepare(product);
             history.pushState(location.pathname, null, '/items/' + product.name);
             UIModal.show();

@@ -1,4 +1,19 @@
-<div class = 'ui text container'>
-  <h1>Индивидуальные заказы</h1>
-  <p>На данной странице будет размещена информация о том, как оформить индивидуальный заказ</p>
-</div>
+<%= render partial: '/sub_header', locals: {title: 'Индивидуальные заказы' } %>
+
+<section class='text-container personal-order'>
+
+  <p>Информация по заказу...</p>
+
+  <%= form_tag '', multipart: true do %>
+      <div class="field">
+        <%= text_area :order, :comment, required: true %>
+      </div>
+      <div class="field">
+        <%= file_field :order, :image %>
+      </div>
+      <div class="field">
+        <%= submit_tag 'Заказать' %>
+      </div>
+  <% end %>
+
+</section>

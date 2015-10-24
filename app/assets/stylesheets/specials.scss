@@ -1,29 +1,22 @@
 .specials.container {
-  padding: 1em 2em;
-
   .special {
-    background-color: $disabled-color;
+    background-color: white;
     margin-bottom: 2em;
 
     .img-container {
-      width: 10em;
-      height: 10em;
+      width: 10vw;
+      height: 10vw;
       float: left;
     }
 
     .description {
-      width: calc(100% - 10em);
+      background-color: $brand-color-4;
+      font-size: 0.9em;
+      height: 10vw;
+      width: calc(100% - 10vw);
       float: right;
-
-      p {
-        padding: 0 2em;
-      }
-
-      h1 {
-        margin: 0;
-        text-align: center;
-        background-color: $brand-color-1;
-      }
+      overflow: hidden;
+      padding: 0.5em 1em;
     }
   }
 }

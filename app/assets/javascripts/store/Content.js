@@ -1,6 +1,7 @@
 window.Content = (function() {
     var tag = null,
         category = null,
+        stocked = false,
         searchQuery = null,
         pageCapacity = 100;
 
@@ -10,9 +11,14 @@ window.Content = (function() {
 
     return {
         page: 0,
+
+        stocked: function(val) {
+            stocked = val;
+            this.load();
+        },
+
         tag: function(t) {
             tag = t;
-            this.load();
         },
         untag: function() {
             tag = null;
@@ -43,7 +49,7 @@ window.Content = (function() {
             $.get('/store/get', {
                     offset: page * pageCapacity, limit: pageCapacity,
                     tags: generateTags(), category: category,
-                    search: searchQuery
+                    search: searchQuery, stocked: stocked
                 });
         }
     }

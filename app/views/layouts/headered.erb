@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :modals do %>
-    <%= render partial: 'store/cartModal', locals: {cart: @cart} %>
+    <%= render partial: '/store/cartModal', locals: {cart: @cart} %>
 <% end %>
 
-<%= render template: 'layouts/application' %>
+<%= render template: '/layouts/application' %>

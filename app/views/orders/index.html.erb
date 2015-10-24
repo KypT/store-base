@@ -1,5 +1,6 @@
-<div class = 'ui text container'>
-  <h1>Заказы</h1>
+<%= render partial: '/sub_header', locals: {title: 'Заказы'} %>
+
+<div class = 'medium container'>
   <% @orders.each do |order| %>
       <div class = 'orders'>
         <%= render order %>

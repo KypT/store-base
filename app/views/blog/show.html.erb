@@ -1,3 +1,8 @@
-<div class="text-container">
-  <%= render partial: @article %>
+<%= render partial: '/sub_header', locals: {title: 'Мятный Домик. Блог'} %>
+
+<div class="medium container">
+  <%= link_to blog_path, class: 'link' do %>
+    <span class="arrow left long brown"></span> Другие статьи
+  <% end %><br/> <br/>
+  <%= render partial: @article, locals: {context: 'single'} %>
 </div>

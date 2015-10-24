@@ -3,7 +3,7 @@ module StoreConcern
 
   included do
     layout :pick_layout
-    before_action :init, only: [:index, :show]
+    before_action :init
   end
 
   def pick_layout
@@ -11,7 +11,7 @@ module StoreConcern
   end
 
   def init
-    @tags = Tag.all unless request.xhr?
+    @tags = Tag.select {|t| t.special == nil} unless request.xhr?
     @products = Product.all
   end
 end

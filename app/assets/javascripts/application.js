@@ -1,4 +1,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require polyfill.object-fit.min
-//= require main
+//= require UI/all
+//= require store/products
+//= require store/Content
+//= require Modals/cart
+//= require Modals/product
+//= require pages/main

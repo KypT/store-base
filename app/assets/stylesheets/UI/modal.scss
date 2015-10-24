@@ -17,14 +17,13 @@
   @include transition(all 0.3s);
 
   &.show {
-    background-color: rgba(255, 255, 255, 0.71);
+    background-color: rgba(255, 255, 255, 0.80);
     display: block;
 
     & .modal.show {
       display: block;
     }
   }
-
 }
 
 .modal {

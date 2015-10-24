@@ -1,42 +1,71 @@
-<header class="root">
-  <%= image_tag 'logo.png', alt: 'Мятный домик', title: 'Мятный домик' %>
-</header>
-
-<section class="text-container intro">
-  <p>
-    Добро пожаловать в наш маленький и теплый Мятный Домик. Здесь вы найдете деревянные украшения ручной работы, и,
-    поверьте, каждое изделие имеет душу.
-  </p>
-  <p>
-    Надеюсь, вы увидите здесь что-нибудь, что приглянется именно вам! А если нет - не спешите убегать: оставайтесь.
-    Мы порадуем вас уютной дружеской атмосферой и обязательно найдем что-нибудь по душе)
-  </p>
-  <p>
-    Взгляните на некоторые мои работы или посетите <a href="<%= store_path %>" class="link">каталог</a>
-  </p>
-  <div class="products clear">
-    <%= render partial: @products %>
-  </div>
-  <p>
-    Вы также можете оставтиь заявку на выполнение <a href="<%= personal_order_path %>" class="link">индивидуального заказа</a>.
-  </p>
-</section>
-
-<section class="text-container reviews">
-  <h2>Отзывы:</h2>
-  <%= render partial: @reviews %>
-  <%= link_to 'Все отзывы...', reviews_path, class: 'link' %>
-</section>
-
-<section class="author text-container">
-  <div class="img-container">
-    <img src="https://pp.vk.me/c616222/v616222048/fa41/6WGrobzZ39A.jpg" alt="Александра Тоботрас"/>
-  </div>
-  <h1>Александра тоботрас</h1>
-  <p>Несколько солв об авторе...</p>
-  <a href="<%= about_path %>" class="link">Подробнее</a>
-</section>
-
-<% content_for :javascripts do %>
-    <%= render partial: 'store/json', locals: {products: @products} %>
+<% content_for :modals do %>
+    <%= render partial: 'store/productModal' %>
 <% end %>
+
+<div class="main-page">
+  <section class="intro">
+    <div class="text-container">
+      <div class="img-container">
+        <%= image_tag 'logo.png', alt: 'Мятный домик', title: 'Мятный домик', class: 'root-logo' %>
+      </div>
+      <p>
+        Добро пожаловать в наш маленький и теплый Мятный Домик. Здесь вы найдете деревянные украшения ручной работы, и,
+        поверьте, каждое изделие имеет душу.
+      </p>
+
+      <p>
+        Надеюсь, вы увидите здесь что-нибудь, что приглянется именно вам! А если нет - не спешите убегать: оставайтесь.
+        Мы порадуем вас уютной дружеской атмосферой и обязательно найдем что-нибудь по душе)
+      </p>
+    </div>
+  </section>
+
+  <section class="store">
+    <div class="text-container">
+      <p>
+        Взгляните на некоторые мои работы. Какая-то байда, они белые и пушистые!!!
+      </p>
+
+      <div class="products clear">
+        <%= link_to store_path, class: 'link' do %>
+            Перейти в каталог <span class="arrow right long brown"></span>
+        <% end %>
+        <br/>
+        <%= render partial: @products %>
+      </div>
+    </div>
+  </section>
+
+  <section class="personal">
+    <p class="personal-order">
+      Вы также можете оставтиь заявку на выполнение индивидуального заказа.
+      <br/>
+      <button class="btn dream-btn">Воплотить мечты</button>
+    </p>
+  </section>
+
+  <section class="reviews">
+    <div class="text-container">
+      <h2>Отзывы:</h2>
+      <%= render partial: @reviews %>
+      <%= link_to 'Все отзывы...', reviews_path, class: 'link' %>
+    </div>
+  </section>
+
+  <section class="author">
+    <div class="text-container">
+      <div class="img-container">
+        <img src="https://pp.vk.me/c616222/v616222048/fa41/6WGrobzZ39A.jpg" alt="Александра Тоботрас"/>
+      </div>
+      <h1>Александра тоботрас</h1>
+
+      <p>Несколько солв об авторе...</p>
+      <a href="<%= about_path %>" class="link">Подробнее</a>
+    </div>
+  </section>
+
+  <% content_for :javascripts do %>
+      <%= render partial: 'store/json', locals: {products: @products} %>
+  <% end %>
+</div>
+

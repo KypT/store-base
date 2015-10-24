@@ -1,3 +1,79 @@
-// Place all the styles related to the store controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'specials';
+@import 'product-modal';
+
+.store-controls {
+  position: relative;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .tabs {
+    background-color: $brand-color-2;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+
+    li {
+      @extend .font-accent;
+      display: inline-block;
+      padding: 0.2em 1em 0.4em 1em;
+      margin: 0;
+      text-align: center;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: white;
+
+      &:hover {
+        background-color: darken($brand-color-2, 10);
+      }
+    }
+
+    li.active {
+      cursor: default;
+      background-color: $brand-color-3;
+      color: $font-color-1;
+    }
+  }
+
+  .sub-menu {
+    display: none;
+    position: relative;
+    text-align: center;
+    padding: 0.4em 10em 0 10em;
+
+    ul.tags.cloud {
+
+      li {
+        display: inline-block;
+        font-size: .9em;
+        padding: 0 0.4em;
+        cursor: pointer;
+        text-transform: uppercase;
+        color: $font-color-1;
+        &:hover {
+          background-color: #e6e6e6;
+        }
+        &.active {
+          background-color: $brand-color-4;
+        }
+      }
+    }
+    .stocked-check {
+      position: absolute;
+      right: 0.5em;
+      top: 0.4em;
+    }
+  }
+}
+
+.content {
+  @extend .clear;
+}
+
+.store.container {
+  .product {
+    width: 25%;
+  }
+}

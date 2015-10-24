@@ -1,6 +1,6 @@
 function CartModal() {
     var $cart = $('.cart.modal'),
-        UIModal = UI.Modal.create($cart),
+        UIModal = UI.Modal.create($cart, {centerY: true}),
         $cartCounter = $('.items-counter');
 
     $('.close-cart').click(hide);
@@ -11,8 +11,10 @@ function CartModal() {
             hide();
     });
 
-    $cart.find('.cart-product').each(function(ind, val) {
-        initCartCounter($(val));
+    $(function() {
+        $cart.find('.cart-product').each(function(ind, val) {
+            initCartCounter($(val));
+        });
     });
 
     $cart.find('.section').each(function(_, s) {

@@ -1,50 +1,92 @@
 $header-height: 150px;
 
 header {
-  background-color: $brand-bg-color-2;
+  position: relative;
+  background-color: $brand-color-1;
+  text-align: center;
+  vertical-align: middle;
 
-  &.big {
-    height: 100%;
+  nav {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    width: 550px;
+    padding: 0 200px;
+
+    .left-nav,
+    .right-nav {
+      width: 200px;
+      position: absolute;
+      top: 50%;
+      @include translateY(-50%);
+
+      .links-cnt {
+        @extend .font-accent;
+        font-size: 1.6em;
+        line-height: 1.1em;
+        color: white;
+        text-transform: uppercase;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+
+    .left-nav {
+      left: 0;
+      text-align: right;
+
+      @for $i from -1 to 2 {
+        & a:nth-of-type(#{$i + 2}) {
+          position: relative;
+          right: - ($i * $i) * 10px;
+        }
+      }
+    }
+
+    .right-nav {
+      right: 0;
+      text-align: left;
+
+      @for $i from -1 to 2 {
+        & a:nth-of-type(#{$i + 2}) {
+          position: relative;
+          left: - ($i * $i) * 10px + 5px;
+        }
+      }
+    }
+
+    .logo {
+      display: inline-block;
+      img {
+        height: 7em;
+      }
+    }
+  }
+}
+
+.cart-icon {
+  position: absolute;
+  right: 1em;
+  bottom: .5em;
+  cursor: pointer;
+
+  img {
+    height: 2.5em;
   }
 
-  ul {
-    position: relative;
-    list-style: none;
+  .items-counter {
+    color: $font-color-1;
+    display: inline-block;
+    position: absolute;
+    top: -10px;
+    right: 0;
+    padding: 5px 0;
+    font-size: 16px;
     text-align: center;
-    margin: 0;
-
-    li {
-      vertical-align: middle;
-      display: inline-block;
-      margin: 0 1em;
-      img {
-        height: 3em;
-      }
-    }
-
-    .logo img {
-        height: 7em;
-    }
-
-    .cart-icon {
-      position: relative;
-      cursor: pointer;
-
-      .items-counter {
-        color: black;
-        display: inline-block;
-        position: absolute;
-        top: -10px;
-        right: 0;
-        padding: 5px 0;
-        font-size: 16px;
-        text-align: center;
-        height: 25px;
-        width: 25px;
-        line-height: 16px;
-        background-color: red;
-        border-radius: 50px;
-      }
-    }
+    height: 25px;
+    width: 25px;
+    line-height: 16px;
+    background-color: $brand-color-3;
+    border-radius: 50px;
   }
 }

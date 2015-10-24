@@ -22,6 +22,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
+    add_image if params[:image]
 
     if @category.save
       redirect_to categories_path, notice: 'Category was successfully created.'
@@ -33,7 +34,7 @@ class CategoriesController < ApplicationController
   def update
     add_image if params[:image]
     @category.update(category_params)
-    render nothing: true
+    redirect_to @category
   end
 
   def destroy

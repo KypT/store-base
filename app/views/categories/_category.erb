@@ -1,23 +1,27 @@
 <% if not defined?(context) %>
-    <div class="collection">
-      <h1 class='font-accent' <%= editable 'category[name]', url_for(category) %>><%= category.name %></h1>
+    <div class="collection full">
 
-      <div class="img-container">
-        <img class="cover" src="<%= image_for category %>" alt="<%= category.name %>">
+      <div class="img-container rectangle">
+        <div class="container">
+            <img class="cover" src="<%= image_for category %>" alt="<%= category.name %>">
+        </div>
       </div>
+
+      <h1 class='font-accent' <%= editable 'category[name]', url_for(category) %>><%= category.name %></h1>
       <p class='description' <%= editable 'category[description]', url_for(category) %>><%= category.description %></p>
 
-      <div class="products">
+      <div class="products clear">
         <%= render partial: category.products %>
       </div>
     </div>
 <% elsif context == 'thumb' %>
     <%= link_to category, remote: true do %>
         <div class="collection thumb">
-          <h1 class='font-accent' <%= editable 'category[name]', url_for(category) %>><%= category.name %></h1>
-
-          <div class="img-container">
-            <img class="cover" src="<%= image_for category %>" alt="<%= category.name %>">
+          <h1 class='font-accent'><%= category.name %></h1>
+          <div class="rectangle">
+            <div class="container">
+                <img class="cover" src="<%= image_for category %>" alt="<%= category.name %>">
+            </div>
           </div>
         </div>
     <% end %>

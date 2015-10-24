@@ -4,7 +4,7 @@
 
 body {
   @extend .regular;
-  background: $brand-bg-color-3;
+  background: white;
   color: $font-color-1;
 }
 
@@ -25,9 +25,9 @@ a {
   color: black;
   padding: 8px 12px;
   font-size: 18px;
-  background-color: $brand-color-3;
+  background-color: $brand-color-2;
   &:hover {
-    background-color: $brand-color-3;
+    background-color: $brand-color-2;
   }
 }
 
@@ -51,12 +51,24 @@ p {
   clear:both;
 }
 
+::selection {
+  background: $brand-color-1;
+}
+::-moz-selection {
+  background: $brand-color-1;
+}
+
 h1, h2, h3, h4, h5, h6 {
   @extend .regular;
 }
 
+.title {
+  font-size: 1.2em;
+}
+
 input,
-textarea {
+textarea,
+button {
   outline: none;
 }
 
@@ -68,7 +80,7 @@ img.cover {
 }
 
 .bordered {
-  border: 1px solid $font-color-1;
+  border: 1px solid #BBB8B4;
 }
 
 input[type='text'],
@@ -81,23 +93,91 @@ textarea {
 }
 
 .square {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: relative;
 
   &:before {
     content: "";
     display: block;
     padding-top: 100%;
   }
+
+  .container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+.rectangle {
+  @extend .square;
+  &:before {
+    padding-top: 50%;
+  }
+}
+
+.btn {
+  @extend .font-accent;
+  border: none;
+  cursor: pointer;
+  background: $brand-color-3;
+  text-transform: uppercase;
+  color: $font-color-1;
+  clear: both;
+  padding: 0 10px 5px 10px;
+  margin-top: 5px;
+  text-align: center;
+  font-size: 32px;
+}
+
+.page.title {
+  @extend .font-accent;
+  color: white;
+  text-align: center;
+  font-size: 1.6em;
+  padding-bottom: 0.2em;
+  border-radius: 0 0 10px 10px;
+  background-color: $brand-color-3;
+}
+
+.container {
+  margin: auto;
+
+  &.large  { width: 1366px; }
+  &.medium { width: 1024px }
+  &.small  { width: 768px; }
+}
+
+.main.content {
+  padding: 1em 0;
 }
 
 .link {
-  text-decoration: underline;
+  color: $brand-color-1 !important;
+  text-align: center;
 
   &:hover {
-    text-decoration: underline;
+    color: $brand-color-2 !important;
+    border-bottom: 2px solid $brand-color-3;
+  }
+}
+
+$arrows_directions: ('left', 'right');
+$arrows_widths: ('long', 'short');
+$arrows_colors: ('white', 'brown');
+
+.arrow {
+  background-size: cover;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+
+  @each $direction in $arrows_directions {
+    @each $width in $arrows_widths {
+      @each $color in $arrows_colors {
+        &.#{$direction}.#{$width}.#{$color} { background-image: url(/assets/images/arrow_#{$direction}_#{$width}_#{$color}.png) }
+      }
+    }
   }
 }

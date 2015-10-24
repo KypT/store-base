@@ -1,3 +1,12 @@
-<div class="articles text-container">
-    <%= render partial: @articles %>
+<%= render partial: '/sub_header', locals: {title: 'Мятный Домик. Блог'} %>
+
+<div class="articles medium container">
+  <% if admin_signed_in? %>
+      <div class="new-article">
+        <a href="<%= new_article_path %>">
+          Добавить статью
+        </a>
+      </div>
+  <% end %>
+  <%= render partial: @articles %>
 </div>

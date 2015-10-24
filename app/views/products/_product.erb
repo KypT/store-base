@@ -5,7 +5,7 @@
         <div class="product-info">
           <h3><%= product.name %></h3>
           <p>Цена: <%= product.price %></p>
-          <img class='learn-more' src="<%= image_url 'arrow.png' %>" alt="<%=  %>"/>
+          <span class="arrow right brown long"></span>
         </div>
       </div>
     </div>
@@ -18,7 +18,7 @@
         <h4 class="title">
           <%= product.name %>
           <%= link_to cart_path(id: product.id, type: type), remote: true, method: 'delete' do %>
-            <img class='remove' src="<%= image_url 'cross.png' %>" alt=""/>
+            <img class='remove' src="<%= image_url 'cross_white.png' %>" alt=""/>
           <% end %>
         </h4>
         <%= render partial: 'UI/counter', locals: {val: amounts[product.id]} %>

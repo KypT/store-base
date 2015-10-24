@@ -1,41 +1,48 @@
 .collections.container,
-.specials.container{
-  padding: 1em 0.75em;
+.specials.container {
+  max-width: 1280px;
+  margin: auto;
 }
 
 .collection,
 .special {
-  background-color: $disabled-color;
+  background-color: white;
   margin-bottom: 0.5em;
 
   h1 {
+    line-height: 0.9em;
     margin: 0;
     text-align: center;
-    background-color: $brand-color-1;
+    padding-bottom: 0.25em;
+    color: white;
+    background-color: $brand-color-2;
   }
 
   .description {
-    background-color: $brand-color-3;
     margin: 0;
-    padding: 0 2em;
-  }
-
-  .img-container {
-    height: 30em;
-  }
-
-  .products {
-    padding: 0.2em;
+    padding: 1em 2em;
   }
 }
 
 .collection.thumb,
 .special.thumb {
+  position: relative;
   width: 50%;
   float: left;
   padding: 0 0.25em;
+}
 
-  .img-container {
-    height: 15em;
+.collection.full,
+.special.full {
+  background-color: $brand-color-4;
+  font-size: 30px;
+
+   h1 {
+     margin: 0;
+   }
+
+  .products {
+    text-align: center;
+    padding: 0 1em 0.25em 1em;
   }
 }

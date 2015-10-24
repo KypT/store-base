@@ -1,7 +1,28 @@
 window.Admin = (function() {
 
-    activateEditables();
-    activateFileUploadZones();
+    $(function() {
+        activateEditables();
+        activateFileUploadZones();
+        activateCKEDITOR();
+    });
+
+    function activateCKEDITOR() {
+        CKEDITOR.disableAutoInline = true;
+
+        $('.ckeditor').each(function(_, edit) {
+            CKEDITOR.replace(edit);
+        });
+
+        for (var inst in CKEDITOR.instances) {
+            CKEDITOR.instances[inst].on('blur', function() {
+                var url = $('.article').data('url'),
+                    attr = 'content',
+                    val = this.getData();
+
+                updateAttribute(url, attr, val);
+            });
+        }
+    }
 
     function activateFileUploadZones() {
         var $zones = $('form.file-upload-zone');
@@ -27,7 +48,10 @@ window.Admin = (function() {
                 var $this = $(this),
                     url = $this.attr('data-url'),
                     attr = $this.attr('data-attr'),
-                    val = $.trim($this.text());
+                    val = undefined;
+
+                if ($this.is('input')) val = $this.val();
+                else val = $.trim($this.text());
 
                 updateAttribute(url, attr, val);
             })
@@ -37,7 +61,11 @@ window.Admin = (function() {
     function updateAttribute(url, attr, value) {
         var data = {};
         data[attr] = value;
-        $.ajax(url, {data: data, method: 'put'});
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            method: 'put'});
     }
 
     return {

@@ -3,7 +3,8 @@ class StoreController < ApplicationController
 
   def index
     @product = Product.friendly.find(params[:name]) if params[:name]
-    @products = Product.all
+    @tag = Tag.find_by_name(params[:tag]) if params[:tag]
+    @products = @tag ? @tag.products : Product.all
     @tab = 'tags'
   end
 
@@ -16,6 +17,9 @@ class StoreController < ApplicationController
 
     @products = (category ? category.products : Product.all).includes :images
     @products = tagged_with(@products, tags).sort[offset, limit]
+    if params[:stocked] == 'true'
+      @products = @products.select { |p| p.stock > 0 }
+    end
     render nothing: true and return until @products
     render layout: false
   end

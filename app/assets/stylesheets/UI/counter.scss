@@ -2,19 +2,20 @@
   @extend .font-accent;
   text-align: justify;
   height: 50px;
+  width: 180px;
   line-height: 50px;
-  font-size: 20px;
+  font-size: 26px;
 
   span {
     cursor: pointer;
     width: 40px;
     display: inline-block;
     text-align: center;
-    background-color: #E1DAD5;
+    background-color: lighten($brand-color-2, 30%);
   }
 
   .count {
     width: 90px;
-    background-color: #F8F2EE;
+    background-color: lighten($brand-color-2, 40%);
   }
 }

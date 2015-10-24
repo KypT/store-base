@@ -6,9 +6,7 @@
       <div class='img-container'>
         <%= image_tag 'arrow-left-active.png', class: 'left' %>
         <img src="#" class='product-image' alt=""/>
-        <%= form_tag '#', multipart: true, class: 'file-upload-zone' do %>
-            <%= file_field_tag 'images[]', multiple: true %>
-        <% end %>
+        <%= render partial: 'admin/upload_zone' if admin_signed_in? %>
         <%= image_tag 'arrow-right-active.png', class: 'right' %>
       </div>
     </div>
@@ -45,7 +43,9 @@
       <p <%= editable 'description', '#' %>></p>
     </div>
     <div class="modal-product-tags modal-right-part">
-      <div class="modal-tags"></div>
+      <div class="modal-tags">
+        <%= render partial: 'admin/tag_edit' if admin_signed_in? %>
+      </div>
     </div>
   </div>
 </div>

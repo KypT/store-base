@@ -22,6 +22,7 @@ class SpecialsController < ApplicationController
 
   def create
     @special = Special.new(special_params)
+    add_image if params[:image]
     if @special.save
       redirect_to specials_path, notice: 'Special was successfully created.'
     else

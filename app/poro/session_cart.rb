@@ -5,17 +5,25 @@ class SessionCart
   end
 
   def products(type)
-    Product.find @session[:products].collect { | p | p['type'] == type ? p['id'] : nil }.compact
+    if count > 0
+      return Product.find @session[:products].collect { | p | p['type'] == type ? p['id'] : nil }.compact
+    end
+    return Product.none
   end
 
   def amounts(type)
     amounts = []
-    @session[:products].each { | p | amounts[p['id']] = p['amount'] if p['type'] == type  }
+    if count > 0
+      @session[:products].each { | p | amounts[p['id']] = p['amount'] if p['type'] == type  }
+    end
     amounts
   end
 
   def total
-    @session[:products].reduce(0) { |memo, item| memo + Product.find(item['id']).price * item['amount'].to_i }
+    if count > 0
+      return @session[:products].reduce(0) { |memo, item| memo + Product.find(item['id']).price * item['amount'].to_i }
+    end
+    return 0
   end
 
   def clear

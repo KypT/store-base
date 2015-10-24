@@ -1,5 +1,24 @@
-<article class="article" data-id="<%= article.id %>">
-  <h1 class="title"><%= article.title %></h1>
-  <time datetime="<%= article.created_at %>"> <%= article.created_at.strftime('%d.%m.%Y') %></time>
-  <p class="content"><%= article.content %></p>
-</article>
+<% if not defined?(context) %>
+    <article class="article" data-id="<%= article.id %>">
+      <h1 class="title">
+        <a href="<%= blog_article_path(article.id) %>"><%= article.title %></a></h1>
+      <time datetime="<%= article.created_at %>"> <%= article.created_at.strftime('%d.%m.%Y') %></time>
+      <div class="content short">
+        <%= article.content.html_safe %> <br/>
+        <%= link_to blog_article_path(article.id), class: 'article-link link' do %>
+            Читать далее <span class="arrow right brown long"></span>
+        <% end %>
+      </div>
+    </article>
+<% elsif context == 'single' %>
+    <article class="article" data-id="<%= article.id %>" <%= "data-url=#{url_for(article)}" if admin_signed_in? %>>
+      <h1 <%= editable 'title', url_for(article) %> class="title"><%= article.title %></h1>
+      <time datetime="<%= article.created_at %>"> <%= article.created_at.strftime('%d.%m.%Y') %></time>
+      <% if admin_signed_in? %>
+          <div class="remove">
+            <%= link_to 'Удалить', article_path(article), method: 'delete', data: {confirm: 'Точно?'} %>
+          </div>
+      <% end %>
+      <div class="<%= 'ckeditor' if admin_signed_in? %> content"><%= article.content.html_safe %></div>
+    </article>
+<% end %>

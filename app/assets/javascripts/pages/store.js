@@ -4,31 +4,41 @@ window.Store = (function() {
         $content = $('.content'),
         $tabs = $controls.find('.tabs'),
         $tagBtn = $controls.find('.tag'),
-        $products = $('.product'),
-        $modalWrapper = $('.products.modal-wrapper'),
-        modal = UI.Modal.create($modalWrapper);
+        $stockCheck = $controls.find('input[type="checkbox"');
 
     $tagBtn.click(tagHandler);
-    $tabs.find('.btn').click(tabHandler);
-
-    UI.addShowEffectToProducts($products);
+    $tabs.find('li').click(tabHandler);
+    $stockCheck.change(function() {
+        Content.stocked($stockCheck[0].checked);
+    });
+    if ($tabs.find('#tags-tab').is('.active')) {
+        $subMenu.slideDown();
+    }
 
     window.addEventListener("popstate", function(e) {
         if (e.state != null)
-            modal.hide();
+            Modal.hide();
     });
-
-    if (window.product)
-        modal.show(product);
 
     window.addEventListener("popstate", function(e) {
         location.reload();
     });
 
     function tagHandler() {
-        var id = $(this).data('id');
-        if (!Content.tagged(id))
+        var $this = $(this),
+            id = $this.data('id');
+        if (!Content.tagged(id)) {
+            history.pushState(null,  null, '/store/' + $this.text());
+            $tagBtn.removeClass('active');
+            $this.addClass('active');
             Content.tag(id);
+            Content.load();
+        }
+        else {
+            history.pushState(null,  null, '/store');
+            $this.removeClass('active');
+            Content.untag();
+        }
     }
 
     function tabHandler() {
@@ -39,9 +49,10 @@ window.Store = (function() {
         $tabs.find('.active').removeClass('active');
         $this.addClass('active');
 
-        if ($this.is('.tags.btn')) {
+        if ($this.is('.tags')) {
             history.pushState(null,  null, '/store');
-            Content.load();
+            $tagBtn.removeClass('active');
+            Content.untag();
             $subMenu.slideDown();
         }
         else {
@@ -55,9 +66,7 @@ window.Store = (function() {
     return {
         displayContent: function(html, uri) {
             $content.html(html);
-            var $products = $('.product');
-            UI.addShowEffectToProducts($products);
-            UI.initModal4Products($products, $modal);
+            Products.init();
             if (uri) history.pushState(null, null, uri);
         }
     }

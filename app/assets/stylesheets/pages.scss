@@ -1,19 +1,34 @@
-header.root {
+.img-container {
   text-align: center;
-  img {
-    width: 15%;
+
+  img.root-logo {
+    width: 30%;
   }
 }
 
-section.intro,
-section.author,
-section.reviews {
-  margin-top: 2em;
-  padding: 1em;
-  background-color: $brand-color-2;
+.main-page p {
+  font-size: 23px;
 }
 
-.author {
+section.intro {
+  text-align: center;
+}
+
+.main-page section:nth-child(odd) {
+  background-color: $brand-color-4;
+}
+
+section.intro,
+section.store,
+section.author,
+section.reviews,
+section.author-page {
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+section.author,
+section.author-page {
   .img-container {
     text-align: center;
     img {
@@ -27,3 +42,17 @@ section.reviews {
   margin: auto;
 }
 
+.personal-order {
+  margin-top: 1em;
+  text-align: center;
+
+  .dream-btn {
+    text-transform: uppercase;
+    background-color: $brand-color-3;
+  }
+}
+
+.btn.to-store {
+  text-align: center;
+  display: inline-block;
+}

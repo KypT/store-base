@@ -25,15 +25,17 @@
 }
 
 .reviews-container {
-  width: 700px;
+  width: 800px;
   margin: auto;
+  padding: 1em;
+  background-color: $brand-color-4;
 }
 
 form.new-review {
   @extend .bordered;
   background-color: $brand-color-1;
   width: 500px;
-  margin: 50px auto 50px auto;
+  margin: 1em auto 0 auto;
   padding: 0 1em 1em 1em;
 
   .info {
