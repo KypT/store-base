@@ -1,6 +1,5 @@
-$header-height: 150px;
-
 header {
+  @extend .no-select;
   position: relative;
   background-color: $brand-color-1;
   text-align: center;
@@ -24,10 +23,11 @@ header {
         @extend .font-accent;
         font-size: 1.6em;
         line-height: 1.1em;
-        color: white;
         text-transform: uppercase;
         display: inline-block;
         vertical-align: middle;
+
+        .link { color: white; }
       }
     }
 
@@ -36,7 +36,7 @@ header {
       text-align: right;
 
       @for $i from -1 to 2 {
-        & a:nth-of-type(#{$i + 2}) {
+        & .header-link:nth-of-type(#{$i + 2}) {
           position: relative;
           right: - ($i * $i) * 10px;
         }
@@ -48,7 +48,7 @@ header {
       text-align: left;
 
       @for $i from -1 to 2 {
-        & a:nth-of-type(#{$i + 2}) {
+        & .header-link:nth-of-type(#{$i + 2}) {
           position: relative;
           left: - ($i * $i) * 10px + 5px;
         }

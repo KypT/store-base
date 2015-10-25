@@ -2,9 +2,14 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:update, :destroy]
   before_action :authenticate_user!, only: [:new, :update, :destroy]
 
+  def show
+    redirect_to store_path
+  end
+
   def new
     @product = Product.default
-    redirect_to @product
+    @product.save
+    redirect_to store_path
   end
 
   def update

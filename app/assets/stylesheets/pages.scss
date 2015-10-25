@@ -1,8 +1,14 @@
-.img-container {
-  text-align: center;
+header.root {
+  nav {
+    width: 590px;
+  }
 
-  img.root-logo {
-    width: 30%;
+  .logo img {
+    height: 9em;
+  }
+
+  .cart-icon {
+    display: none;
   }
 }
 
@@ -10,16 +16,63 @@
   font-size: 23px;
 }
 
+section.author {
+  .author-image {
+    background-image: url(/assets/images/img2.jpg);
+    height: 450px;
+    background-size: cover;
+    background-position: bottom;
+
+    padding: 50px 600px 0 20px;
+  }
+}
+
+.root.header {
+  .img-container {
+    background-color: $brand-color-1;
+  }
+}
+
 section.intro {
   text-align: center;
+  margin-bottom: 2em;
+  p {
+    margin-bottom: 0;
+  }
+  h1 {
+    span {
+      border-bottom: 2px solid $brand-color-1;
+    }
+    font-size: 1.3em;
+  }
 }
 
-.main-page section:nth-child(odd) {
-  background-color: $brand-color-4;
+section.store {
+  margin-bottom: 1em;
+
+  .products-image {
+    background-image: url(/assets/images/img.png);
+    height: 535px;
+    background-size: cover;
+    background-position: center;
+
+    padding: 50px 600px 0 50px;
+    text-align: center;
+  }
 }
 
-section.intro,
-section.store,
+section.personal {
+  .personal-image {
+    background-image: url(/assets/images/img1.jpg);
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+
+    padding: 50px 50px 0 600px;
+    text-align: center;
+  }
+}
+
 section.author,
 section.reviews,
 section.author-page {
@@ -55,4 +108,8 @@ section.author-page {
 .btn.to-store {
   text-align: center;
   display: inline-block;
+}
+
+.payment.container {
+  padding: 2em;
 }

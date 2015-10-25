@@ -4,8 +4,8 @@
         <img class="product-image cover" src="<%= images_for(product)[0] %>" alt="<%= product.name %>"/>
         <div class="product-info">
           <h3><%= product.name %></h3>
-          <p>Цена: <%= product.price %></p>
-          <span class="arrow right brown long"></span>
+          <p class="price font-accent"><%= number_to_currency(product.price, precision: 0, locale: :ru) %></p>
+          <span class="link">Подробнее <span class="arrow right brown long"></span>
         </div>
       </div>
     </div>

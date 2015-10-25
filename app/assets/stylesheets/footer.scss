@@ -1,0 +1,46 @@
+footer {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 1em 12em;
+  background-color: $brand-color-1;
+
+  .information {
+    width: 200px;
+    float: left;
+  }
+
+  .subscription {
+    width: 253px;
+    float: right;
+    text-align: left;
+
+    input {
+      border: none;
+      padding: 0.25em;
+      font-size: 1.1em;
+
+    }
+
+    h2 {
+      margin-bottom: 5px;
+    }
+
+    .subscribe {
+      cursor: pointer;
+      background-color: $brand-color-3;
+      padding: 7px 0.6em;
+    }
+  }
+
+  h3 {
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .social-link img {
+    max-height: 50px;
+  }
+}

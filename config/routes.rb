@@ -5,13 +5,13 @@ Rails.application.routes.draw do
   get 'about' => 'pages#about', as: 'about'
   get 'blog' => 'blog#index', as: 'blog'
   get 'blog/article/:id' => 'blog#show', as: 'blog_article'
+  get 'items/new' => 'products#new'
+  get 'items/:name' => 'store#index'
 
   resources :products, path: 'items', except: [:edit, :create] do
     post '' => 'products#update', on: :member
     get 'get', on: :collection
   end
-
-  get 'items/:name' => 'store#index'
 
   scope :store do
     get '' => 'store#index', as: :store

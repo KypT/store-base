@@ -2,46 +2,45 @@
     <%= render partial: 'store/productModal' %>
 <% end %>
 
-<div class="main-page">
-  <section class="intro">
-    <div class="text-container">
-      <div class="img-container">
-        <%= image_tag 'logo.png', alt: 'Мятный домик', title: 'Мятный домик', class: 'root-logo' %>
-      </div>
-      <p>
-        Добро пожаловать в наш маленький и теплый Мятный Домик. Здесь вы найдете деревянные украшения ручной работы, и,
-        поверьте, каждое изделие имеет душу.
-      </p>
+<% content_for :header do %>
+    <%= render partial: '/header', locals: {root: true} %>
+<% end %>
 
-      <p>
-        Надеюсь, вы увидите здесь что-нибудь, что приглянется именно вам! А если нет - не спешите убегать: оставайтесь.
-        Мы порадуем вас уютной дружеской атмосферой и обязательно найдем что-нибудь по душе)
-      </p>
-    </div>
+<%= content_for :sub_header do %>
+    <h1 class="medium container page title">
+      Добро пожаловать в Мятный Домик
+    </h1>
+<% end %>
+
+<div class="main-page">
+  <section class="intro small container">
+    <p>
+      "Мятный Домик" – обитель уютных и милых деревянных украшений ручной работы.
+      Здесь каждое изделие неповторимо и имеет душу:
+      Здесь вы найдете что-то простое, трогательное и глазастое, чуть реже - что-то фентезийное, волшебное и сказочное.
+      Здесь оживают и обретают свои истории все персонажи, изображенные на моих работах.
+    </p>
   </section>
 
   <section class="store">
-    <div class="text-container">
-      <p>
-        Взгляните на некоторые мои работы. Какая-то байда, они белые и пушистые!!!
-      </p>
-
-      <div class="products clear">
-        <%= link_to store_path, class: 'link' do %>
+      <div class="products-image">
+        <p>
+          Взгляните на некоторые мои работы. Какая-то байда, они белые и пушистые!!!
+        </p>
+        <%= link_to store_path, class: 'btn' do %>
             Перейти в каталог <span class="arrow right long brown"></span>
         <% end %>
-        <br/>
-        <%= render partial: @products %>
       </div>
-    </div>
   </section>
 
   <section class="personal">
-    <p class="personal-order">
-      Вы также можете оставтиь заявку на выполнение индивидуального заказа.
-      <br/>
-      <button class="btn dream-btn">Воплотить мечты</button>
-    </p>
+    <div class="personal-image">
+      <p class="personal-order">
+        Вы также можете оставтиь заявку на выполнение индивидуального заказа.
+        <br/>
+        <button class="btn dream-btn">Воплотить мечты</button>
+      </p>
+    </div>
   </section>
 
   <section class="reviews">
@@ -53,15 +52,10 @@
   </section>
 
   <section class="author">
-    <div class="text-container">
-      <div class="img-container">
-        <img src="https://pp.vk.me/c616222/v616222048/fa41/6WGrobzZ39A.jpg" alt="Александра Тоботрас"/>
+      <div class="author-image">
+      <p>Подробнее о магазине и об авторе:</p>
+      <a href="<%= about_path %>" class="btn">Узнать больше</a>
       </div>
-      <h1>Александра тоботрас</h1>
-
-      <p>Несколько солв об авторе...</p>
-      <a href="<%= about_path %>" class="link">Подробнее</a>
-    </div>
   </section>
 
   <% content_for :javascripts do %>

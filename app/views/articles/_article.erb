@@ -5,7 +5,7 @@
       <time datetime="<%= article.created_at %>"> <%= article.created_at.strftime('%d.%m.%Y') %></time>
       <div class="content short">
         <%= article.content.html_safe %> <br/>
-        <%= link_to blog_article_path(article.id), class: 'article-link link' do %>
+        <%= link_to blog_article_path(article.id), class: 'article-link dim link' do %>
             Читать далее <span class="arrow right brown long"></span>
         <% end %>
       </div>

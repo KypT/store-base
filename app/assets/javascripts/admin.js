@@ -2,7 +2,6 @@ window.Admin = (function() {
 
     $(function() {
         activateEditables();
-        activateFileUploadZones();
         activateCKEDITOR();
     });
 
@@ -22,22 +21,6 @@ window.Admin = (function() {
                 updateAttribute(url, attr, val);
             });
         }
-    }
-
-    function activateFileUploadZones() {
-        var $zones = $('form.file-upload-zone');
-        $zones.change(function (e) {
-            var form = e.target.form,
-                formData = new FormData(form);
-            $.ajax({
-                url: form.getAttribute('action'),
-                type: 'POST',
-                data: formData,
-                processData: false,
-                cache: false,
-                contentType: false
-            });
-        })
     }
 
     function activateEditables() {
@@ -80,6 +63,22 @@ window.Admin = (function() {
                 cache: false,
                 contentType: false
             });
+        },
+
+        activateDropZone: function($form, url, callback) {
+            $form.change(function (e) {
+                var form = e.target.form,
+                    formData = new FormData(form);
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: formData,
+                    success: callback,
+                    processData: false,
+                    cache: false,
+                    contentType: false
+                });
+            })
         }
     }
 }());

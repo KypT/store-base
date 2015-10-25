@@ -3,9 +3,15 @@ module ApplicationHelper
     current_user and current_user.admin?
   end
 
-  def editable
-    if admin_signed_in?
-       'class = editable contenteditable = true'
+  def controller_and_action?(cnt, action)
+    cnt == controller.controller_name and action == controller.action_name
+  end
+
+  def header_link(controller, action, name)
+    content_tag(:span, class: 'header-link') do
+      link_to_if(!controller_and_action?(controller, action), name, {:controller => controller, :action => action}, class: 'link') do
+        content_tag(:span, name, class: 'link current')
+      end
     end
   end
 

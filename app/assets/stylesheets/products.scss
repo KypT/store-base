@@ -1,15 +1,35 @@
+.products.grid {
+  margin: -0.5em;
+
+  .grid-cell {
+    background-color: white;
+  }
+
+  &.four.wide {
+    .grid-cell {
+      padding: 0.5em 0.5em;
+      float: left;
+      width: 25%;
+    }
+  }
+}
+
+.new-item {
+  text-align: center;
+  padding: 1em;
+  margin-bottom: 1em;
+  background-color: $brand-color-1;
+}
+
 .product {
   position: relative;
   overflow: hidden;
-  float: left;
-  width: 20%;
   opacity: 0;
   @include transition(all 0.3s);
 
   .product-data {
     cursor: pointer;
     position: absolute;
-    padding: 0.125em 0.25em;
     top: 0;
     bottom: 0;
     left: 0;
@@ -25,6 +45,15 @@
     content: "";
     display: block;
     padding-top: 100%;
+  }
+
+  .price {
+    margin-top: -13px;
+    font-size: 1.6em;
+  }
+
+  span.link {
+    color: darken($brand-color-1, 20%);
   }
 
   h3 {

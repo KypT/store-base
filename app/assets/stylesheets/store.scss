@@ -3,6 +3,7 @@
 
 .store-controls {
   position: relative;
+  background-color: white;
 
   ul {
     padding: 0;
@@ -73,7 +74,5 @@
 }
 
 .store.container {
-  .product {
-    width: 25%;
-  }
+  overflow: hidden;
 }

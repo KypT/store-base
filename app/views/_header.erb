@@ -1,11 +1,10 @@
-<header class="medium container <%= 'big' if defined?(big) %>">
+<header class="medium container <%= 'root' if controller_and_action?('pages', 'root') %>">
   <nav>
-
     <div class="left-nav">
       <div class="links-cnt">
-        <%= link_to 'Блог', blog_path %><br/><!--
-     --><%= link_to 'Каталог', store_path %><br/><!--
-     --><%= link_to 'Отзывы', reviews_path %>
+        <%= header_link '/blog', 'index', 'Блог' %><br/><!--
+     --><%= header_link '/store', 'index', 'Каталог' %><br/><!--
+     --><%= header_link '/reviews', 'index', 'Отзывы' %>
       </div>
     </div>
 
@@ -17,9 +16,9 @@
 
     <div class="right-nav">
       <div class="links-cnt">
-        <%= link_to 'О Магазине', about_path %> <br/>
-        <%= link_to 'Заказы', personal_order_path %> <br/>
-        <%= link_to 'Оплата и доставка', reviews_path %>
+        <%= header_link '/pages', 'about', 'О магазине' %> <br/>
+        <%= header_link '/pages', 'uniq', 'Заказы' %> <br/>
+        <%= header_link '/pages', 'payment', 'Оплата и доставка' %>
       </div>
     </div>
   </nav>

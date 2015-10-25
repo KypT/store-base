@@ -125,7 +125,9 @@ function ProductModal() {
             var url = '/items/' + product.name,
                 product_tags = product.tags.map(function(val) { return val.name }).join(', '),
                 product_collection = product.category?  product.category.name : '';
-            $modal.find('form.file-upload-zone').attr('action', url);
+            Admin.activateDropZone($modal.find('form.file-upload-zone'), url, function() {
+                location.reload();
+            });
             $modal.find('*[contenteditable="true"]').attr('data-url', url);
             $modal.find('.modal-tags input[data-attr="tags"]').val(product_tags);
             $modal.find('.modal-tags input[data-attr="category"]').val(product_collection);
