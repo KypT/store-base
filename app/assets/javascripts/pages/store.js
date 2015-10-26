@@ -4,7 +4,7 @@ window.Store = (function() {
         $content = $('.content'),
         $tabs = $controls.find('.tabs'),
         $tagBtn = $controls.find('.tag'),
-        $stockCheck = $controls.find('input[type="checkbox"');
+        $stockCheck = $controls.find('input[type="checkbox"]');
 
     $tagBtn.click(tagHandler);
     $tabs.find('li').click(tabHandler);
