@@ -4,7 +4,8 @@ module ApplicationHelper
   end
 
   def controller_and_action?(cnt, action)
-    cnt == controller.controller_name and action == controller.action_name
+    (cnt == controller.controller_name and action == controller.action_name) or
+    (cnt == '/' + controller.controller_name and action == controller.action_name)
   end
 
   def header_link(controller, action, name)
