@@ -26,26 +26,33 @@ function ProductModal() {
     });
 
     function ImageSlider(product) {
-        var $img = $modal.find('.product-image'),
+        var $imgContainer = $modal.find('.img-container'),
             imageId = 0;
 
-        setImage(Products.imageFor(product));
+        $imgContainer.find('.product-image').remove();
 
-        function setImage(image) {
-            $img.attr('src', image);
+        for (var i = 0; i < product.images.length; i++) {
+            $imgContainer.append($('<img class="hide product-image" data-id="'+ i +'">').attr('src', product.images[i].file.url));
+        }
+
+        setImage(0);
+
+        function setImage(ind) {
+            $imgContainer.find('.product-image').hide();
+            $imgContainer.find('.product-image[data-id="'+ ind +'"]').show();
         }
 
         return {
             next: function() {
                 if (product.images.length == 0) return;
                 if (product.images.length <= ++imageId) imageId = 0;
-                setImage(product.images[imageId].file.url);
+                setImage(imageId);
             },
 
             prev: function() {
                 if (product.images.length == 0) return;
                 if (imageId <= 0) imageId = product.images.length;
-                setImage(product.images[--imageId].file.url);
+                setImage(imageId);
             }
         }
     }

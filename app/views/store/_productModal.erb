@@ -5,7 +5,6 @@
     <div class='modal-product-images modal-left-part'>
       <div class='img-container'>
         <%= image_tag 'arrow-left-active.png', class: 'left' %>
-        <img src="#" class='product-image' alt=""/>
         <%= render partial: 'admin/upload_zone' if admin_signed_in? %>
         <%= image_tag 'arrow-right-active.png', class: 'right' %>
       </div>
