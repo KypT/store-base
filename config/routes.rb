@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
+  get 'user/update'
+
   root 'pages#root'
   get 'payment' => 'pages#payment'
   get 'personal-order' => 'pages#uniq', as: 'personal_order'
+  post 'personal-order' => 'pages#make_uniq'
   get 'about' => 'pages#about', as: 'about'
   get 'blog' => 'blog#index', as: 'blog'
   get 'blog/article/:id' => 'blog#show', as: 'blog_article'
   get 'items/new' => 'products#new'
-  get 'items/:name' => 'store#index'
+  post 'user' => 'user#register', :as => :user
+  get 'profile' => 'user#profile'
 
-  resources :products, path: 'items', except: [:edit, :create] do
+  resources :products, path: 'items', except: [:edit, :create, :show] do
+    get '/:name' => 'store#index'
     post '' => 'products#update', on: :member
     get 'get', on: :collection
   end
@@ -31,5 +36,14 @@ Rails.application.routes.draw do
   resources :articles do
     post '' => 'articles#update', on: :member
   end
-  devise_for :users
+
+  devise_for :users, :skip => [:sessions]
+  as :user do
+    get 'login' => 'users/sessions#new', :as => :new_user_session
+    post 'login' => 'users/sessions#create', :as => :user_session
+    delete 'logout' => 'users/sessions#destroy', :as => :destroy_user_session
+    get 'logout' => 'users/sessions#destroy'
+  end
+
+
 end

@@ -3,36 +3,48 @@
       <%= form_tag orders_path, class: 'new-order' do %>
           <h1 class="font-accent">Оформление заказа</h1>
           <div class="field">
-            <%= label :order, :name, 'Ваше имя' %>
-            <%= text_field :order, :name %>
+            <%= label :user_data, :name, 'Ваше имя' %>
+            <%= text_field :user_data, :name, required: true, title: 'Пожалуйста, укажите ваше имя' %>
           </div>
           <div class="field">
-            <%= label :order, :surname, 'Фамилия' %>
-            <%= text_field :order, :surname %>
+            <%= label :user_data, :surname, 'Фамилия' %>
+            <%= text_field :user_data, :surname, required: true, title: 'Пожалуйста, укажите вашу фамилию' %>
           </div>
           <div class="field">
-            <%= label :order, :phone, 'Телефон' %>
-            <%= phone_field :order, :phone %>
+            <%= label :user_data, :fname, 'Отчество' %>
+            <%= text_field :user_data, :fname %>
           </div>
           <div class="field">
-            <%= label :order, :email, 'Email' %>
-            <%= email_field :order, :email %>
+            <%= label :user_data, :phone, 'Телефон' %>
+            <%= phone_field :user_data, :phone %>
           </div>
           <div class="field">
-            <%= label :order, :country, 'Страна' %>
-            <%= text_field :order, :country %>
+            <%= label :user_data, :email, 'Email' %>
+            <%= text_field_tag :email, user_email, required: true, title: 'Пожалуйста, укажите адрес вашей электронной почты' %>
           </div>
           <div class="field">
-            <%= label :order, :city, 'Город' %>
-            <%= text_field :order, :city %>
+            <%= label :user_data, :vk, 'Профиль VK' %>
+            <%= text_field :user_data, :vk %>
           </div>
           <div class="field">
-            <%= label :order, :address, 'Адрес' %>
-            <%= text_field :order, :address %>
+            <%= label :user_data, :skype, 'Skype' %>
+            <%= text_field :user_data, :skype %>
           </div>
           <div class="field">
-            <%= label :order, :post_code, 'Индекс' %>
-            <%= number_field :order, :post_code %>
+            <%= label :user_data, :country, 'Страна' %>
+            <%= text_field :user_data, :country, required: true, title: 'Пожалуйста, укажите страну, в которой вы проживаете' %>
+          </div>
+          <div class="field">
+            <%= label :user_data, :city, 'Город' %>
+            <%= text_field :user_data, :city, required: true, title: 'Пожалуйста, укажите город, в котором вы проживаете' %>
+          </div>
+          <div class="field">
+            <%= label :user_data, :address, 'Адрес' %>
+            <%= text_field :user_data, :address, required: true, title: 'Пожалуйста, укажите ваш адрес' %>
+          </div>
+          <div class="field">
+            <%= label :user_data, :index, 'Индекс' %>
+            <%= number_field :user_data, :index, required: true, title: 'Пожалуйста, укажите ваш почтовый индекс' %>
           </div>
           <%= submit_tag 'Продолжить →' %>
       <% end %>

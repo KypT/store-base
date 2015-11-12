@@ -9,7 +9,11 @@
     </div>
 
     <div class='logo'>
-      <%= link_to root_path do %>
+      <% if !current_page?(root_url) %>
+          <%= link_to root_path do %>
+              <%= image_tag 'logo.png', title: 'На главную', alt: 'На главную' %>
+          <% end %>
+      <% else %>
           <%= image_tag 'logo.png', title: 'На главную', alt: 'На главную' %>
       <% end %>
     </div>

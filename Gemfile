@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'coffee-rails', '~> 4.1.0'
-gem 'friendly_id', '~> 5.1.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'jbuilder', '~> 2.0'

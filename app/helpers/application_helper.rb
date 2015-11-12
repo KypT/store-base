@@ -16,6 +16,12 @@ module ApplicationHelper
     end
   end
 
+  def user_email
+    return current_user.email if user_signed_in?
+    return session[:user_email] if  session[:user_email]
+    ''
+  end
+
   def editable(attr, url)
     if admin_signed_in?
       "contenteditable=true data-url=#{url} data-attr=#{attr}"

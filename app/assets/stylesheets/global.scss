@@ -2,6 +2,14 @@
 @import "mixins";
 @import "fonts";
 
+$footer-height: 220px;
+
+.wrapper {
+  min-height: 100%;
+  position: relative;
+  padding-bottom: $footer-height;
+}
+
 body {
   @extend .regular;
   background-image: url(/assets/images/back.jpg);

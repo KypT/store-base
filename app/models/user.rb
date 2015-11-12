@@ -1,10 +1,12 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :email, uniqueness: { message: 'Пользователь с таким email уже зарегистрирован.' }
+
+  has_one :user_data
+
   def admin?
-    true
+    group == 'admin'
   end
 end
