@@ -1,8 +1,14 @@
 footer {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  padding: 1em 12em;
-  background-color: $brand-color-1;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+
+  .footer-content {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: $brand-color-1;
+    padding: 1em 12em;
+  }
 
   .information {
     width: 200px;

@@ -25,6 +25,13 @@ function ProductModal() {
         }
     });
 
+    function buyBtnClicked() {
+        var $this = $(this);
+
+        console.log('ok');
+        $this.text('Спасибо! Товар добавлен в корзину');
+    }
+
     function ImageSlider(product) {
         var $imgContainer = $modal.find('.img-container'),
             imageId = 0;
@@ -44,14 +51,14 @@ function ProductModal() {
 
         return {
             next: function() {
-                if (product.images.length == 0) return;
+                if (product.images.length <= 1) return;
                 if (product.images.length <= ++imageId) imageId = 0;
                 setImage(imageId);
             },
 
             prev: function() {
-                if (product.images.length == 0) return;
-                if (imageId <= 0) imageId = product.images.length;
+                if (product.images.length <= 1) return;
+                if (--imageId < 0) imageId = product.images.length - 1;
                 setImage(imageId);
             }
         }
@@ -83,8 +90,8 @@ function ProductModal() {
 
     function prepare(product) {
         imageSlder = new ImageSlider(product);
-        $modal.find('.img-container .left').click(imageSlder.prev);
-        $modal.find('.img-container .right').click(imageSlder.next);
+        $modal.find('.img-container .left').off('click').on('click', imageSlder.prev);
+        $modal.find('.img-container .right').off('click').on('click', imageSlder.next);
         $modal.find('.modal-product-name').text(product.name);
         $modal.find('.amount-info span').text(product.stock);
         $modal.find('.price').text(product.price);
@@ -111,9 +118,11 @@ function ProductModal() {
             $orderBtn = $modal.find('.order-button');
 
         $buyBtn.off('ajax:beforeSend').on('ajax:beforeSend', addAmountToRequest(buyCounter));
-        $buyBtn[0].search = "?id=" + product.id + '&type=stocked';
         $orderBtn.off('ajax:beforeSend').on('ajax:beforeSend', addAmountToRequest(orderCounter));
+        $buyBtn.off('ajax:success').on('ajax:success', buyBtnClicked);
+        $buyBtn[0].search = "?id=" + product.id + '&type=stocked';
         $orderBtn[0].search = "?id=" + product.id + '&type=copy';
+        $buyBtn.text('Купить');
 
         if (product.stock > 0) {
             buyCounter.config({max: product.stock});
@@ -129,7 +138,7 @@ function ProductModal() {
         buyCounter.reset();
 
         if (window.Admin != undefined) {
-            var url = '/items/' + product.name,
+            var url = productPath(product),
                 product_tags = product.tags.map(function(val) { return val.name }).join(', '),
                 product_collection = product.category?  product.category.name : '';
             Admin.activateDropZone($modal.find('form.file-upload-zone'), url, function() {
@@ -139,10 +148,13 @@ function ProductModal() {
             $modal.find('.modal-tags input[data-attr="tags"]').val(product_tags);
             $modal.find('.modal-tags input[data-attr="category"]').val(product_collection);
         }
-        else
-        {
+        else {
             $modal.find('.modal-tags').html(tags(product));
         }
+    }
+
+    function productPath(product) {
+        return '/items/' + product.id + '/' + product.name.replace(/ /g, '_');
     }
 
     function addAmountToRequest(counter) {
@@ -168,7 +180,7 @@ function ProductModal() {
                 return;
             }
             prepare(product);
-            history.pushState(location.pathname, null, '/items/' + product.name);
+            history.pushState(location.pathname, null, productPath(product));
             UIModal.show();
         },
 

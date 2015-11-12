@@ -1,0 +1,14 @@
+<%= render partial: '/sub_header', locals: {title: 'Профиль' } %>
+
+<div class="profile medium container">
+  <h1>Добро пожаловать, <%= current_user.user_data.name %></h1>
+
+  <%= render partial: current_user.user_data %>
+
+  <div class="user-orders">
+    <% current_user.user_data.orders.each do | order | %>
+        <%= render partial: 'orders/summary', locals: {order: order}  %>
+    <% end %>
+  </div>
+
+</div>

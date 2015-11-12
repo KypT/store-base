@@ -2,7 +2,7 @@ class StoreController < ApplicationController
   include StoreConcern
 
   def index
-    @product = Product.friendly.find(params[:name]) if params[:name]
+    @product = Product.find(params[:product_id]) if params[:product_id]
     @tag = Tag.find_by_name(params[:tag]) if params[:tag]
     @products = @tag ? @tag.products : Product.all
     @tab = 'tags'

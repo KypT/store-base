@@ -16,6 +16,10 @@ class PagesController < ApplicationController
   def about
   end
 
+  def make_uniq
+
+  end
+
   def specials
     @specials = Special.all
   end

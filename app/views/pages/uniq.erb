@@ -1,6 +1,6 @@
 <%= render partial: '/sub_header', locals: {title: 'Индивидуальные заказы' } %>
 
-<section class='text-container personal-order'>
+<section class='medium container personal-order'>
 
   <p>Информация по заказу...</p>
 
@@ -9,7 +9,7 @@
         <%= text_area :order, :comment, required: true %>
       </div>
       <div class="field">
-        <%= file_field :order, :image %>
+        <%= file_field :order, :image, multiple: true %>
       </div>
       <div class="field">
         <%= submit_tag 'Заказать' %>

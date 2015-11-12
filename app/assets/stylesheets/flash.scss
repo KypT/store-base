@@ -1,0 +1,11 @@
+.flash {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+
+  background-color: $brand-color-3;
+  border: 1px solid $brand-color-2;
+  border-radius: 2px;
+  padding: .5em 1em;
+  z-index: 1;
+}
