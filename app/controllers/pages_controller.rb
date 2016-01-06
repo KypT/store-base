@@ -17,10 +17,26 @@ class PagesController < ApplicationController
   end
 
   def make_uniq
-
+    @personal_order = PersonalOrder.new personal_order_params
+    if @personal_order.save
+      save_order_images
+      session[:personalOrder] = @personal_order.id
+      redirect_to new_order_path
+    end
   end
 
   def specials
     @specials = Special.all
+  end
+
+  private
+  def save_order_images
+    images = params.require(:order)[:images]
+    @personal_order.images << images.map { |img| Image.create file: img } unless images.nil?
+    @personal_order.save
+  end
+
+  def personal_order_params
+    params.require(:order).permit(:comment)
   end
 end

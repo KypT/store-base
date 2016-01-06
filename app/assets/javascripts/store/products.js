@@ -16,7 +16,7 @@ window.Products = (function () {
 
             $products.click(function () {
                 var product = Products.get(this.getAttribute('data-id'));
-                Modal.show(product)
+                ProductModal.show(product);
             });
 
             setTimeout(function () {
@@ -28,6 +28,10 @@ window.Products = (function () {
             if (item.images.length > 0)
                 return item.images[0].file.url;
             return '/assets/missing-image.png';
+        },
+
+        path: function(product) {
+            return '/items/' + product.id + '/' + product.name.replace(/ /g, '_');
         }
     }
 }());

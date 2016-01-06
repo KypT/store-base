@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'user/update'
 
   root 'pages#root'
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
   get 'items/new' => 'products#new'
   post 'user' => 'user#register', :as => :user
   get 'profile' => 'user#profile'
+  post 'subscriptions/new', as: 'new_subscription'
 
   resources :products, path: 'items', except: [:edit, :create, :show] do
     get '/:name' => 'store#index'

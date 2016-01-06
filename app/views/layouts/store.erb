@@ -2,7 +2,7 @@
     <script>
         $(function () {
             <% if @product %>
-                Modal.show(Products.get(<%= @product.id %>));
+                ProductModal.show(Products.get(<%= @product.id %>));
             <% end %>
 
             <% if @tag %>

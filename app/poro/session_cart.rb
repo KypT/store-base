@@ -50,12 +50,8 @@ class SessionCart
     @session[:products].delete p if p
   end
 
-  def make_order
-    order = Order.new
-    @session[:products].each do | p |
-      order.cart_entries << CartEntry.create(product: Product.find(p['id']), amount: p['amount'], order_type: p['type'])
-    end
-    order
+  def cart_entries
+    @session[:products].map { | p | CartEntry.create(product: Product.find(p['id']), amount: p['amount'], order_type: p['type']) }
   end
 
   def count

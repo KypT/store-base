@@ -2,30 +2,10 @@
   <h1 class='font-accent'>Спасибо за заказ!</h1>
 
   <p>Скоро мы свяжемся с вами для уточнения деталей заказа и осуществления оплаты.</p>
+  <p>Вы можете отслеживать статус заказа в <%= link_to 'личном кабинете', profile_path, class: 'link' %>.</p>
 
-  <% unless current_user %>
-      <h2>Давайте мы вас зарегистрируем?</h2>
-      <%= form_tag user_path %>
-          <div class="field">
-            <%= label_tag :email %><br/>
-            <%= email_field_tag :email, session[:user_email] %>
-          </div>
+  <% if @new_user %>
+    <p> Мы сгенерировали для вас пароль: <%= @password %>. </p>
+  <% end %>
 
-          <div class="field">
-            <%= label_tag :password %>
-            <% if @minimum_password_length %>
-                <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %><br/>
-            <%= password_field_tag :password %>
-          </div>
-
-          <div class="field">
-            <%= label_tag :password_confirmation %><br/>
-            <%= password_field_tag :password_confirmation %>
-          </div>
-
-          <div class="actions">
-            <%= submit_tag "Sign up" %>
-          </div>
-      <% end %>
 </div>

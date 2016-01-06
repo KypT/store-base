@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:update, :destroy]
-  before_action :authenticate_user!, only: [:new, :update, :destroy]
+  before_action :authenticate_admin!, only: [:new, :update, :destroy]
 
   def show
     redirect_to store_path
@@ -56,5 +56,9 @@ class ProductsController < ApplicationController
 
   def product_params
     params.permit(:name, :price, :description, :stock)
+  end
+
+  def authenticate_admin!
+    not_found until admin_signed_in?
   end
 end

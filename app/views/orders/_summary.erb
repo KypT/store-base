@@ -1,3 +1,5 @@
+<% if order.personal_order.nil? %>
+
 <div class="order summary">
   <h3 class="font-accent">Детали заказа</h3>
 
@@ -21,15 +23,11 @@
       </div>
   <% end %>
 
-  <% order_entries = order.entries_with('order') %>
-  <% unless order_entries.empty? %>
-      <div class="section order">
-        <h4>Заказы</h4>
-        <div class="entries">
-          <%= render partial: order_entries %>
-        </div>
-      </div>
-  <% end %>
-
   <h3>Сумма заказа: <%= order.total %></h3>
 </div>
+
+<% else %>
+    <div class="personal-order summary">
+        <%= render partial: 'personal_order/personal_order', locals: {personal_order: order.personal_order} %>
+    </div>
+<% end %>

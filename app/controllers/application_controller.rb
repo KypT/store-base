@@ -25,4 +25,8 @@ class ApplicationController < ActionController::Base
   def pick_layout
     request.xhr? ? false : 'headered'
   end
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
 end

@@ -9,10 +9,10 @@
       <a href="https://www.etsy.com/shop/LittleMintyLoft" class="social-link"><img src="/assets/images/etsy.png" alt="vk"/></a>
     </div>
 
-    <div class="subscription">
+    <%= form_tag new_subscription_path, remote: true, class: 'subscription' do %>
       <h2>Подпишитесь на наши новости</h2>
-      <input type="email" placeholder="Введите ваш email" class="subscription-email">
-      <span class="subscribe"> <span class="right long arrow white"></span> </span>
-    </div>
+      <input type="email" name="email" required placeholder="Введите ваш email" class="subscription-email">
+      <button type="submit" class="subscribe"><span class="right long arrow white"></span></button>
+    <% end %>
   </div>
 </footer>
