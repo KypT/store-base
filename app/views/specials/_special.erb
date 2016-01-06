@@ -1,10 +1,8 @@
 <% if not defined?(context) %>
     <div class="special full">
 
-      <div class="img-container rectangle">
-        <div class="container">
+      <div class="img-container">
           <img class="cover" src="<%= image_for special %>" alt="<%= special.title %>">
-        </div>
       </div>
 
       <h1 class='font-accent' <%= editable 'special[name]', url_for(special) %>><%= special.title %></h1>

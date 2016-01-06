@@ -34,8 +34,8 @@ function CartModal() {
             type = $product.data('type'),
             options = {};
 
-        if (type == 'stocked')
-            options = {max: product.stock};
+        //if (type == 'stocked')
+        //    options = {max: product.stock};
 
         var counter = UI.Counter.create($counter, options);
 

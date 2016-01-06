@@ -1,6 +1,6 @@
-function BuyProductModal($modal) {
-    var UIModal = UI.Modal.create($modal, {centerY: true}),
-        orderCounter = UI.Counter.create($modal.find('#order-counter'));
+function BuyProductModal(selector) {
+    var UIModal = UI.Modal.create(selector, {centerY: true}),
+        orderCounter = UI.Counter.create($(selector).find('#order-counter'));
 
     function addAmountToRequest(counter) {
         return function(_, request, options) {
@@ -10,6 +10,7 @@ function BuyProductModal($modal) {
 
     var buyModal =  {
         show: function() {
+            var $modal = $(selector);
             if ($modal.length == 0) {
                 console.log('Product modal not found');
                 return;
@@ -18,7 +19,8 @@ function BuyProductModal($modal) {
         },
 
         prepare: function(product) {
-            var $orderBtn = $modal.find('.order-button');
+            var $modal = $(selector),
+                $orderBtn = $modal.find('.order-button');
 
             $orderBtn[0].search = "?id=" + product.id + '&type=copy';
             $orderBtn.off('ajax:beforeSend').on('ajax:beforeSend', addAmountToRequest(orderCounter));

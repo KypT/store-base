@@ -2,8 +2,8 @@
 //= require Modals/show-product.js
 
 function ProductModal() {
-    var showModal = new ShowProductModal($('.show-product-modal')),
-        buyModal  = new BuyProductModal($('.buy-product-modal'));
+    var showModal = new ShowProductModal('.show-product-modal'),
+        buyModal  = new BuyProductModal('.buy-product-modal');
 
     var wrapperClicked = function(e) {
         if ($(e.target).hasClass('modal-wrapper'))

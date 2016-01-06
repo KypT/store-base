@@ -1,10 +1,8 @@
 <% if not defined?(context) %>
     <div class="collection full">
 
-      <div class="img-container rectangle">
-        <div class="container">
-            <img class="cover" src="<%= image_for category %>" alt="<%= category.name %>">
-        </div>
+      <div class="img-container">
+        <img class="cover" src="<%= image_for category %>" alt="<%= category.name %>">
       </div>
 
       <h1 class='font-accent' <%= editable 'category[name]', url_for(category) %>><%= category.name %></h1>
@@ -18,7 +16,7 @@
           <h1 class='font-accent'><%= category.name %></h1>
           <div class="rectangle">
             <div class="container">
-                <img class="cover" src="<%= image_for category %>" alt="<%= category.name %>">
+              <img class="cover" src="<%= image_for category %>" alt="<%= category.name %>">
             </div>
           </div>
         </div>

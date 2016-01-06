@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post 'user' => 'user#register', :as => :user
   get 'profile' => 'user#profile'
   post 'subscriptions/new', as: 'new_subscription'
+  post 'images/create', as: 'new_image'
 
   resources :products, path: 'items', except: [:edit, :create, :show] do
     get '/:name' => 'store#index'

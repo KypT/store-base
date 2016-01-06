@@ -1,6 +1,6 @@
 window.UI.Modal = (function () {
     return {
-        create: function ($modal, settings) {
+        create: function (selector, settings) {
             var $body = $('body'),
                 $wrapper = $('.modal-wrapper');
 
@@ -16,10 +16,16 @@ window.UI.Modal = (function () {
             }
 
             function centerY() {
+                var $modal = $(selector);
                 if ($body.height() < $wrapper.height())
                     $body.height($wrapper.height());
 
+                console.log($wrapper.height());
+                console.log($modal.height());
+
                 var diff = $wrapper.height() - $modal.height();
+                console.log(diff);
+
                 if (diff > 0) {
                     $modal.css('margin-top', diff / 2 );
                 }
@@ -30,16 +36,19 @@ window.UI.Modal = (function () {
 
             return {
                 visible: function() {
+                    var $modal = $(selector);
                     return $modal.hasClass('show');
                 },
 
                 hide: function() {
+                    var $modal = $(selector);
                     $wrapper.removeClass('show');
                     $modal.removeClass('show');
                     $body.removeClass('modal-showing');
                 },
 
                 show: function () {
+                    var $modal = $(selector);
                     $wrapper.addClass('show');
                     $modal.addClass('show');
                     $body.addClass('modal-showing');

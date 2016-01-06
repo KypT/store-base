@@ -1,10 +1,11 @@
-function ShowProductModal($modal) {
+function ShowProductModal() {
     var $showModal = $('.show-product-modal'),
-        $buyModal = $('.buy-product-modal'),
         ShowUIModal = UI.Modal.create($showModal, {centerY: true}),
         buyCounter = UI.Counter.create($showModal.find('#buy-counter')),
-        sliderContainer = $('.slider-container'),
-        sliderReady = false;
+        $slider = $showModal.find('.slider'),
+        $sliderNav = $showModal.find('.slider-nav'),
+        slider = undefined,
+        sliderNav = undefined;
 
     var $buyGroup   = $showModal.find('.buy-menu'),
         $orderGroup = $showModal.find('.order-menu'),
@@ -50,60 +51,65 @@ function ShowProductModal($modal) {
         return result;
     }
 
-    function initSlider() {
-        console.log('initializing slider');
-        var slider =  sliderContainer.find('.slider');
-        slider.slick({
+    function initSlider(product) {
+        $slider.slick({
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: false,
             fade: true,
             asNavFor: '.slider-nav'
         });
+        $slider.addClass('full-height');
+        sliderNav = undefined;
 
-        var sliderNav = sliderContainer.find('.slider-nav');
-        sliderNav.slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            asNavFor: '.slider',
-            dots: false,
-            centerMode: true,
-            focusOnSelect: true
-        });
+        if (product.images.length > 1) {
+            $slider.removeClass('full-height');
+
+            $sliderNav.slick({
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                asNavFor: '.slider',
+                dots: false,
+                centerMode: true,
+                focusOnSelect: true
+            });
+            sliderNav = $sliderNav.slick('getSlick');
+        }
+
+        slider = $slider.slick('getSlick');
     }
 
     function fillSlider(product) {
+        slider.unslick();
 
-        console.log(sliderContainer.find('.slider').slick('getSlick'));
+        if (sliderNav)
+            sliderNav.unslick();
 
         function imageHtml(url) {
             return '<div><img src = "'+ url +'"></div>';
         }
 
-        while(true) {
-            var slide = sliderContainer.find('.slider').slick('slickCurrentSlide');
-
-            sliderContainer.find('.slider').slick('slickRemove', slide);
-            sliderContainer.find('.slider-nav').slick('slickRemove', slide);
-            if (slide == 0) break;
-        }
+        $slider.empty();
+        $sliderNav.empty();
 
         product.images.forEach(function(image) {
-            sliderContainer.find('.slider').slick('slickAdd', imageHtml(image.file.url));
+            var image = imageHtml(image.file.url);
+            $slider.append(image);
+            if (product.images.length > 1)
+                $sliderNav.append(image);
         });
 
-        product.images.forEach(function(image) {
-            sliderContainer.find('.slider-nav').slick('slickAdd', imageHtml(image.file.url));
-        });
-
-        sliderContainer.find('.slider').slick('slickGoTo', 0);
-        sliderContainer.find('.slider-nav').slick('slickGoTo', 0);
+        initSlider(product);
+        setTimeout(function () {
+            slider.setPosition();
+            if (sliderNav)
+                sliderNav.setPosition();
+        }, 0)
     }
 
     function prepare(product) {
-        if (!sliderReady) {
-            initSlider();
-            sliderReady = true;
+        if (slider == undefined) {
+            initSlider(product);
         }
 
         fillSlider(product);
@@ -154,7 +160,7 @@ function ShowProductModal($modal) {
             $showModal.find('.modal-tags input[data-attr="category"]').val(product_collection);
         }
         else {
-            $showModal.find('.modal-tags').html(tags(product));
+            $showModal.find('.product-tags').html(tags(product));
         }
     }
 
@@ -171,10 +177,12 @@ function ShowProductModal($modal) {
 
     return {
         show: function() {
+            console.log('show');
             ShowUIModal.show();
         },
 
         prepare: function(product) {
+            console.log('prepare');
             prepare(product);
         },
 
