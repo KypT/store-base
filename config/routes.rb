@@ -13,11 +13,12 @@ Rails.application.routes.draw do
   post 'user' => 'user#register', :as => :user
   get 'profile' => 'user#profile'
   post 'subscriptions/new', as: 'new_subscription'
-  post 'images/create', as: 'new_image'
 
   resources :products, path: 'items', except: [:edit, :create, :show] do
+    delete '/image/:id' => 'products#delete_image', on: :member
+    post '/images' => 'products#reorder_images', on: :member
     get '/:name' => 'store#index'
-    post '' => 'products#update', on: :member
+    post '/:product_name' => 'products#update', on: :member
     get 'get', on: :collection
   end
 

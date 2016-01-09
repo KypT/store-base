@@ -4,6 +4,4 @@
 //= require UI/all
 //= require store/products
 //= require store/Content
-//= require Modals/cart
-//= require Modals/product.js
 //= require pages/main

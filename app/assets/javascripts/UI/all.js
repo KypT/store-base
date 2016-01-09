@@ -3,3 +3,4 @@
 //= require UI/dropdown
 //= require UI/modal
 //= require UI/imageupload
+//= require UI/modal-manager

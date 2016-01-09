@@ -1,10 +1,9 @@
 function CartModal() {
     var $cart = $('.cart.modal'),
-        UIModal = UI.Modal.create($cart, {centerY: true}),
+        UIModal = UI.Modal.create('.cart.modal', {centerY: true}),
         $cartCounter = $('.items-counter');
 
     $('.close-cart').click(hide);
-    $('.cart-icon').click(toggle);
 
     $(document).click(function(e) {
         if ($(e.target).hasClass('modal-wrapper'))
@@ -34,6 +33,7 @@ function CartModal() {
             type = $product.data('type'),
             options = {};
 
+        // TODO fixit
         //if (type == 'stocked')
         //    options = {max: product.stock};
 
@@ -96,6 +96,9 @@ function CartModal() {
 
     return {
         toggle: toggle,
+        hide: hide,
+        visible: visible,
+        show: show,
 
         addProduct: function(html, type) {
             var $section = $cart.find('.' + type),

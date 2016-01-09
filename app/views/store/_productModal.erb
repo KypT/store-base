@@ -1,7 +1,10 @@
 <div class="show-product-modal clear">
-  <h2 class='modal-product-name' <%= editable 'name', '#' %> ></h2>
-
-  <%= render partial: 'admin/upload_zone' if admin_signed_in? %>
+  <h2 class='modal-product-name'>
+    <span class="name"></span>
+    <% if admin_signed_in? %>
+        <span class="link open-modal" data-modal="product-edit" data-arg="0">Редактировать</span>
+    <% end %>
+  </h2>
 
   <div class="slider-container">
     <div class="slider"></div>
@@ -9,11 +12,10 @@
   </div>
 
   <div class='details'>
-    <p class="description" <%= editable 'description', '#' %>></p>
-
+    <p class="description"></p>
     <div class="buy-panel">
-      <p class='amount-info'>в наличии: <span class='stock-amount' <%= editable 'stock', '#' %> >0</span></p>
-      <span class="price" <%= editable 'price', '#' %> > 0 </span>
+      <p class='amount-info'>в наличии: <span class='stock-amount'>0</span></p>
+      <span class="price"> 0 </span>
       <%= render partial: 'UI/counter', locals: {id: 'buy-counter'} %>
       <%= link_to 'Купить', new_cart_path(id: nil), remote: true, class: 'btn buy-button', data: {target: '#buy-counter'} %>
     </div>
@@ -57,3 +59,24 @@
     <%= link_to 'Заказать повтор', new_cart_path(id: nil), remote: true, class: 'btn order-button', daыta: {target: '#order-counter'} %>
   </div>
 </div>
+
+<% if admin_signed_in? %>
+<div class="edit-product-modal clear">
+  <div class="edit-attributes">
+    <h2 class='modal-product-name' <%= editable 'name', '#' %> ></h2>
+    <div class="description" <%= editable 'description', '#' %> ></div>
+    <div>В наличии: <span class="stock" <%= editable 'stock', '#' %> >0</span></div>
+    <div>Цена: <span class="price" <%= editable 'price', '#' %> >0</span></div>
+  </div>
+  <div class="edit-images">
+    <div class="upload-zone">
+        Добавить фотографии
+        <%= render partial: 'admin/upload_zone' if admin_signed_in? %>
+    </div>
+    <div class="save-order">
+      Сохранить порядок
+    </div>
+    <div class="images"></div>
+  </div>
+</div>
+<% end  %>

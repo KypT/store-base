@@ -113,7 +113,8 @@ function ShowProductModal() {
         }
 
         fillSlider(product);
-        $showModal.find('.modal-product-name').text(product.name);
+        $showModal.find('.modal-product-name .name').text(product.name);
+        $showModal.find('.link.open-modal').attr('data-arg', product.id);
         $showModal.find('.amount-info span').text(product.stock);
         $showModal.find('.price').text(product.price);
         $showModal.find('.more-amount').data('target', '.cart-counter-' + product.id);
@@ -152,9 +153,7 @@ function ShowProductModal() {
             var url = Products.path(product),
                 product_tags = product.tags.map(function(val) { return val.name }).join(', '),
                 product_collection = product.category?  product.category.name : '';
-            Admin.activateDropZone($showModal.find('form.file-upload-zone'), url, function() {
-                location.reload();
-            });
+
             $showModal.find('*[contenteditable="true"]').attr('data-url', url);
             $showModal.find('.modal-tags input[data-attr="tags"]').val(product_tags);
             $showModal.find('.modal-tags input[data-attr="category"]').val(product_collection);
@@ -175,15 +174,15 @@ function ShowProductModal() {
         ShowUIModal.hide();
     }
 
-    return {
-        show: function() {
-            console.log('show');
-            ShowUIModal.show();
-        },
 
-        prepare: function(product) {
-            console.log('prepare');
+    var showModal = {
+        show: function(product) {
             prepare(product);
+            ShowUIModal.show();
+
+            if (location.pathname != Products.path(product)) {
+                history.pushState(location.pathname, null, Products.path(product));
+            }
         },
 
         visible: function() {
@@ -191,5 +190,7 @@ function ShowProductModal() {
         },
 
         hide: hide
-    }
+    };
+
+    return showModal;
 }

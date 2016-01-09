@@ -20,12 +20,8 @@ window.UI.Modal = (function () {
                 if ($body.height() < $wrapper.height())
                     $body.height($wrapper.height());
 
-                console.log($wrapper.height());
-                console.log($modal.height());
 
                 var diff = $wrapper.height() - $modal.height();
-                console.log(diff);
-
                 if (diff > 0) {
                     $modal.css('margin-top', diff / 2 );
                 }

@@ -1,4 +1,5 @@
-.show-product-modal {
+.show-product-modal,
+.edit-product-modal {
   @extend .bordered;
   background-color: white;
   margin: 1em 7%;
@@ -163,4 +164,66 @@
 
 .slick-slider {
   margin-bottom: 5px;
+}
+
+.edit-product-modal {
+  display: none;
+  background-color: white;
+  max-width: 1200px;
+  margin: 2em auto;
+  padding: 1em 2em;
+
+  &.show {
+    display: block;
+  }
+
+  .edit-attributes {
+    float: left;
+    width: 40%;
+  }
+
+  .edit-images {
+    float: right;
+    width: 60%;
+
+    .upload-zone {
+      position: relative;
+      margin: 0 10px;
+      text-align: center;
+      background-color: $brand-color-3;
+    }
+
+    .save-order {
+      text-align: center;
+      background-color: greenyellow;
+      margin: 10px;
+    }
+  }
+
+  .img-cnt {
+    @extend .bordered;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    float: left;
+    margin: 10px;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .remove {
+      display: inline-block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      cursor: pointer;
+      color: red;
+      background-color: white;
+
+    }
+  }
 }

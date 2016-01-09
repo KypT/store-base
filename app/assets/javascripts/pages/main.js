@@ -2,7 +2,6 @@
 //= require pages/root
 //= require pages/store
 
-window.ProductModal = new ProductModal();
 window.Cart = new CartModal();
 
 $(function() {

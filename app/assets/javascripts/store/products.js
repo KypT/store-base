@@ -16,7 +16,7 @@ window.Products = (function () {
 
             $products.click(function () {
                 var product = Products.get(this.getAttribute('data-id'));
-                ProductModal.show(product);
+                ModalManager.open('product-show', product);
             });
 
             setTimeout(function () {

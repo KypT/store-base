@@ -13,7 +13,7 @@
 
   <p>Читайте подробнее про условия и способы оплаты и доставки.</p>
 
-  <%= form_tag '', multipart: true do %>
+  <%= form_tag '', multipart: true, class: 'make-order' do %>
       <div class="field">
         <%= text_area :order, :comment, required: true %>
       </div>

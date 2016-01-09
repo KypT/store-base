@@ -26,7 +26,7 @@
       </div>
     </div>
   </nav>
-  <span class='cart-icon'>
+  <span class='cart-icon open-modal' data-modal="cart">
     <%= image_tag 'cart.png', title: 'Корзина', alt: 'Корзина' %>
     <div class="items-counter <%= show_cart_counter %>"><%= @cart.count %></div>
   </span>

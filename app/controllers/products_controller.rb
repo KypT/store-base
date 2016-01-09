@@ -30,9 +30,23 @@ class ProductsController < ApplicationController
     redirect_to products_path
   end
 
+  def delete_image
+    @id = params[:id]
+    Image.destroy(@id)
+  end
+
+  def reorder_images
+    counter = 0
+    params[:order].each do | image_id |
+      Image.find(image_id).update(order: counter)
+      counter += 1
+    end
+    render nothing: true
+  end
+
   private
   def set_product
-    @product = Product.friendly.find(params[:id])
+    @product = Product.find(params[:id])
   end
 
   def update_tags
