@@ -1,16 +1,14 @@
-default: &default
+development:
   adapter: sqlite3
   pool: 5
   timeout: 5000
-
-development:
-  <<: *default
   database: db/development.sqlite3
 
-test:
-  <<: *default
-  database: db/test.sqlite3
-
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  pool: 5
+  encoding: unicode
+  host: localhost
+  username: minty_user
+  password: minty_pass
+  database: minty_db
