@@ -9,6 +9,6 @@ production:
   pool: 5
   encoding: unicode
   host: localhost
-  username: minty_user
-  password: minty_pass
+  username: minty
+  password: wuCue8da
   database: minty_db
