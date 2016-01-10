@@ -1,8 +1,18 @@
+<% if admin_signed_in? %>
+    <% content_for :stylesheets do %>
+        <link rel="stylesheet" href="/vendor/select2.min.css"/>
+    <% end %>
+<% end %>
+
 <% content_for :javascripts do %>
+    <% if admin_signed_in? %>
+        <script src="/vendor/select2.min.js"></script>
+    <% end %>
+
     <script>
         $(function () {
             <% if @product %>
-                ProductModal.show(Products.get(<%= @product.id %>));
+                ModalManager.open('product-show', Products.get(<%= @product.id %>));
             <% end %>
 
             <% if @tag %>

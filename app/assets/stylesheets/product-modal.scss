@@ -9,6 +9,10 @@
     display: block;
   }
 
+  #tags + .select2 {
+    min-width: 100%;
+  }
+
   h2 {
     @extend .font-accent;
     text-align: center;

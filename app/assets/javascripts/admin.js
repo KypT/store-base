@@ -52,6 +52,8 @@ window.Admin = (function() {
     }
 
     return {
+        updateAttribute: updateAttribute,
+
         upload: function () {
             var $form = $('form.file-upload-zone'),
                 formData = new FormData($form[0]);

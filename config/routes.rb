@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post 'user' => 'user#register', :as => :user
   get 'profile' => 'user#profile'
   post 'subscriptions/new', as: 'new_subscription'
+  get 'tags' => 'tags#list'
 
   resources :products, path: 'items', except: [:edit, :create, :show] do
     delete '/image/:id' => 'products#delete_image', on: :member

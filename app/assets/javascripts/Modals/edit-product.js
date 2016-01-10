@@ -18,6 +18,22 @@ function EditProductModal(selector) {
         $this.find('.price').text(product.price);
         $this.find('*[contenteditable="true"]').attr('data-url', url);
 
+        var tags = product.tags.map(function(tag) {return tag.name; });
+
+        if (product.category)
+            $this.find('#collection').val(product.category.name);
+        $this.find('#tags').val(tags);
+
+        $this.find('#collection').change(function() {
+            Admin.updateAttribute(Products.path(product), 'category', $('#collection').val());
+        });
+
+        $this.find("#tags").select2({
+            tags: true
+        }).on('change', function() {
+            Admin.updateAttribute(Products.path(product), 'tags', $('#tags').val());
+        });
+
         var $images = $this.find('.edit-images .images');
         product.images.forEach(function(image) {
             var $image = productImage(product, image);

@@ -51,7 +51,7 @@ class ProductsController < ApplicationController
 
   def update_tags
     @product.tags.clear
-    params[:tags].split(', ').each do | tag_name |
+    params[:tags].each do | tag_name |
       tag = Tag.find_by_name(tag_name) || Tag.create(name: tag_name)
       @product.tags << tag
     end
