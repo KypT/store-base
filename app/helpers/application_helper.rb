@@ -44,6 +44,10 @@ module ApplicationHelper
     end
   end
 
+  def product_image(product)
+    product.images.count > 0 ? product.images.first : Image.new;
+  end
+
   def image_for(thing)
     return image_url('missing-image.png') unless thing
     thing.image ? thing.image.file.url : image_url('missing-image.png')

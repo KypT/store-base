@@ -35,6 +35,7 @@ function EditProductModal(selector) {
         });
 
         var $images = $this.find('.edit-images .images');
+        $images.empty();
         product.images.forEach(function(image) {
             var $image = productImage(product, image);
             $images.append($image);
