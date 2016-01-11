@@ -1,5 +1,5 @@
 <%= render partial: '/sub_header', locals: {title: 'Профиль' } %>
-
+<% unless current_user.user_data.nil? %>
 <div class="profile medium container">
   <h1>Добро пожаловать, <%= current_user.user_data.name %></h1>
 
@@ -10,5 +10,5 @@
         <%= render partial: 'orders/summary', locals: {order: order}  %>
     <% end %>
   </div>
-
+<% end %>
 </div>

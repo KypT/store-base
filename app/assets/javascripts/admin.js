@@ -47,8 +47,8 @@ window.Admin = (function() {
         $.ajax({
             url: url,
             type: 'POST',
-            data: data,
-            method: 'put'});
+            data: data
+        });
     }
 
     return {

@@ -64,8 +64,13 @@ class ProductsController < ApplicationController
   end
 
   def add_images
-    images = params[:images].map { |img| Image.create file: img }
-    @product.images << images
+    params[:images].each do | file |
+      image = @product.images.build
+      image.update file: file
+      errors = image.errors
+      byebug
+    end
+    @product.save
   end
 
   def product_params
