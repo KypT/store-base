@@ -93,10 +93,11 @@ function ShowProductModal() {
         $sliderNav.empty();
 
         product.images.forEach(function(image) {
-            var image = imageHtml(image.file.url);
-            $slider.append(image);
+            var imageTag = imageHtml(image.file.regular.url),
+                thumbTag = imageHtml(image.file.thumb.url);
+            $slider.append(imageTag);
             if (product.images.length > 1)
-                $sliderNav.append(image);
+                $sliderNav.append(thumbTag);
         });
 
         initSlider(product);
@@ -113,6 +114,7 @@ function ShowProductModal() {
         }
 
         fillSlider(product);
+        $('.open-modal[data-modal="product-show"]').attr('data-arg', product.id);
         $showModal.find('.modal-product-name .name').text(product.name);
         $showModal.find('.link.open-modal').attr('data-arg', product.id);
         $showModal.find('.amount-info span').text(product.stock);
@@ -122,7 +124,7 @@ function ShowProductModal() {
         if (product.description.length > 0)
             $showModal.find('.description').text(product.description);
         else
-            $showModal.find('.description').text('Steampunk inspired brooch, representing a tricky mix of Cheshire cats sly smile and a Mad Hatter. Hand-painted on wood with acrylics.<br><br>* Materials: wood, acrylic paint, glossy varnish.<br>* Measurements: 55x40mm.<br>* All goods are carefully packaged in proprietary envelopes and bags, wrapped in several layers of protective film and will be mailed in a mailing bag or in a box (if it is something delicate).<br>* NEW ACTION: Free cute postcard included with each order! Look for details: <a href="https://www.etsy.com/ru/listing/226400813/free-card-included-with-each-order" target="_blank">https://www.etsy.com/listing/226400813/free-card-included-with-each-order</a><br.');
+            $showModal.find('.description').text('');
 
         if (product.stock > 0) {
             $showModal.find('.empty-stock-message').addClass('hide');
@@ -173,9 +175,11 @@ function ShowProductModal() {
         ShowUIModal.hide();
     }
 
-
     var showModal = {
         show: function(product) {
+            if (typeof(product) != "object" && typeof(+product) == "number")
+                product = Products.get(product);
+
             prepare(product);
             ShowUIModal.show();
 

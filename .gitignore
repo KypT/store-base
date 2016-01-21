@@ -5,6 +5,12 @@ git /.bundle
 /db/schema.rb
 /db/*.sqlite3-journal
 
+.byebug_history
+
+/public/assets/*
+!/public/assets/ckeditor
+!/public/assets/images
+
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep

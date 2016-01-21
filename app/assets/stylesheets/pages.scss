@@ -104,7 +104,18 @@ section.author-page {
   }
 
   .make-order {
+    .img-preview {
+      float: left;
+      width: 33.3333%;
+      max-height: 300px;
+      padding: 10px;
 
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
   }
 }
 

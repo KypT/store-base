@@ -50,6 +50,6 @@ module ApplicationHelper
 
   def image_for(thing)
     return image_url('missing-image.png') unless thing
-    thing.image ? thing.image.file.url : image_url('missing-image.png')
+    thing.image ? thing.image.file.regular.url : image_url('missing-image.png')
   end
 end

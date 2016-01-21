@@ -1,3 +1,11 @@
+<% content_for :javascripts do %>
+  <script src="/vendor/lightbox.min.js"></script>
+<% end %>
+
+<% content_for :stylesheets do %>
+  <link rel="stylesheet" href="/vendor/lightbox.min.css">
+<% end %>
+
 <%= render partial: '/sub_header', locals: {title: 'Отзывы' } %>
 
 <section class="reviews-container">

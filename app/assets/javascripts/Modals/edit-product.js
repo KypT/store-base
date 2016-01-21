@@ -4,7 +4,7 @@ function EditProductModal(selector) {
 
     function productImage(product, image) {
         return  '<div class="img-cnt" data-id="'+ image.id +'">' +
-                '<img src="'+ image.file.url +'">' +
+                '<img src="'+ image.file.thumb.url +'">' +
                 '<div class="remove"><a data-remote="true" data-confirm="Точно?" data-method="delete" href="/items/'+ product.id +'/image/'+ image.id +'">Удалить</div>' +
                 '</div>';
     }
@@ -24,15 +24,14 @@ function EditProductModal(selector) {
             $this.find('#collection').val(product.category.name);
         $this.find('#tags').val(tags);
 
-        $this.find('#collection').change(function() {
-            Admin.updateAttribute(Products.path(product), 'category', $('#collection').val());
+        $this.find('#collection').off('change').on('change', function() {
+            var collection = $('#collection').val();
+            Admin.updateAttribute(Products.path(product), 'category', collection);
         });
 
         $this.find("#tags").select2({
             tags: true
-        }).on('change', function() {
-            Admin.updateAttribute(Products.path(product), 'tags', $('#tags').val());
-        });
+        }).off('change', tagsChangedHandler).on('change', product, tagsChangedHandler);
 
         var $images = $this.find('.edit-images .images');
         $images.empty();
@@ -48,7 +47,7 @@ function EditProductModal(selector) {
             location.reload();
         });
 
-        $this.find('.save-order').click(function() {
+        $this.find('.save-order').off('click').on('click', function() {
             var order = [];
 
             $images.find('.img-cnt').each(function(_, image) {
@@ -60,9 +59,14 @@ function EditProductModal(selector) {
         });
     }
 
+    function tagsChangedHandler(event) {
+        var tags = $('#tags').val(),
+            product = event.data;
+        Admin.updateAttribute(Products.path(product), 'tags', tags);
+    }
+
     var editModal = {
         show: function(id) {
-            console.log(id);
             var product = Products.get(id);
             prepare(product);
             editUIModal.show();

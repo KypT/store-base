@@ -68,7 +68,7 @@ window.Admin = (function() {
         },
 
         activateDropZone: function($form, url, callback) {
-            $form.change(function (e) {
+            $form.off('change').on('change', function (e) {
                 var form = e.target.form,
                     formData = new FormData(form);
                 $.ajax({

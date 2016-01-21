@@ -54,7 +54,7 @@ class ProductsController < ApplicationController
     params[:tags].each do | tag_name |
       tag = Tag.find_by_name(tag_name) || Tag.create(name: tag_name)
       @product.tags << tag
-    end
+    end if params[:tags].length > 0
     Tag.cleanup
   end
 
@@ -68,7 +68,6 @@ class ProductsController < ApplicationController
       image = @product.images.build
       image.update file: file
       errors = image.errors
-      byebug
     end
     @product.save
   end

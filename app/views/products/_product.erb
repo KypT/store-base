@@ -12,7 +12,7 @@
 <% elsif context == 'cart' %>
     <div class="cart-product" data-id = '<%= product.id %>' data-type="<%= type %>">
       <div class='img-container'>
-        <img class = 'cover' src="<%= images_for(product)[0] %>" alt="<%= product.name %>"/>
+        <img class = 'cover' src="<%= product_image(product).file.thumb.url %>" alt="<%= product.name %>"/>
       </div>
       <div class="details">
         <h4 class="title">

@@ -19,13 +19,13 @@
       <%= render partial: 'UI/counter', locals: {id: 'buy-counter'} %>
       <%= link_to 'Купить', new_cart_path(id: nil), remote: true, class: 'btn buy-button', data: {target: '#buy-counter'} %>
     </div>
-    <button class="btn switch-product-modal">Заказать</button>
+    <button class="btn open-modal" data-modal="product-buy">Заказать</button>
     <div class="product-tags"></div>
   </div>
 </div>
 
 <div class="buy-product-modal clear">
-  <button class="btn switch-product-modal">Вернуться к просмотру</button>
+  <button class="btn open-modal" data-modal="product-show">Вернуться к просмотру</button>
   <div class="information">
     <p>Повтор изделия - это изготовление похожей работы индивидуально для Вас. Обратите внимание: все изделия
       магазинчика создаются вручную, а потому полная копия невозможна и не приветствуется. Мы стараемся делать каждую
