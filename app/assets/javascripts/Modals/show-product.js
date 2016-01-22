@@ -114,7 +114,7 @@ function ShowProductModal() {
         }
 
         fillSlider(product);
-        $('.open-modal[data-modal="product-show"]').attr('data-arg', product.id);
+        $showModal.find('.open-modal[data-modal="product-buy"]').attr('data-arg', product.id);
         $showModal.find('.modal-product-name .name').text(product.name);
         $showModal.find('.link.open-modal').attr('data-arg', product.id);
         $showModal.find('.amount-info span').text(product.stock);
@@ -167,6 +167,8 @@ function ShowProductModal() {
     function addAmountToRequest(counter) {
         return function(_, request, options) {
             options.url += '&amount=' + counter.val();
+            if (counter.val() == 0)
+                request.abort();
         }
     }
 

@@ -1,7 +1,7 @@
 <article class="review clear" data-id="<%= review.id %>">
   <div class="img-container">
-    <%= link_to image_for(review), data: {lightbox: 'review'}, title: review.review do %>
-      <%=  image_tag image_for(review), class: 'cover' %>
+    <%= link_to image_for(review, 'original'), data: {lightbox: 'review'}, title: review.review do %>
+      <%= image_tag image_for(review), class: 'cover' %>
     <% end %>
   </div>
   <h2 class="author"><%= review.author %></h2>

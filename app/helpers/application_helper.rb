@@ -48,8 +48,8 @@ module ApplicationHelper
     product.images.count > 0 ? product.images.first : Image.new;
   end
 
-  def image_for(thing)
-    return image_url('missing-image.png') unless thing
-    thing.image ? thing.image.file.regular.url : image_url('missing-image.png')
+  def image_for(thing, type = 'regular')
+    return image_url('missing-image.png') unless thing and thing.image
+    type == 'original' ? thing.image.file.url : thing.image.file.send(type).url
   end
 end

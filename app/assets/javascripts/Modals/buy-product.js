@@ -1,20 +1,26 @@
 function BuyProductModal(selector) {
-    var UIModal = UI.Modal.create(selector, {centerY: true}),
+    var $self = $(selector),
+        UIModal = UI.Modal.create(selector, {centerY: true}),
         orderCounter = UI.Counter.create($(selector).find('#order-counter'));
 
     function addAmountToRequest(counter) {
         return function(_, request, options) {
+            if (counter.val() == 0)
+                request.abort();
             options.url += '&amount=' + counter.val();
         }
     }
 
     var buyModal =  {
-        show: function() {
-            var $modal = $(selector);
-            if ($modal.length == 0) {
+        show: function(product) {
+            var product = Products.get(product);
+
+            if ($self.length == 0) {
                 console.log('Product modal not found');
                 return;
             }
+
+            this.prepare(product);
             UIModal.show();
         },
 
@@ -22,7 +28,9 @@ function BuyProductModal(selector) {
             var $modal = $(selector),
                 $orderBtn = $modal.find('.order-button');
 
+            $self.find('.open-modal[data-modal="product-show"]').attr('data-arg', product.id);
             $orderBtn[0].search = "?id=" + product.id + '&type=copy';
+            $self.find('.price').text(product.price);
             $orderBtn.off('ajax:beforeSend').on('ajax:beforeSend', addAmountToRequest(orderCounter));
             orderCounter.reset();
         },

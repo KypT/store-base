@@ -17,16 +17,20 @@ class OrdersController < ApplicationController
     begin
       if user_signed_in?
         @user = current_user
-        @new_user = false
-        @user.user_data.update user_params
+        if @user.user_data.nil?
+          @user_data = UserData.create! user_params
+          @user.user_data = @user_data
+        else
+          @user.user_data.update user_params
+        end
       else
         @password = Devise.friendly_token 8
         @user = save_user!
         sign_in :user, @user
-        @new_user = true
         @user_data = UserData.create! user_params
         @user_data.user = @user
         @user_data.save!
+        NotificationMailer.user_registration(@user).deliver_now
       end
 
       @order.user_data = @user_data
@@ -37,6 +41,8 @@ class OrdersController < ApplicationController
       session[:user_email] = params[:email]
       @cart.clear
       #NotificationMailer.order_created_notification(@order).deliver_now
+    rescue ActiveRecord::RecordInvalid => e
+      redirect_to profile_path
     rescue Exception => e
       flash[:title] = 'Could not create order!'
       flash[:alert] = e.message
