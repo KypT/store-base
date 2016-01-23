@@ -9,4 +9,12 @@ class Category < ActiveRecord::Base
       cat.destroy if cat.products.empty?
     end
   end
+
+  def to_param
+    "#{id}/#{name}".html_safe
+  end
+
+  def url_name
+    self.name.gsub ' ', '_'
+  end
 end

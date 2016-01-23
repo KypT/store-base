@@ -7,4 +7,8 @@ class Special < ActiveRecord::Base
   def create_tag
     self.tag = Tag.create name: self.title
   end
+
+  def url_title
+    self.title.gsub ' ', '_'
+  end
 end

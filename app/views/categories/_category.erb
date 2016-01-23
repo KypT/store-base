@@ -5,13 +5,13 @@
         <img class="cover" src="<%= image_for category %>" alt="<%= category.name %>">
       </div>
 
-      <h1 class='font-accent' <%= editable 'category[name]', url_for(category) %>><%= category.name %></h1>
-      <p class='description' <%= editable 'category[description]', url_for(category) %>><%= category.description %></p>
+      <h1 class='font-accent' <%= editable 'name', category_url(category) %>><%= category.name %></h1>
+      <p class='description' <%= editable 'description', category_url(category) %>><%= category.description %></p>
 
       <%= render partial: 'products/grid', locals: {grid_size: 'four wide', products: category.products} %>
     </div>
 <% elsif context == 'thumb' %>
-    <%= link_to category, remote: true do %>
+    <%= link_to category_url(category), remote: true do %>
         <div class="collection thumb">
           <h1 class='font-accent'><%= category.name %></h1>
           <div class="rectangle">

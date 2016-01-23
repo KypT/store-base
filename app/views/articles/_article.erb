@@ -1,11 +1,11 @@
 <% if not defined?(context) %>
     <article class="article" data-id="<%= article.id %>">
       <h1 class="title">
-        <a href="<%= blog_article_path(article.id) %>"><%= article.title %></a></h1>
+        <a href="<%= blog_article_path(article.id, article.url_title) %>"><%= article.title %></a></h1>
       <time datetime="<%= article.created_at %>"> <%= article.created_at.strftime('%d.%m.%Y') %></time>
       <div class="content short">
         <%= article.content.html_safe %> <br/>
-        <%= link_to blog_article_path(article.id), class: 'article-link dim link' do %>
+        <%= link_to blog_article_path(article.id, article.url_title), class: 'article-link dim link' do %>
             Читать далее <span class="arrow right brown long"></span>
         <% end %>
       </div>

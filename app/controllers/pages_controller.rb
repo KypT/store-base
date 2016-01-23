@@ -30,6 +30,15 @@ class PagesController < ApplicationController
     @specials = Special.all
   end
 
+  def sitemap
+    @tags = Tag.all
+    @collections = Category.all
+    @specials = Special.all
+    @products = Product.all
+    @articles = Article.all
+    render layout: false
+  end
+
   private
   def save_order_images
     images = params[:images]

@@ -1,24 +1,31 @@
 Rails.application.routes.draw do
 
-  get 'user/update'
-
   root 'pages#root'
+
   get 'payment' => 'pages#payment'
-  get 'personal-order' => 'pages#uniq', as: 'personal_order'
-  post 'personal-order' => 'pages#make_uniq'
   get 'about' => 'pages#about', as: 'about'
-  get 'blog' => 'blog#index', as: 'blog'
-  get 'blog/article/:id' => 'blog#show', as: 'blog_article'
-  get 'items/new' => 'products#new'
-  post 'user' => 'user#register', :as => :user
+  get 'personal-order' => 'pages#uniq', as: 'personal_order'
   get 'profile' => 'user#profile'
-  post 'subscriptions/new', as: 'new_subscription'
   get 'tags' => 'tags#list'
+  get 'sitemap' => 'pages#sitemap'
+  get 'items/new' => 'products#new'
+
+  post 'personal-order' => 'pages#make_uniq'
+  post 'user' => 'user#register', :as => :user
+  post 'subscriptions/new', as: 'new_subscription'
+
+  scope :blog do
+    get '' => 'blog#index', as: 'blog'
+    get 'article/:id/:title' => 'blog#show', as: 'blog_article'
+    resources :articles, only: [:new, :destroy] do
+      post '' => 'articles#update', on: :member
+    end
+  end
 
   resources :products, path: 'items', except: [:new, :edit, :create, :show] do
     delete '/image/:id' => 'products#delete_image', on: :member
     post '/images' => 'products#reorder_images', on: :member
-    get '/:name' => 'store#index'
+    get '/:name' => 'store#index', as: 'item'
     post '/:product_name' => 'products#update', on: :member
     get '' => 'products#get', on: :member
   end
@@ -27,8 +34,14 @@ Rails.application.routes.draw do
     get 'new' => 'store#new', as: :new_product
     get '' => 'store#index', as: :store
     get 'get' => 'store#get'
-    resources :categories, path: 'collections'
-    resources :specials
+    resources :categories, path: 'collections' do
+      get ':url_name' => 'categories#show', as: 'collection'
+      post ':url_name' => 'categories#update'
+    end
+    resources :specials do
+      get ':url_name' => 'specials#show', as: 'special'
+      post ':url_name' => 'specials#update'
+    end
     get '/:tag' => 'store#index'
   end
 
@@ -37,11 +50,7 @@ Rails.application.routes.draw do
   end
 
   resources :reviews, only:  [:index, :create, :destroy]
-
   resources :orders, except: [:update, :edit]
-  resources :articles do
-    post '' => 'articles#update', on: :member
-  end
 
   devise_for :users, :skip => [:sessions]
   as :user do

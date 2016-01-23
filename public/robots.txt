@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+Sitemap: http://minty-store.ru/sitemap.xml
+Host: minty-store.ru

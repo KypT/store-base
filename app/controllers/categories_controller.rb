@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @id = params[:id].to_i
+    @id = params[:category_id].to_i
     @category = Category.find(@id)
     @tab = 'collections'
   end
@@ -34,12 +34,12 @@ class CategoriesController < ApplicationController
   def update
     add_image if params[:image]
     @category.update(category_params)
-    redirect_to @category
+    render nothing: true
   end
 
   def destroy
     @category.destroy
-      redirect_to categories_url, notice: 'Category was successfully destroyed.'
+    redirect_to categories_url, notice: 'Category was successfully destroyed.'
   end
 
   private
@@ -48,10 +48,10 @@ class CategoriesController < ApplicationController
   end
 
   def set_category
-    @category = Category.find(params[:id])
+    @category = Category.find(params[:category_id])
   end
 
   def category_params
-    params.require(:category).permit([:name, :description])
+    params.permit(:name, :description)
   end
 end

@@ -15,6 +15,10 @@ class Product < ActiveRecord::Base
     "#{id}/#{name}"
   end
 
+  def url_name
+    self.name.gsub ' ', '_'
+  end
+
   def get_json
     self.to_json(:include => [:images, :category, {:tags => { :include =>  :special  } }]).html_safe
   end

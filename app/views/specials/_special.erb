@@ -5,13 +5,13 @@
           <img class="cover" src="<%= image_for special %>" alt="<%= special.title %>">
       </div>
 
-      <h1 class='font-accent' <%= editable 'special[name]', url_for(special) %>><%= special.title %></h1>
-      <p class='description' <%= editable 'special[description]', url_for(special) %>><%= special.description %></p>
+      <h1 class='font-accent' <%= editable 'title', special_url(special) %>><%= special.title %></h1>
+      <p class='description' <%= editable 'description', special_url(special) %>><%= special.description %></p>
 
       <%= render partial: 'products/grid', locals: {grid_size: 'four wide', products: special.tag.products} %>
     </div>
 <% elsif context == 'thumb' %>
-    <%= link_to special, remote: true do %>
+    <%= link_to special_url(special), remote: true do %>
         <div class="special thumb clear">
           <h1 class='font-accent'><%= special.title %></h1>
 

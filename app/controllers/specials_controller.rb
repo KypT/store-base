@@ -8,7 +8,7 @@ class SpecialsController < ApplicationController
   end
 
   def show
-    id = params[:id].to_i
+    id = params[:special_id].to_i
     @special = Special.find(id)
     @tab = 'specials'
   end
@@ -32,11 +32,8 @@ class SpecialsController < ApplicationController
 
   def update
     add_image if params[:image]
-    if @special.update(special_params)
-      redirect_to specials_path, notice: 'Special was successfully updated.'
-    else
-      render :edit
-    end
+    @special.update(special_params)
+    render nothing: true
   end
 
   def destroy
@@ -50,11 +47,11 @@ class SpecialsController < ApplicationController
   end
 
   def set_special
-    @special = Special.find(params[:id])
+    @special = Special.find(params[:special_id])
   end
 
   def special_params
-    params.require(:special).permit(:title, :description)
+    params.permit(:title, :description)
   end
 
 end

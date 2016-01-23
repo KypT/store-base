@@ -1,19 +1,9 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @articles = Article.all
-  end
-
-  def show
-  end
-
   def new
     @article = Article.create title: 'Статья', content: 'Статья'
-    redirect_to blog_article_path @article.id
-  end
-
-  def edit
+    redirect_to blog_article_path @article.id, @article.title
   end
 
   def update

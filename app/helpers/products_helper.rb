@@ -14,4 +14,8 @@ module ProductsHelper
   def description_for(product)
     product.description.length > 0 ? product.description : lorem
   end
+
+  def product_url(product)
+    product_item_path(product.id, product.url_name)
+  end
 end
