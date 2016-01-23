@@ -1,1 +1,6 @@
 Store.displayContent( '<%=j render partial: @special %>', '<%= special_url(@special) %>');
+<% if admin_signed_in? %>
+Admin.activateDropZone($('.special .file-upload-zone'), '<%= special_url(@special) %>', function() {
+  location.reload();
+});
+<% end %>

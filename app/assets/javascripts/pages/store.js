@@ -18,9 +18,7 @@ window.Store = (function() {
         $subMenu.slideDown();
     }
 
-    window.addEventListener("popstate", function() {
-        location.reload();
-    });
+    window.addEventListener("popstate", reload);
 
     window.addEventListener("scroll", function() {
         if  ($(document).height() - $(window).height() - $(window).scrollTop() <= 100) {
@@ -28,6 +26,10 @@ window.Store = (function() {
         }
     });
 
+    Admin.activateDropZone($('.special .file-upload-zone'), location.href, reload);
+    Admin.activateDropZone($('.collection .file-upload-zone'), location.href, reload);
+
+    function reload() { location.reload(); }
 
     function tagHandler() {
         var $this = $(this),

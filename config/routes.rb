@@ -34,13 +34,15 @@ Rails.application.routes.draw do
     get 'new' => 'store#new', as: :new_product
     get '' => 'store#index', as: :store
     get 'get' => 'store#get'
-    resources :categories, path: 'collections' do
+    resources :categories, path: 'collections', only: [:index, :new] do
       get ':url_name' => 'categories#show', as: 'collection'
       post ':url_name' => 'categories#update'
+      delete ':url_name' => 'categories#destroy'
     end
-    resources :specials do
+    resources :specials, only: [:index, :new] do
       get ':url_name' => 'specials#show', as: 'special'
       post ':url_name' => 'specials#update'
+      delete ':url_name' => 'specials#destroy'
     end
     get '/:tag' => 'store#index'
   end

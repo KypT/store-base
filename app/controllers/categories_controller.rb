@@ -14,26 +14,14 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    @category = Category.new
-  end
-
-  def edit
-  end
-
-  def create
-    @category = Category.new(category_params)
-    add_image if params[:image]
-
-    if @category.save
-      redirect_to categories_path, notice: 'Category was successfully created.'
-    else
-      render :new
-    end
+    @category = Category.create name: 'Коллекция', description: 'Описание'
+    redirect_to category_collection_path(@category.id, @category.url_name)
   end
 
   def update
     add_image if params[:image]
     @category.update(category_params)
+    @category.image = Image.create file: params[:images][0] if params[:images]
     render nothing: true
   end
 

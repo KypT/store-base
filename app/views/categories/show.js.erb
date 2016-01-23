@@ -1,1 +1,6 @@
 Store.displayContent( '<%=j render partial: @category %>', '<%= category_url(@category)%>');
+<% if admin_signed_in? %>
+Admin.activateDropZone($('.collection .file-upload-zone'), '<%= category_url(@category) %>', function() {
+  location.reload();
+});
+<% end %>

@@ -14,25 +14,14 @@ class SpecialsController < ApplicationController
   end
 
   def new
-    @special = Special.new
-  end
-
-  def edit
-  end
-
-  def create
-    @special = Special.new(special_params)
-    add_image if params[:image]
-    if @special.save
-      redirect_to specials_path, notice: 'Special was successfully created.'
-    else
-      render :edit
-    end
+    @special = Special.create title: 'Акция', description: 'Описание'
+    redirect_to special_special_path(@special.id, @special.url_title)
   end
 
   def update
     add_image if params[:image]
     @special.update(special_params)
+    @special.image = Image.create file: params[:images][0] if params[:images]
     render nothing: true
   end
 

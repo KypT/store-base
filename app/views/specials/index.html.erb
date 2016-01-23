@@ -1,3 +1,8 @@
 <section class="medium specials container clear">
+  <% if admin_signed_in? %>
+      <div class="new-item">
+        <%= link_to 'Новая акция', new_special_path, class: 'link' %>
+      </div>
+  <% end %>
   <%= render partial: @specials, locals: {context: 'thumb'} %>
 </section>

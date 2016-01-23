@@ -2,6 +2,7 @@
     <div class="collection full">
 
       <div class="img-container">
+        <%= render partial: 'admin/upload_zone' if admin_signed_in? %>
         <img class="cover" src="<%= image_for category %>" alt="<%= category.name %>">
       </div>
 
@@ -10,6 +11,7 @@
 
       <%= render partial: 'products/grid', locals: {grid_size: 'four wide', products: category.products} %>
     </div>
+    <%= link_to 'Удалить', category_url(@category), method: 'delete', data: {confirm: 'Точно?'} if admin_signed_in?%>
 <% elsif context == 'thumb' %>
     <%= link_to category_url(category), remote: true do %>
         <div class="collection thumb">

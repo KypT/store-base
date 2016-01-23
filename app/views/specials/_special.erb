@@ -2,6 +2,7 @@
     <div class="special full">
 
       <div class="img-container">
+          <%= render partial: 'admin/upload_zone' if admin_signed_in? %>
           <img class="cover" src="<%= image_for special %>" alt="<%= special.title %>">
       </div>
 
@@ -10,6 +11,7 @@
 
       <%= render partial: 'products/grid', locals: {grid_size: 'four wide', products: special.tag.products} %>
     </div>
+    <%= link_to 'Удалить', special_url(special), method: 'delete', data: {confirm: 'Точно?'} if admin_signed_in?%>
 <% elsif context == 'thumb' %>
     <%= link_to special_url(special), remote: true do %>
         <div class="special thumb clear">
