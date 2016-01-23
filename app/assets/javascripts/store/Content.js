@@ -13,19 +13,19 @@ window.Content = (function() {
     return {
         stocked: function(val) {
             stocked = val;
-            page = 1;
+            page = 0;
             Store.clearProducts();
             this.load();
         },
         tag: function(t) {
             tag = t;
-            page = 1;
+            page = 0;
             Store.clearProducts();
             Content.load();
         },
         untag: function() {
             tag = null;
-            page = 1;
+            page = 0;
             Store.clearProducts();
             Content.load();
         },
