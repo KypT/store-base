@@ -26,8 +26,10 @@ window.Store = (function() {
         }
     });
 
-    Admin.activateDropZone($('.special .file-upload-zone'), location.href, reload);
-    Admin.activateDropZone($('.collection .file-upload-zone'), location.href, reload);
+    if (Admin) {
+        Admin.activateDropZone($('.special .file-upload-zone'), location.href, reload);
+        Admin.activateDropZone($('.collection .file-upload-zone'), location.href, reload);
+    }
 
     function reload() { location.reload(); }
 
