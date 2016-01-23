@@ -69,7 +69,7 @@ window.Store = (function() {
     }
 
     function productsContainer() {
-        return $('.products');
+        return $('.products.catalog');
     }
 
     return {
