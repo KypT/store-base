@@ -4,7 +4,7 @@ window.Content = (function() {
         stocked = false,
         searchQuery = null,
         pageCapacity = 12,
-        page = 0;
+        page = 1;
 
     function generateTags() {
         return tag ? [tag] : [];
@@ -13,19 +13,19 @@ window.Content = (function() {
     return {
         stocked: function(val) {
             stocked = val;
-            page = 0;
+            page = 1;
             Store.clearProducts();
             this.load();
         },
         tag: function(t) {
             tag = t;
-            page = 0;
+            page = 1;
             Store.clearProducts();
             Content.load();
         },
         untag: function() {
             tag = null;
-            page = 0;
+            page = 1;
             Store.clearProducts();
             Content.load();
         },
@@ -48,10 +48,7 @@ window.Content = (function() {
                 search: searchQuery, stocked: stocked
             }).always(function(result) {
                 if (result.status = 200) {
-                    if (page == 0)
-                        Store.replaceProducts(result.responseText);
-                    else
-                        Store.appendProducts(result.responseText);
+                    Store.appendProducts(result.responseText);
                 }
             });
             page += 1;

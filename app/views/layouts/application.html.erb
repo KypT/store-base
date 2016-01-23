@@ -5,8 +5,6 @@
   <meta name="google-site-verification" content="nZ9GBgMGB9K0oE7h_xfa1kmBfLd-A4eG6kEptKZ9kYM" />
   <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
-  <link rel="stylesheet" href="/vendor/slick.css"/>
-  <link rel="stylesheet" href="/vendor/slick-theme.css"/>
   <link rel="stylesheet" href="/vendor/jquery-ui.min.css"/>
   <%= yield :meta %>
   <%= stylesheet_link_tag 'application' %>
@@ -32,7 +30,6 @@
 </div>
 
 <%= javascript_include_tag 'application' %>
-<script src="/vendor/slick.min.js"></script>
 <script src="/vendor/jquery-ui.min.js"></script>
 <% if admin_signed_in? %>
     <%= javascript_include_tag 'admin' %>

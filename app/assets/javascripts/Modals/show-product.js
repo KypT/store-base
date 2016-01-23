@@ -150,18 +150,7 @@ function ShowProductModal() {
         }
 
         buyCounter.reset();
-
-        if (window.Admin != undefined) {
-            var url = Products.path(product),
-                product_tags = product.tags.map(function(val) { return val.name }).join(', '),
-                product_collection = product.category?  product.category.name : '';
-
-            $showModal.find('.modal-tags input[data-attr="tags"]').val(product_tags);
-            $showModal.find('.modal-tags input[data-attr="category"]').val(product_collection);
-        }
-        else {
-            $showModal.find('.product-tags').html(tags(product));
-        }
+        $showModal.find('.product-tags').html(tags(product));
     }
 
     function addAmountToRequest(counter) {

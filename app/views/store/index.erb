@@ -1,8 +1,3 @@
 <div class="medium store container">
-  <% if admin_signed_in? %>
-    <div class="new-item">
-      <%= link_to 'Новое украшение', new_product_path, class: 'link' %>
-    </div>
-  <% end %>
-    <%= render partial: 'products/grid', locals: { grid_size: 'four wide', products: @products } %>
+<%= render partial: 'catalog' %>
 </div>

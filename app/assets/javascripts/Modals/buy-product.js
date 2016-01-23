@@ -19,7 +19,7 @@ function BuyProductModal(selector) {
                     return;
                 }
 
-                this.prepare(product);
+                buyModal.prepare(product);
                 UIModal.show();
             });
 

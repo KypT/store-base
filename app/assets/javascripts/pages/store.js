@@ -1,8 +1,9 @@
+//= require store/Content
+
 window.Store = (function() {
     var $controls = $('.store-controls'),
         $subMenu = $controls.find('.sub-menu'),
         $content = $('.content'),
-        $products = $('.products'),
         $tabs = $controls.find('.tabs'),
         $tagBtn = $controls.find('.tag'),
         $stockCheck = $controls.find('input[type="checkbox"]');
@@ -12,14 +13,10 @@ window.Store = (function() {
     $stockCheck.change(function() {
         Content.stocked($stockCheck[0].checked);
     });
+
     if ($tabs.find('#tags-tab').is('.active')) {
         $subMenu.slideDown();
     }
-
-    window.addEventListener("popstate", function(e) {
-        if (e.state != null)
-            Modal.hide();
-    });
 
     window.addEventListener("popstate", function() {
         location.reload();
@@ -30,6 +27,7 @@ window.Store = (function() {
             Content.load();
         }
     });
+
 
     function tagHandler() {
         var $this = $(this),
@@ -55,18 +53,23 @@ window.Store = (function() {
         $tabs.find('.active').removeClass('active');
         $this.addClass('active');
 
+        var url = $this.data('url');
+        history.pushState(null, null, url);
+        $content.load(url, null, function() {
+            Products.init();
+        });
+
         if ($this.is('.tags')) {
-            history.pushState(null,  null, '/store');
             $tagBtn.removeClass('active');
-            Content.untag();
             $subMenu.slideDown();
         }
         else {
-            var url = $this.data('url');
-            history.pushState(null, null, url);
-            $content.load(url);
             $subMenu.slideUp();
         }
+    }
+
+    function productsContainer() {
+        return $('.products');
     }
 
     return {
@@ -77,12 +80,12 @@ window.Store = (function() {
         },
 
         appendProducts: function(html) {
-            $products.append(html);
+            productsContainer().append(html);
             Products.init($('.product:not(.show)'));
         },
 
         clearProducts: function() {
-            $products.empty();
+            productsContainer().empty();
         }
     }
 }());

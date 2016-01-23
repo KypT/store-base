@@ -22,6 +22,10 @@ module ApplicationHelper
     ''
   end
 
+  def price(number)
+    number_to_currency(number, :precision => 0)
+  end
+
   def editable(attr, url)
     if admin_signed_in?
       "contenteditable=true data-url=#{url} data-attr=#{attr}"
