@@ -29,18 +29,18 @@ function CartModal() {
 
     function initCartCounter($product) {
         var $counter = $product.find('.counter'),
-            product = Products.get(parseInt($product.data('id'))),
             type = $product.data('type'),
             options = {};
 
-        // TODO fixit
-        //if (type == 'stocked')
-        //    options = {max: product.stock};
+        Products.get(parseInt($product.data('id'))).done(function(product) {
+            if (type == 'stocked')
+                options = {max: product.stock};
 
-        var counter = UI.Counter.create($counter, options);
+            var counter = UI.Counter.create($counter, options);
 
-        $counter.find('.less-btn, .more-btn').on('click', function() {
-            $.get('/cart/new', { id: product.id, type: type, amount:  counter.val()});
+            $counter.find('.less-btn, .more-btn').on('click', function() {
+                $.get('/cart/new', { id: product.id, type: type, amount:  counter.val()});
+            });
         });
     }
 

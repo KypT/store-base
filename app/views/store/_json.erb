@@ -1,3 +1,0 @@
-<script>
-    Products.set ( <%= products.to_json(:include => [:images, :category, {:tags => { :include =>  :special  } }]).html_safe %> );
-</script>

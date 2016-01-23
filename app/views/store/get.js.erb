@@ -1,3 +1,5 @@
-Products.set( <%= @products.to_json(include: [:images, :tags, :category]).html_safe %> );
-Content.page = <%= @page %>;
-Store.displayContent('<%=j render partial: 'products/grid', locals: { grid_size: 'four wide', products: @products } %>');
+<% @products.each do | product | %>
+  <div class="grid-cell">
+    <%= render product %>
+  </div>
+<% end %>

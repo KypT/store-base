@@ -7,7 +7,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   def default_url(*args)
-    "/missing-image.png"
+    "/assets/missing-image.png"
   end
 
   # Choose what kind of storage to use for this uploader:

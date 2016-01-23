@@ -11,17 +11,16 @@
 
     <script>
         $(function () {
-            <% if @product %>
-                ModalManager.open('product-show', Products.get(<%= @product.id %>));
-            <% end %>
+          <% modal = @new_product ? 'product-edit' : 'product-show' %>
+          <% if @product %>
+            ModalManager.open('<%= modal %>', <%= @product.id %>);
+          <% end %>
 
-            <% if @tag %>
-                Content.tag(<%= @tag.id %>);
-            <% end %>
+          <% if @tag %>
+            Content.tag(<%= @tag.id %>);
+          <% end %>
         })
     </script>
-
-    <%= render partial: 'store/json', locals: {products: @products} %>
 <% end %>
 
 <%= content_for :sub_header do %>

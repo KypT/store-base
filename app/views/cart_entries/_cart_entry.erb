@@ -1,5 +1,5 @@
 <div class="cart-entry clear">
-  <div class="image" style = 'background-image: url(<%= images_for(cart_entry.product)[0] %>)'></div>
+  <div class="image" style = 'background-image: url(<%= image_for(cart_entry.product, 'thumb') %>)'></div>
   <div class="details">
     <span><%= cart_entry.product.name %></span> <br/>
     <span>Количество: <%= cart_entry.amount %></span>

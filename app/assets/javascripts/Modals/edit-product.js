@@ -67,9 +67,10 @@ function EditProductModal(selector) {
 
     var editModal = {
         show: function(id) {
-            var product = Products.get(id);
-            prepare(product);
-            editUIModal.show();
+            Products.get(id).done(function(product) {
+                prepare(product);
+                editUIModal.show();
+            });
         },
 
         prepare: function(product) {

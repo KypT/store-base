@@ -49,7 +49,12 @@ module ApplicationHelper
   end
 
   def image_for(thing, type = 'regular')
-    return image_url('missing-image.png') unless thing and thing.image
-    type == 'original' ? thing.image.file.url : thing.image.file.send(type).url
+    return image_url('missing-image.png') unless thing
+
+    image = thing.image if thing.respond_to? :image
+    image = thing.images[0] if thing.respond_to? :images
+    image = Image.new if image.nil?
+
+    type == 'original' ? image.file.url : image.file.send(type).url
   end
 end

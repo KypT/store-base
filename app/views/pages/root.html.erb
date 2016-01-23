@@ -57,9 +57,5 @@
       <a href="<%= about_path %>" class="btn">Узнать больше</a>
       </div>
   </section>
-
-  <% content_for :javascripts do %>
-      <%= render partial: 'store/json', locals: {products: @products} %>
-  <% end %>
 </div>
 

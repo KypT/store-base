@@ -1,27 +1,38 @@
 window.Products = (function () {
-    var products = [];
+    var products = {};
 
     return {
-        set: function (prod) {
-            products = prod;
-        },
-
         get: function (id) {
-            for (var i = 0; i < products.length; i++)
-                if (products[i].id == id) return products[i];
+            var deferred = $.Deferred();
+
+            if (products[id]) {
+                setTimeout(function() {
+                    deferred.resolve(products[id]);
+                }, 0);
+            }
+            else {
+                $.getJSON('/items/' + id).done(function(product) {
+                    products[id] = product;
+                    deferred.resolve(product);
+                });
+            }
+
+            return deferred;
         },
 
-        init: function() {
-            var $products = $('.product');
+        init: function($products) {
+            if (typeof($products) === 'undefined')
+                $products = $('.product');
 
             $products.click(function () {
-                var product = Products.get(this.getAttribute('data-id'));
-                ModalManager.open('product-show', product);
+                ModalManager.open('product-show', this.getAttribute('data-id'));
             });
+
+            ModalManager.init($products);
 
             setTimeout(function () {
                 $products.addClass('show');
-            }, 300);
+            }, 0);
         },
 
         imageFor: function (item) {

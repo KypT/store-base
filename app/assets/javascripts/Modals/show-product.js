@@ -180,14 +180,15 @@ function ShowProductModal() {
     var showModal = {
         show: function(product) {
             if (typeof(product) != "object" && typeof(+product) == "number")
-                product = Products.get(product);
+                Products.get(product).done(function(product) {
+                    prepare(product);
+                    ShowUIModal.show();
 
-            prepare(product);
-            ShowUIModal.show();
+                    if (location.pathname != Products.path(product)) {
+                        history.pushState(location.pathname, null, Products.path(product));
+                    }
+                });
 
-            if (location.pathname != Products.path(product)) {
-                history.pushState(location.pathname, null, Products.path(product));
-            }
         },
 
         visible: function() {

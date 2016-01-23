@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
     @cart = SessionCart.new session
   end
 
+  def authenticate_admin!
+    not_found until admin_signed_in?
+  end
+
   def admin_signed_in?
     current_user and current_user.admin?
   end

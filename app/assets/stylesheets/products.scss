@@ -25,7 +25,7 @@
   position: relative;
   overflow: hidden;
   opacity: 0;
-  @include transition(all 0.3s);
+  @include transition(all 0.5s);
 
   .product-data {
     cursor: pointer;

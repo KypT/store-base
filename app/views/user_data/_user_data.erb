@@ -1,46 +1,50 @@
-<table>
-  <tr>
-    <td>Имя:</td>
-    <td><%= user_data.name %></td>
-  </tr>
-  <tr>
-    <td>Фамилия:</td>
-    <td><%= user_data.surname %></td>
-  </tr>
-  <tr>
-    <td>Отчество:</td>
-    <td><%= user_data.fname %></td>
-  </tr>
-  <tr>
-    <td>Телефон:</td>
-    <td><%= user_data.phone %></td>
-  </tr>
-  <tr>
-    <td>Email:</td>
-    <td><%= user_data.user.email %></td>
-  </tr>
-  <tr>
-    <td>Профиль VK:</td>
-    <td><%= user_data.vk %></td>
-  </tr>
-  <tr>
-    <td>Skype:</td>
-    <td><%= user_data.skype %></td>
-  </tr>
-  <tr>
-    <td>Страна:</td>
-    <td><%= user_data.country %></td>
-  </tr>
-  <tr>
-    <td>Город:</td>
-    <td><%= user_data.city %></td>
-  </tr>
-  <tr>
-    <td>Адрес:</td>
-    <td><%= user_data.address %></td>
-  </tr>
-  <tr>
-    <td>Индекс:</td>
-    <td><%= user_data.index %></td>
-  </tr>
-</table>
+<div class="user-data clear">
+  <table class="main">
+    <tr>
+      <td>Имя:</td>
+      <td><%= user_data.name %></td>
+    </tr>
+    <tr>
+      <td>Фамилия:</td>
+      <td><%= user_data.surname %></td>
+    </tr>
+    <tr>
+      <td>Отчество:</td>
+      <td><%= user_data.fname %></td>
+    </tr>
+    <tr>
+      <td>Страна:</td>
+      <td><%= user_data.country %></td>
+    </tr>
+    <tr>
+      <td>Город:</td>
+      <td><%= user_data.city %></td>
+    </tr>
+    <tr>
+      <td>Адрес:</td>
+      <td><%= user_data.address %></td>
+    </tr>
+    <tr>
+      <td>Индекс:</td>
+      <td><%= user_data.index %></td>
+    </tr>
+  </table>
+  <table class="contacts">
+    <tr>
+      <td>Телефон:</td>
+      <td><%= user_data.phone %></td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td><%= user_data.user.email %></td>
+    </tr>
+    <tr>
+      <td>Профиль VK:</td>
+      <td><%= user_data.vk %></td>
+    </tr>
+    <tr>
+      <td>Skype:</td>
+      <td><%= user_data.skype %></td>
+    </tr>
+  </table>
+</div>

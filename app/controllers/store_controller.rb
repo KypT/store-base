@@ -1,10 +1,19 @@
 class StoreController < ApplicationController
   include StoreConcern
+  before_action :authenticate_admin!, only: [:new]
+
+  def new
+    @product = Product.default
+    @product.save
+    @new_product = true
+    render controller: 'store', action: 'index'
+  end
 
   def index
+    @limit = 12
     @product = Product.find(params[:product_id]) if params[:product_id]
     @tag = Tag.find_by_name(params[:tag]) if params[:tag]
-    @products = @tag ? @tag.products : Product.all
+    @products = @tag ? @tag.products : Product.all.take(@limit)
     @tab = 'tags'
   end
 
@@ -17,7 +26,7 @@ class StoreController < ApplicationController
 
     @products = (category ? category.products : Product.all).includes :images
     @products = tagged_with(@products, tags).sort[offset, limit]
-    if params[:stocked] == 'true'
+    if params[:stocked] == 'true' and not @products.nil?
       @products = @products.select { |p| p.stock > 0 }
     end
     render nothing: true and return until @products

@@ -2,6 +2,7 @@ window.Store = (function() {
     var $controls = $('.store-controls'),
         $subMenu = $controls.find('.sub-menu'),
         $content = $('.content'),
+        $products = $('.products'),
         $tabs = $controls.find('.tabs'),
         $tagBtn = $controls.find('.tag'),
         $stockCheck = $controls.find('input[type="checkbox"]');
@@ -20,8 +21,14 @@ window.Store = (function() {
             Modal.hide();
     });
 
-    window.addEventListener("popstate", function(e) {
+    window.addEventListener("popstate", function() {
         location.reload();
+    });
+
+    window.addEventListener("scroll", function() {
+        if  ($(document).height() - $(window).height() - $(window).scrollTop() <= 100) {
+            Content.load();
+        }
     });
 
     function tagHandler() {
@@ -32,7 +39,6 @@ window.Store = (function() {
             $tagBtn.removeClass('active');
             $this.addClass('active');
             Content.tag(id);
-            Content.load();
         }
         else {
             history.pushState(null,  null, '/store');
@@ -68,6 +74,15 @@ window.Store = (function() {
             $content.html(html);
             Products.init();
             if (uri) history.pushState(null, null, uri);
+        },
+
+        appendProducts: function(html) {
+            $products.append(html);
+            Products.init($('.product:not(.show)'));
+        },
+
+        clearProducts: function() {
+            $products.empty();
         }
     }
 }());

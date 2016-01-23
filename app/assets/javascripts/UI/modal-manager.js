@@ -50,13 +50,16 @@ window.ModalManager = (function() {
                 url = '/store';
 
             history.pushState(null, null, url);
+        },
+
+        init: function($html) {
+            $html.click(function() {
+                manager.open(this.getAttribute('data-modal'), this.getAttribute('data-arg'));
+            });
         }
     };
 
-    $('.open-modal').click(function() {
-        manager.open(this.getAttribute('data-modal'), this.getAttribute('data-arg'));
-    });
-
+    manager.init($('.open-modal'));
     document.addEventListener('click', wrapperClicked);
 
     return manager;

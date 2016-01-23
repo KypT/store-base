@@ -3,25 +3,30 @@ window.Content = (function() {
         category = null,
         stocked = false,
         searchQuery = null,
-        pageCapacity = 100;
+        pageCapacity = 12,
+        page = 0;
 
     function generateTags() {
         return tag ? [tag] : [];
     }
 
     return {
-        page: 0,
-
         stocked: function(val) {
             stocked = val;
+            page = 0;
+            Store.clearProducts();
             this.load();
         },
-
         tag: function(t) {
             tag = t;
+            page = 0;
+            Store.clearProducts();
+            Content.load();
         },
         untag: function() {
             tag = null;
+            page = 0;
+            Store.clearProducts();
             Content.load();
         },
         tagged: function(t) {
@@ -36,21 +41,20 @@ window.Content = (function() {
             searchQuery = words;
             this.load();
         },
-        reset: function() {
-            tags = [];
-            category = null;
-            searchQuery = null;
-            pageCapacity = 100;
-            this.load();
-        },
-        load: function(page) {
-            page = page || 0;
-            if (page < 0) page = 0;
+        load: function() {
             $.get('/store/get', {
-                    offset: page * pageCapacity, limit: pageCapacity,
-                    tags: generateTags(), category: category,
-                    search: searchQuery, stocked: stocked
-                });
+                offset: page * pageCapacity, limit: pageCapacity,
+                tags: generateTags(), category: category,
+                search: searchQuery, stocked: stocked
+            }).always(function(result) {
+                if (result.status = 200) {
+                    if (page == 0)
+                        Store.replaceProducts(result.responseText);
+                    else
+                        Store.appendProducts(result.responseText);
+                }
+            });
+            page += 1;
         }
     }
 }());

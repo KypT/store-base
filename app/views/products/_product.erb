@@ -1,7 +1,7 @@
 <% if not defined?(context) %>
-    <div class='product show-modal' data-id='<%= product.id %>'>
+    <div class='product open-modal' data-modal='product-show' data-arg='<%= product.id %>'>
       <div class="product-data">
-        <img class="product-image cover" src="<%= product_image(product).file.thumb.url %>" alt="<%= product.name %>"/>
+        <img class="product-image cover" src="<%= image_for(product, 'thumb') %>" alt="<%= product.name %>"/>
         <div class="product-info">
           <h3><%= product.name %></h3>
           <p class="price font-accent"><%= number_to_currency(product.price, precision: 0, locale: :ru) %></p>

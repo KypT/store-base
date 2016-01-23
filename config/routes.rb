@@ -15,15 +15,16 @@ Rails.application.routes.draw do
   post 'subscriptions/new', as: 'new_subscription'
   get 'tags' => 'tags#list'
 
-  resources :products, path: 'items', except: [:edit, :create, :show] do
+  resources :products, path: 'items', except: [:new, :edit, :create, :show] do
     delete '/image/:id' => 'products#delete_image', on: :member
     post '/images' => 'products#reorder_images', on: :member
     get '/:name' => 'store#index'
     post '/:product_name' => 'products#update', on: :member
-    get 'get', on: :collection
+    get '' => 'products#get', on: :member
   end
 
   scope :store do
+    get 'new' => 'store#new', as: :new_product
     get '' => 'store#index', as: :store
     get 'get' => 'store#get'
     resources :categories, path: 'collections'

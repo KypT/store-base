@@ -13,15 +13,16 @@ function BuyProductModal(selector) {
 
     var buyModal =  {
         show: function(product) {
-            var product = Products.get(product);
+            Products.get(product).done(function(product) {
+                if ($self.length == 0) {
+                    console.log('Product modal not found');
+                    return;
+                }
 
-            if ($self.length == 0) {
-                console.log('Product modal not found');
-                return;
-            }
+                this.prepare(product);
+                UIModal.show();
+            });
 
-            this.prepare(product);
-            UIModal.show();
         },
 
         prepare: function(product) {

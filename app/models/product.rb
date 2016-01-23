@@ -15,6 +15,10 @@ class Product < ActiveRecord::Base
     "#{id}/#{name}"
   end
 
+  def get_json
+    self.to_json(:include => [:images, :category, {:tags => { :include =>  :special  } }]).html_safe
+  end
+
   def <=>(this)
     self.created_at <=> this.created_at
   end

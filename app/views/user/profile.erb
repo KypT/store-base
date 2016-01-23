@@ -7,7 +7,9 @@
 
   <div class="user-orders">
     <% current_user.user_data.orders.each do | order | %>
+      <div class="order-cnt">
         <%= render partial: 'orders/summary', locals: {order: order}  %>
+      </div>
     <% end %>
   </div>
 <% end %>
