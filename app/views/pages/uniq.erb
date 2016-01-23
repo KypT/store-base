@@ -18,7 +18,7 @@
         <%= text_area :order, :comment, required: true %>
       </div>
       <div class="field">
-        <%= render partial: 'UI/imageUpload', locals: {max: 3, name: 'images'} %>
+        <%= render partial: 'UI/imageUpload', locals: {max: 3, name: 'images[]'} %>
       </div>
       <div class="field">
         <%= submit_tag 'Заказать' %>

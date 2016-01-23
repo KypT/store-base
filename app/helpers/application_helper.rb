@@ -22,6 +22,10 @@ module ApplicationHelper
     ''
   end
 
+  def pending_order?
+    @cart.count > 0 or not session[:personalOrder].nil?
+  end
+
   def price(number)
     number_to_currency(number, :precision => 0)
   end

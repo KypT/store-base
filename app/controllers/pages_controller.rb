@@ -21,6 +21,7 @@ class PagesController < ApplicationController
     if @personal_order.save
       save_order_images
       session[:personalOrder] = @personal_order.id
+      @personal_order.save
       redirect_to new_order_path
     end
   end
@@ -31,9 +32,13 @@ class PagesController < ApplicationController
 
   private
   def save_order_images
-    images = params.require(:order)[:images]
-    @personal_order.images << images.map { |img| Image.create file: img } unless images.nil?
-    @personal_order.save
+    images = params[:images]
+    return if images.nil?
+
+    images.each do | file |
+      image = @personal_order.images.build
+      image.update file: file
+    end
   end
 
   def personal_order_params

@@ -120,34 +120,23 @@ function ShowProductModal() {
         $showModal.find('.amount-info span').text(product.stock);
         $showModal.find('.price').text(product.price);
         $showModal.find('.more-amount').data('target', '.cart-counter-' + product.id);
-
-        if (product.description.length > 0)
-            $showModal.find('.description').text(product.description);
-        else
-            $showModal.find('.description').text('');
+        $showModal.find('.description').text(product.description);
 
         if (product.stock > 0) {
-            $showModal.find('.empty-stock-message').addClass('hide');
-            $showModal.find('.stock-message').removeClass('hide');
+            var $buyBtn = $showModal.find('.buy-button');
+            $showModal.find('.buy-panel').show();
+            buyCounter.config({max: product.stock});
+            $buyBtn.off('ajax:beforeSend').on('ajax:beforeSend', addAmountToRequest(buyCounter));
+            $buyBtn.off('ajax:success').on('ajax:success', buyBtnClicked);
+            $buyBtn[0].search = "?id=" + product.id + '&type=stocked';
+            $buyBtn.text('Купить');
+            $showModal.find('.less-amount').data('target', '.cart-counter-' + product.id);
+            $showModal.find('.amount-counter').addClass('cart-counter-' + product.id).text(1);
         }
         else {
-            $showModal.find('.empty-stock-message').removeClass('hide');
-            $showModal.find('.stock-message').addClass('hide');
+            $showModal.find('.buy-panel').hide();
         }
 
-        $showModal.find('.less-amount').data('target', '.cart-counter-' + product.id);
-        $showModal.find('.amount-counter').addClass('cart-counter-' + product.id).text(1);
-
-        var $buyBtn = $showModal.find('.buy-button');
-
-        $buyBtn.off('ajax:beforeSend').on('ajax:beforeSend', addAmountToRequest(buyCounter));
-        $buyBtn.off('ajax:success').on('ajax:success', buyBtnClicked);
-        $buyBtn[0].search = "?id=" + product.id + '&type=stocked';
-        $buyBtn.text('Купить');
-
-        if (product.stock > 0) {
-            buyCounter.config({max: product.stock});
-        }
 
         buyCounter.reset();
         $showModal.find('.product-tags').html(tags(product));
