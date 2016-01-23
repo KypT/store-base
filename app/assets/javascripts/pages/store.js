@@ -26,7 +26,7 @@ window.Store = (function() {
         }
     });
 
-    if (Admin) {
+    if (typeof(Admin) != "undefined") {
         Admin.activateDropZone($('.special .file-upload-zone'), location.href, reload);
         Admin.activateDropZone($('.collection .file-upload-zone'), location.href, reload);
     }
