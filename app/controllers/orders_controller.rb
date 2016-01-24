@@ -5,13 +5,11 @@ class OrdersController < ApplicationController
   before_action :find_personal_order
 
   def new
-    @order = Order.new cart_entries: @cart.cart_entries if  @cart.count > 0
+    @order.personal_order = @personal_order
     redirect_to store_path unless @order || @personal_order
   end
 
   def create
-    @order = Order.new
-    @order.cart_entries << @cart.cart_entries
     @order.personal_order = @personal_order
 
     begin
@@ -34,12 +32,13 @@ class OrdersController < ApplicationController
       end
 
       @order.user_data = @user_data
+      @order.comment = params[:comment]
       @order.save!
 
       session[:personalOrder] = nil
+      session[:order] = nil
       session[:user_data_id] =  @user_data.id
       session[:user_email] = params[:email]
-      @cart.clear
       #NotificationMailer.order_created_notification(@order).deliver_now
     rescue ActiveRecord::RecordInvalid => e
       redirect_to profile_path

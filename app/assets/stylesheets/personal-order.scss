@@ -1,7 +1,13 @@
-.personal-order {
-  width: 300px;
+.personal.order {
+  width: 400px;
+
+  .description {
+    padding: 10px;
+    margin: 0;
+  }
 
   .images {
+    padding: 0 10px;
     img {
       max-width: 100%;
     }

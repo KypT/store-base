@@ -51,6 +51,6 @@ class PagesController < ApplicationController
   end
 
   def personal_order_params
-    params.require(:order).permit(:comment)
+    params.require(:personal).permit(:comment)
   end
 end

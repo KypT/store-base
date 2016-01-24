@@ -64,11 +64,15 @@ header {
   }
 }
 
-.profile-icon {
+.icons {
   position: absolute;
-  right: 4em;
+  right: 1em;
   bottom: .5em;
-  cursor: pointer;
+
+  span {
+    margin-left: 1em;
+    cursor: pointer;
+  }
 
   img {
     height: 2.5em;
@@ -78,22 +82,7 @@ header {
 .cart-icon,
 .profile-icon,
 .order-icon {
-  position: absolute;
-  right: 1em;
-  bottom: .5em;
-  cursor: pointer;
-
-  img {
-    height: 2.5em;
-  }
-}
-
-.profile-icon {
-  right: 4em;
-}
-
-.order-icon {
-  right: 7em;
+  float: left;
 }
 
 .cart-icon .items-counter {

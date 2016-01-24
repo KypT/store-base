@@ -15,7 +15,7 @@
 
   <%= form_tag '', multipart: true, class: 'make-order' do %>
       <div class="field">
-        <%= text_area :order, :comment, required: true %>
+        <%= text_area :personal, :comment, required: true %>
       </div>
       <div class="field">
         <%= render partial: 'UI/imageUpload', locals: {max: 3, name: 'images[]'} %>

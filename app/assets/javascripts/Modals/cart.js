@@ -1,7 +1,8 @@
 function CartModal() {
     var $cart = $('.cart.modal'),
         UIModal = UI.Modal.create('.cart.modal', {centerY: true}),
-        $cartCounter = $('.items-counter');
+        $cartCounter = $('.items-counter'),
+        $cartIcon = $('.cart-icon');
 
     $('.close-cart').click(hide);
 
@@ -124,11 +125,11 @@ function CartModal() {
 
         updateIcon: function(count) {
             if (count == 0) {
-                $cartCounter.addClass('hide');
+                $cartIcon .addClass('hide');
                 $cartCounter.text(count);
             }
             else {
-                $cartCounter.removeClass('hide');
+                $cartIcon .removeClass('hide');
                 $cartCounter.text(count);
             }
         }

@@ -10,7 +10,7 @@ class Special < ActiveRecord::Base
   end
 
   def update_tag
-    self.tag.update name: self.title if self.taggit
+    self.tag.update name: self.title if self.tag
   end
 
   def url_title

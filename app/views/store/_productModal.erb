@@ -50,8 +50,6 @@
 
   </div>
   <div class="order-panel">
-    <p class="store-info">Не забудьте оставить ваши пожелания:</p>
-    <textarea id="order-comment" cols="30" rows="4" placeholder="Комментарий к заказу"></textarea>
     <span class="price" <%= editable 'price', '#' %> > 0 </span>
     <%= render partial: 'UI/counter', locals: {id: 'order-counter'} %>
     <%= link_to 'Заказать повтор', new_cart_path(id: nil), remote: true, class: 'btn order-button', daыta: {target: '#order-counter'} %>

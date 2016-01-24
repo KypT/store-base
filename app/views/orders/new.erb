@@ -53,10 +53,14 @@
           <%= label :user_data, :index, 'Индекс' %>
           <%= number_field :user_data, :index, required: true, title: 'Пожалуйста, укажите ваш почтовый индекс' %>
         </div>
+        <div class="field">
+          <%= label :order, :comment, 'Комментарий к заказу' %>
+          <textarea name="comment" id="order_comment" cols="30" rows="10"></textarea>
+        </div>
         <%= submit_tag 'Продолжить →' %>
     <% end %>
   </div>
-  <% if @order %>
+  <% if @order.order_items.count > 0 %>
       <div class="order-summary">
         <%= render partial: 'orders/summary', locals: {order: @order} %>
         <%= session[:personalOrder] %>

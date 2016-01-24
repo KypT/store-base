@@ -1,14 +1,14 @@
 <% if order.personal_order.nil? %>
 
 <div class="order summary">
-  <h3 class="font-accent">Детали заказа</h3>
+  <h3 class="font-accent">Детали заказа №<%= order.id %></h3>
 
   <% stocked_entries = order.entries_with('stocked') %>
   <% unless stocked_entries.empty? %>
       <div class="section stocked">
         <h4>Покупка</h4>
         <div class="entries">
-          <%= render partial: stocked_entries %>
+          <%= render partial: stocked_entries, locals: {field: 'buy_amount'} %>
         </div>
       </div>
   <% end %>
@@ -18,10 +18,11 @@
       <div class="section copy">
         <h4>Повторы</h4>
         <div class="entries">
-          <%= render partial: copy_entries %>
+          <%= render partial: copy_entries, locals: {field: 'repeat_amount'} %>
         </div>
       </div>
   <% end %>
+  <p><%= order.comment %></p>
 
   <h3>Сумма заказа: <%= order.total %></h3>
 </div>

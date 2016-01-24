@@ -1,10 +1,10 @@
-<div class="order summary">
-  <h3 class="font-accent">Детали заказа</h3>
-  <p><%= personal_order.comment %></p>
+<div class="personal order summary">
+  <h3 class="font-accent">Детали заказа №<%= personal_order.order.id %></h3>
+  <p class="description"><%= personal_order.comment %></p>
 
-  <div class="section stocked">
-    <div class="entries">
-      <%= image_tag image_for personal_order %>
-    </div>
+  <div class="images">
+    <% personal_order.images.each do | img | %>
+      <%= image_tag img.file.regular.url %>
+    <% end %>
   </div>
 </div>

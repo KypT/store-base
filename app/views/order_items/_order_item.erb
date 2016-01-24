@@ -1,0 +1,8 @@
+<div class="cart-entry clear">
+  <div class="image" style = 'background-image: url(<%= image_for(order_item.product, 'thumb') %>)'></div>
+  <div class="details">
+    <span><%= order_item.product.name %></span> <br/>
+    <span>Количество: <%= order_item.send(field) %></span>
+  </div>
+  <span class = 'subtotal'><%= order_item.price %></span>
+</div>

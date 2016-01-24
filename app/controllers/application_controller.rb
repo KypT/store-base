@@ -4,7 +4,13 @@ class ApplicationController < ActionController::Base
   layout :pick_layout
 
   def init_cart
-    @cart = SessionCart.new session
+    if session[:order].nil?
+      @order = Order.create
+      session[:order] = @order.id
+    end
+
+    @order = Order.find session[:order]
+    @cart = DBCart.new @order
   end
 
   def authenticate_admin!

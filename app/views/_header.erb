@@ -27,23 +27,24 @@
     </div>
   </nav>
 
-  <% if pending_order? %>
-  <span class="order-icon">
-    <%= link_to new_order_path do %>
-    <img src="/icons/box.svg" alt="Оформление заказа" title="Оформление заказа">
+  <div class="icons">
+    <% if pending_order? %>
+    <span class="order-icon">
+      <%= link_to new_order_path do %>
+        <img src="/icons/box.svg" alt="Оформление заказа" title="Оформление заказа">
+      <% end %>
+    </span>
     <% end %>
-  </span>
-  <% end  %>
 
-  <span class="profile-icon">
-    <%= link_to profile_path do %>
-    <img src="/icons/user.svg" alt="Личный кабинет" title="Личный кабинет">
-    <% end %>
-  </span>
+    <span class="profile-icon">
+      <%= link_to profile_path do %>
+        <img src="/icons/user.svg" alt="Личный кабинет" title="Личный кабинет">
+      <% end %>
+    </span>
 
-  <span class='cart-icon open-modal' data-modal="cart">
-    <%= image_tag 'cart.png', title: 'Корзина', alt: 'Корзина' %>
-    <div class="items-counter <%= show_cart_counter %>"><%= @cart.count %></div>
-  </span>
-
+    <span class='cart-icon open-modal <%= 'hide' if @cart.count == 0 %>' data-modal="cart">
+      <%= image_tag 'cart.png', title: 'Корзина', alt: 'Корзина' %>
+      <div class="items-counter <%= show_cart_counter %>"><%= @cart.count %></div>
+    </span>
+  </div>
 </header>

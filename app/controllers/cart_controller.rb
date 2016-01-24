@@ -38,4 +38,8 @@ class CartController < ApplicationController
     id = params[:id].to_i
     @product = Product.find id
   end
+
+  def calculate_total
+    @total = @cart.total
+  end
 end

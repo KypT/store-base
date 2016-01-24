@@ -28,6 +28,7 @@
 
 <div class="modal-wrapper">
   <%= yield :modals %>
+  <%= render partial: '/store/cartModal', locals: {cart: @cart} %>
 </div>
 
 <%= javascript_include_tag 'application' %>

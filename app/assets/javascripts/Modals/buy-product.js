@@ -3,10 +3,11 @@ function BuyProductModal(selector) {
         UIModal = UI.Modal.create(selector, {centerY: true}),
         orderCounter = UI.Counter.create($(selector).find('#order-counter'));
 
-    function addAmountToRequest(counter) {
+    function addDataToRequest(counter) {
         return function(_, request, options) {
             if (counter.val() == 0)
                 request.abort();
+
             options.url += '&amount=' + counter.val();
         }
     }
@@ -22,7 +23,6 @@ function BuyProductModal(selector) {
                 buyModal.prepare(product);
                 UIModal.show();
             });
-
         },
 
         prepare: function(product) {
@@ -32,7 +32,7 @@ function BuyProductModal(selector) {
             $self.find('.open-modal[data-modal="product-show"]').attr('data-arg', product.id);
             $orderBtn[0].search = "?id=" + product.id + '&type=copy';
             $self.find('.price').text(product.price);
-            $orderBtn.off('ajax:beforeSend').on('ajax:beforeSend', addAmountToRequest(orderCounter));
+            $orderBtn.off('ajax:beforeSend').on('ajax:beforeSend', addDataToRequest(orderCounter));
             orderCounter.reset();
         },
 
