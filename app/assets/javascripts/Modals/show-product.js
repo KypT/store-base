@@ -4,6 +4,8 @@ function ShowProductModal() {
         buyCounter = UI.Counter.create($showModal.find('#buy-counter')),
         $slider = $showModal.find('.slider'),
         $sliderNav = $showModal.find('.slider-nav'),
+        $nextImg = $showModal.find('.next-image'),
+        $prevImg = $showModal.find('.prev-image'),
         slider = undefined,
         sliderNav = undefined;
 
@@ -23,10 +25,9 @@ function ShowProductModal() {
     });
 
     function buyBtnClicked() {
-        var $this = $(this);
-        $this.text('Спасибо! Товар добавлен в корзину');
-
+        $(".buy-success-msg").show();
     }
+
     function tags(product) {
         function categoryTag(cat) {
             if (cat.special) return specialTag(cat);
@@ -59,11 +60,14 @@ function ShowProductModal() {
             fade: true,
             asNavFor: '.slider-nav'
         });
+
         $slider.addClass('full-height');
         sliderNav = undefined;
 
         if (product.images.length > 1) {
             $slider.removeClass('full-height');
+            $prevImg.show();
+            $nextImg.show();
 
             $sliderNav.slick({
                 slidesToShow: 5,
@@ -74,9 +78,15 @@ function ShowProductModal() {
                 focusOnSelect: true
             });
             sliderNav = $sliderNav.slick('getSlick');
+        } else {
+            $prevImg.hide();
+            $nextImg.hide();
         }
 
         slider = $slider.slick('getSlick');
+
+        $nextImg.off('click').on('click', function () { slider.next(); });
+        $prevImg.off('click').on('click', function() { slider.prev(); });
     }
 
     function fillSlider(product) {
@@ -93,7 +103,7 @@ function ShowProductModal() {
         $sliderNav.empty();
 
         product.images.forEach(function(image) {
-            var imageTag = imageHtml(image.file.regular.url),
+            var imageTag = imageHtml(image.file.url),
                 thumbTag = imageHtml(image.file.thumb.url);
             $slider.append(imageTag);
             if (product.images.length > 1)
@@ -115,12 +125,13 @@ function ShowProductModal() {
 
         fillSlider(product);
         $showModal.find('.open-modal[data-modal="product-buy"]').attr('data-arg', product.id);
-        $showModal.find('.modal-product-name .name').text(product.name);
+        $showModal.find('.details .name').text(product.name);
         $showModal.find('.link.open-modal').attr('data-arg', product.id);
         $showModal.find('.amount-info span').text(product.stock);
-        $showModal.find('.price').text(product.price);
+        $showModal.find('.price').text('Цена: ' + product.price + '₽');
         $showModal.find('.more-amount').data('target', '.cart-counter-' + product.id);
-        $showModal.find('.description').text(product.description);
+        $showModal.find('.description').html(product.description);
+        $showModal.find('.buy-success-msg').hide();
 
         if (product.stock > 0) {
             var $buyBtn = $showModal.find('.buy-button');

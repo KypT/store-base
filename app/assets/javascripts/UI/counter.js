@@ -8,7 +8,7 @@ window.UI.Counter = (function () {
 
             var options = {
                 max: Infinity,
-                min: 0
+                min: 1
             };
 
             config(settings);

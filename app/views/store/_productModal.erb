@@ -1,25 +1,26 @@
 <div class="show-product-modal clear">
-  <h2 class='modal-product-name'>
-    <span class="name"></span>
-    <% if admin_signed_in? %>
-        <span class="link open-modal" data-modal="product-edit" data-arg="0">Редактировать</span>
-    <% end %>
-  </h2>
-
   <div class="slider-container">
+    <div class="prev-image"><- Prev</div>
+    <div class="next-image">Next -></div>
     <div class="slider"></div>
     <div class="slider-nav"></div>
   </div>
 
   <div class='details'>
+    <h2>
+      <span class="name"></span>
+      <% if admin_signed_in? %>
+          <span class="link open-modal" data-modal="product-edit" data-arg="0">Редактировать</span>
+      <% end %>
+    </h2>
     <p class="description"></p>
     <div class="buy-panel">
-      <p class='amount-info'>в наличии: <span class='stock-amount'>0</span></p>
-      <span class="price"> 0 </span>
+      <div class='amount-info'>в наличии: <span class='stock-amount'>0</span> <br> <span class="price"></span></div>
       <%= render partial: 'UI/counter', locals: {id: 'buy-counter'} %>
       <%= link_to 'Купить', new_cart_path(id: nil), remote: true, class: 'btn buy-button', data: {target: '#buy-counter'} %>
+      <p class="hide buy-success-msg">Товар добавлен в <span class="open-modal link" data-modal="cart">корзину</span></p>
     </div>
-    <button class="btn open-modal" data-modal="product-buy">Заказать</button>
+    <p>Если вы хотите похожий товар, то вы можете <span class="link open-modal" data-modal="product-buy">заказать повтор</span></p>
     <div class="product-tags"></div>
   </div>
 </div>
@@ -60,7 +61,7 @@
 <div class="edit-product-modal clear">
   <div class="edit-attributes">
     <h2 class='modal-product-name' <%= editable 'name', '#' %> ></h2>
-    <div class="description" <%= editable 'description', '#' %> ></div>
+    <div class="description ckeditor"></div>
     <div>В наличии: <span class="stock" <%= editable 'stock', '#' %> >0</span></div>
     <div>Цена: <span class="price" <%= editable 'price', '#' %> >0</span></div>
     <div>Коллекция:
@@ -77,15 +78,14 @@
           <option value="<%= tag.name %>"><%= tag.name %></option>
       <% end %>
     </select>
+    <button class="btn btn-success save-item">Сохранить</button>
   </div>
   <div class="edit-images">
     <div class="upload-zone">
         Добавить фотографии
         <%= render partial: 'admin/upload_zone' if admin_signed_in? %>
     </div>
-    <div class="save-order">
-      Сохранить порядок
-    </div>
+    <button class="btn btn-primary save-order">Сохранить порядок</button>
     <div class="images"></div>
   </div>
 </div>

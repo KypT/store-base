@@ -20,6 +20,7 @@ class ProductsController < ApplicationController
     update_tags if params[:tags]
     update_category if params[:category]
     @product.update(product_params)
+    print product_params[:description]
     render nothing: true
   end
 

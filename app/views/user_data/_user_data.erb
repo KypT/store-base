@@ -1,35 +1,37 @@
-<div class="user-data clear">
-  <table class="main">
-    <tr>
-      <td>Имя:</td>
-      <td><%= user_data.name %></td>
-    </tr>
-    <tr>
-      <td>Фамилия:</td>
-      <td><%= user_data.surname %></td>
-    </tr>
-    <tr>
-      <td>Отчество:</td>
-      <td><%= user_data.fname %></td>
-    </tr>
-    <tr>
-      <td>Страна:</td>
-      <td><%= user_data.country %></td>
-    </tr>
-    <tr>
-      <td>Город:</td>
-      <td><%= user_data.city %></td>
-    </tr>
-    <tr>
-      <td>Адрес:</td>
-      <td><%= user_data.address %></td>
-    </tr>
-    <tr>
-      <td>Индекс:</td>
-      <td><%= user_data.index %></td>
-    </tr>
-  </table>
-  <table class="contacts">
+<div class="row user-data clear">
+  <div class="col-md-6">
+    <table class="main table">
+      <tr>
+        <td>Имя:</td>
+        <td><%= user_data.name %></td>
+      </tr>
+      <tr>
+        <td>Фамилия:</td>
+        <td><%= user_data.surname %></td>
+      </tr>
+      <tr>
+        <td>Отчество:</td>
+        <td><%= user_data.fname %></td>
+      </tr>
+      <tr>
+        <td>Страна:</td>
+        <td><%= user_data.country %></td>
+      </tr>
+      <tr>
+        <td>Город:</td>
+        <td><%= user_data.city %></td>
+      </tr>
+      <tr>
+        <td>Адрес:</td>
+        <td><%= user_data.address %></td>
+      </tr>
+      <tr>
+        <td>Индекс:</td>
+        <td><%= user_data.index %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-md-6"><table class="col-md-3 table contacts">
     <tr>
       <td>Телефон:</td>
       <td><%= user_data.phone %></td>
@@ -47,4 +49,5 @@
       <td><%= user_data.skype %></td>
     </tr>
   </table>
+  </div>
 </div>

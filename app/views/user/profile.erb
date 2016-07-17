@@ -1,16 +1,19 @@
 <%= render partial: '/sub_header', locals: {title: 'Профиль' } %>
-<% unless current_user.user_data.nil? %>
+
 <div class="profile medium container">
-  <h1>Добро пожаловать, <%= current_user.user_data.name %></h1>
+<% if !current_user.user_data.nil? %>
+  <h3 class="h3">Добро пожаловать, <%= current_user.user_data.name %></h3>
 
   <%= render partial: current_user.user_data %>
 
-  <div class="user-orders">
+  <div class="row user-orders">
     <% current_user.user_data.orders.each do | order | %>
-      <div class="order-cnt">
+      <div class="order-cnt col-md-6">
         <%= render partial: 'orders/summary', locals: {order: order}  %>
       </div>
     <% end %>
   </div>
+<% else %>
+    <%= render partial: 'user_data/form' %>
 <% end %>
 </div>

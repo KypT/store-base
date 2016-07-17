@@ -19,6 +19,8 @@
             <%= link_to 'Удалить', article_path(article), method: 'delete', data: {confirm: 'Точно?'} %>
           </div>
       <% end %>
-      <div class="<%= 'ckeditor' if admin_signed_in? %> content"><%= article.content.html_safe %></div>
+      <div class="<%= 'ckeditor' if admin_signed_in? %> content"
+           data-url="<%= article_path(article) %>"
+           data-attr="content"><%= article.content.html_safe %></div>
     </article>
 <% end %>

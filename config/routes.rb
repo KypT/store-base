@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   get 'payment' => 'pages#payment'
   get 'about' => 'pages#about', as: 'about'
   get 'personal-order' => 'pages#uniq', as: 'personal_order'
-  get 'profile' => 'user#profile'
   get 'tags' => 'tags#list'
   get 'sitemap' => 'pages#sitemap'
   get 'items/new' => 'products#new'
@@ -13,6 +12,11 @@ Rails.application.routes.draw do
   post 'personal-order' => 'pages#make_uniq'
   post 'user' => 'user#register', :as => :user
   post 'subscriptions/new', as: 'new_subscription'
+
+  scope :profile do
+    get  '' => 'user#profile', as: 'profile'
+    post '' => 'user#update'
+  end
 
   scope :blog do
     get '' => 'blog#index', as: 'blog'
@@ -36,11 +40,13 @@ Rails.application.routes.draw do
     get 'get' => 'store#get'
     resources :categories, path: 'collections', only: [:index, :new] do
       get ':url_name' => 'categories#show', as: 'collection'
+      get '' => 'categories#show'
       post ':url_name' => 'categories#update'
       delete ':url_name' => 'categories#destroy'
     end
     resources :specials, only: [:index, :new] do
       get ':url_name' => 'specials#show', as: 'special'
+      get '' => 'specials#show'
       post ':url_name' => 'specials#update'
       delete ':url_name' => 'specials#destroy'
     end
@@ -62,5 +68,8 @@ Rails.application.routes.draw do
     get 'logout' => 'users/sessions#destroy'
   end
 
+  %w( 404 422 500 503 ).each do |code|
+    get code, :to => 'errors#show', :code => code
+  end
 
 end

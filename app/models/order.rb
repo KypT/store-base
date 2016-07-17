@@ -12,4 +12,12 @@ class Order < ActiveRecord::Base
   def total
     self.order_items.reduce(0) { |sum, entry| sum + entry.price }
   end
+
+  def self.created
+    'created'
+  end
+
+  def self.submitted
+    'submitted'
+  end
 end

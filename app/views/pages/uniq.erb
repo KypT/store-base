@@ -14,14 +14,14 @@
   <p>Читайте подробнее про условия и способы оплаты и доставки.</p>
 
   <%= form_tag '', multipart: true, class: 'make-order' do %>
-      <div class="field">
+      <div class="row field">
         <%= text_area :personal, :comment, required: true %>
       </div>
-      <div class="field">
+      <div class="row field">
         <%= render partial: 'UI/imageUpload', locals: {max: 3, name: 'images[]'} %>
       </div>
-      <div class="field">
-        <%= submit_tag 'Заказать' %>
+      <div class="row field">
+        <%= submit_tag 'Заказать', class: 'btn btn-success' %>
       </div>
   <% end %>
 

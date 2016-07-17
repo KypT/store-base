@@ -1,0 +1,94 @@
+<%
+  form_path = (defined?(context) and context == 'order') ? orders_path : profile_path
+%>
+
+<%= form_tag form_path, class: 'new-order' do %>
+    <h1 class="font-accent">Пожалуйста, укажите следующую информацию:</h1>
+
+    <div class="form-group row">
+      <label for="user_data_name" class="col-sm-3">Ваше имя</label>
+      <div class="col-sm-9">
+        <%= text_field :user_data, :name, required: true, title: 'Пожалуйста, укажите ваше имя', class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="user_data_surname" class="col-sm-3">Фамилия</label>
+      <div class="col-sm-9">
+        <%= text_field :user_data, :surname, required: true, title: 'Пожалуйста, укажите вашу фамилию', class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="user_data_fname" class="col-sm-3">Отчество</label>
+      <div class="col-sm-9">
+        <%= text_field :user_data, :fname, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="user_data_phone" class="col-sm-3">Телефон</label>
+      <div class="col-sm-9">
+        <%= phone_field :user_data, :phone, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="email" class="col-sm-3">Email</label>
+      <div class="col-sm-9">
+        <%= text_field_tag :email, user_email, required: true, title: 'Пожалуйста, укажите адрес вашей электронной почты', class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="user_data_vk" class="col-sm-3">Профиль VK</label>
+      <div class="col-sm-9">
+        <%= text_field :user_data, :vk , class: 'form-control'%>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="user_data_skype" class="col-sm-3">Skype</label>
+      <div class="col-sm-9">
+        <%= text_field :user_data, :skype, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="user_data_country" class="col-sm-3">Страна</label>
+      <div class="col-sm-9">
+        <%= text_field :user_data, :country, required: true, title: 'Пожалуйста, укажите страну, в которой вы проживаете', class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="user_data_city" class="col-sm-3">Город</label>
+      <div class="col-sm-9">
+        <%= text_field :user_data, :city, required: true, title: 'Пожалуйста, укажите город, в котором вы проживаете', class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="user_data_address" class="col-sm-3">Адрес</label>
+      <div class="col-sm-9">
+        <%= text_field :user_data, :address, required: true, title: 'Пожалуйста, укажите ваш адрес', class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="user_data_index" class="col-sm-3">Почтовый индекс</label>
+      <div class="col-sm-9">
+        <%= number_field :user_data, :index, required: true, title: 'Пожалуйста, укажите ваш почтовый индекс', class: 'form-control' %>
+      </div>
+    </div>
+
+    <% if defined?(context) and context == 'order' %>
+        <div class="form-group row">
+          <label for="order_comment" class="col-sm-3">Комментарий к заказу</label>
+          <div class="col-sm-9">
+            <textarea name="comment" class="form-control" id="order_comment" cols="30" rows="10"></textarea>
+          </div>
+        </div>
+    <% end %>
+    <%= submit_tag 'Продолжить →' %>
+<% end %>

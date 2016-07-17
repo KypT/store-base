@@ -4,5 +4,5 @@
     <span><%= order_item.product.name %></span> <br/>
     <span>Количество: <%= order_item.send(field) %></span>
   </div>
-  <span class = 'subtotal'><%= order_item.price %></span>
+  <span class = 'subtotal'><%= price(order_item.price) %></span>
 </div>

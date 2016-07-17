@@ -24,7 +24,7 @@
   <% end %>
   <p><%= order.comment %></p>
 
-  <h3>Сумма заказа: <%= order.total %></h3>
+  <h3>Сумма заказа: <%= price(order.total) %></h3>
 </div>
 
 <% else %>

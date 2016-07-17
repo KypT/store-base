@@ -1,6 +1,10 @@
-<div class="image-upload" data-max="<%= max %>">
-  <span> Добавить изображение
-    <input id="fileupload" type="file" name="<%= name %>" <%= 'multiple' if max > 1 %> >
-  </span>
-  <div class="img-preview-cnt"></div>
+<div class="image-upload-cnt" data-max="<%= max %>">
+  <div class="image-upload">
+    <button class="btn btn-primary"> Добавить изображение
+      <input id="fileupload" type="file" name="<%= name %>" <%= 'multiple' if max > 1 %> >
+    </button>
+  </div>
+  <div class="row img-preview-cnt"></div>
 </div>
+
+

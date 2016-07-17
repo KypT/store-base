@@ -32,6 +32,7 @@ class SessionCart
 
   def put(product, type, amount)
     return if amount <= 0
+    if
     @session[:products] << { 'id' => product.id, 'type' => type, 'amount' => amount } unless include? product, type
   end
 

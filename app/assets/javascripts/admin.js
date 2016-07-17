@@ -9,13 +9,17 @@ window.Admin = (function() {
         CKEDITOR.disableAutoInline = true;
 
         $('.ckeditor').each(function(_, edit) {
-            CKEDITOR.replace(edit);
+            var postUrl = $(edit).data('url');
+            var attr = $(edit).data('attr');
+            var editor = CKEDITOR.replace(edit);
+            editor.url = postUrl;
+            editor.attr = attr;
         });
 
         for (var inst in CKEDITOR.instances) {
             CKEDITOR.instances[inst].on('blur', function() {
-                var url = $('.article').data('url'),
-                    attr = 'content',
+                var url = this.url,
+                    attr = this.attr,
                     val = this.getData();
 
                 updateAttribute(url, attr, val);

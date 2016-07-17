@@ -11,9 +11,13 @@ function EditProductModal(selector) {
 
     function prepare(product) {
         var url = Products.path(product);
+        var editor = CKEDITOR.instances.editor1;
+
+        editor.setData(product.description);
+        editor.url = url;
+        editor.attr = 'description';
 
         $this.find('.modal-product-name').text(product.name);
-        $this.find('.description').text(product.description);
         $this.find('.stock').text(product.stock);
         $this.find('.price').text(product.price);
         $this.find('*[contenteditable="true"]').attr('data-url', url);
@@ -27,6 +31,10 @@ function EditProductModal(selector) {
         $this.find('#collection').off('change').on('change', function() {
             var collection = $('#collection').val();
             Admin.updateAttribute(Products.path(product), 'category', collection);
+        });
+
+        $this.find('.save-item').off('click').on('click', function() {
+            location.reload();
         });
 
         $this.find("#tags").select2({

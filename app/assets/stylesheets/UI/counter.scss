@@ -1,21 +1,19 @@
 .counter {
   @extend .font-accent;
   text-align: justify;
-  height: 50px;
   width: 180px;
-  line-height: 50px;
-  font-size: 26px;
+  font-size: 22px;
 
   span {
     cursor: pointer;
     width: 40px;
     display: inline-block;
     text-align: center;
-    background-color: lighten($brand-color-2, 30%);
+    background-color: lighten($brand-color-2, 20%);
   }
 
   .count {
     width: 90px;
-    background-color: lighten($brand-color-2, 40%);
+    background-color: lighten($brand-color-2, 30%);
   }
 }

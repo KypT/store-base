@@ -1,6 +1,6 @@
 function CartModal() {
-    var $cart = $('.cart.modal'),
-        UIModal = UI.Modal.create('.cart.modal', {centerY: true}),
+    var $cart = $('.cart-modal'),
+        UIModal = UI.Modal.create('.cart-modal', {centerY: true}),
         $cartCounter = $('.items-counter'),
         $cartIcon = $('.cart-icon');
 

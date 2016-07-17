@@ -1,6 +1,8 @@
 require 'active_support'
 
 class OrdersController < ApplicationController
+  include ProfileConcern
+
   before_action :authenticate_user!, except: [:create, :new]
   before_action :find_personal_order
 
@@ -13,22 +15,15 @@ class OrdersController < ApplicationController
     @order.personal_order = @personal_order
 
     begin
-      if user_signed_in?
-        @user = current_user
-        if @user.user_data.nil?
-          @user_data = UserData.create! user_params
-          @user.user_data = @user_data
-        else
-          @user.user_data.update user_params
-        end
+      @user = user_signed_in? ? current_user : create_new_user!
+
+      if @user.user_data.nil?
+        @user_data = UserData.create! user_data_params
+        @user.user_data = @user_data
+        @user.save!
       else
-        @password = Devise.friendly_token 8
-        @user = save_user!
-        sign_in :user, @user
-        @user_data = UserData.create! user_params
-        @user_data.user = @user
-        @user_data.save!
-        NotificationMailer.user_registration(@user).deliver_now
+        @user_data = @user.user_data
+        @user_data.update user_data_params
       end
 
       @order.user_data = @user_data
@@ -54,7 +49,7 @@ class OrdersController < ApplicationController
 
   def index
     redirect_to profile_path unless admin_signed_in?
-    @orders = Order.all
+    @orders = Order.select { |o| o.status == Order.submitted }
   end
 
   def show
@@ -67,12 +62,13 @@ class OrdersController < ApplicationController
   end
 
   private
-  def user_params
-    params.require(:user_data).permit(:name, :surname, :fname, :phone, :skype, :vk, :country, :city, :address, :index, :about)
-  end
-
-  def save_user!
-    User.create! email: params[:email], password: @password, password_confirmation: @password
+  def create_new_user!
+    @password = Devise.friendly_token 8
+    user = User.create! email: params[:email], password: @password, password_confirmation: @password
+    print user
+    sign_in :user, user
+    NotificationMailer.user_registration(user).deliver_now
+    user
   end
 
   def find_personal_order

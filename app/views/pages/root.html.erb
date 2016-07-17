@@ -2,12 +2,20 @@
     <%= render partial: 'store/productModal' %>
 <% end %>
 
+<% content_for :javascripts do %>
+    <script src="/vendor/lightbox.min.js"></script>
+<% end %>
+
+<% content_for :stylesheets do %>
+    <link rel="stylesheet" href="/vendor/lightbox.min.css">
+<% end %>
+
 <% content_for :header do %>
     <%= render partial: '/header', locals: {root: true} %>
 <% end %>
 
 <%= content_for :sub_header do %>
-    <h1 class="medium container page title">
+    <h1 class="medium my-container page title">
       Добро пожаловать в Мятный Домик
     </h1>
 <% end %>
@@ -27,7 +35,7 @@
         <p>
           Взгляните на некоторые мои работы. Какая-то байда, они белые и пушистые!!!
         </p>
-        <%= link_to store_path, class: 'btn' do %>
+        <%= link_to store_path, class: 'btn btn-success' do %>
             Перейти в каталог <span class="arrow right long brown"></span>
         <% end %>
       </div>
@@ -38,7 +46,7 @@
       <p class="personal-order">
         Вы также можете оставтиь заявку на выполнение индивидуального заказа.
         <br/>
-        <button class="btn dream-btn">Воплотить мечты</button>
+        <button class="btn btn-success">Воплотить мечты</button>
       </p>
     </div>
   </section>
@@ -54,7 +62,7 @@
   <section class="author">
       <div class="author-image">
       <p>Подробнее о магазине и об авторе:</p>
-      <a href="<%= about_path %>" class="btn">Узнать больше</a>
+      <a href="<%= about_path %>" class="btn btn-primary">Узнать больше</a>
       </div>
   </section>
 </div>

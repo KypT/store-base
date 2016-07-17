@@ -94,17 +94,13 @@ section.author-page {
 .personal-order {
   margin-top: 1em;
 
-  .dream-btn {
-    text-transform: uppercase;
-    background-color: $brand-color-3;
-  }
-
   .make-order {
     .img-preview {
       float: left;
       width: 33.3333%;
       max-height: 300px;
       padding: 10px;
+      overflow: hidden;
 
       img {
         width: 100%;
@@ -115,7 +111,7 @@ section.author-page {
   }
 }
 
-.btn.to-store {
+.butt.to-store {
   text-align: center;
   display: inline-block;
 }

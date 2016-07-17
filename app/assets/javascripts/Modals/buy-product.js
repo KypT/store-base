@@ -12,7 +12,7 @@ function BuyProductModal(selector) {
         }
     }
 
-    var buyModal =  {
+    var buyModal = {
         show: function(product) {
             Products.get(product).done(function(product) {
                 if ($self.length == 0) {

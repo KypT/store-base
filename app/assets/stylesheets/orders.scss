@@ -1,27 +1,3 @@
-.create-order,
-.order-details {
-  float: left;
-  width: calc(100% - 400px);
-}
-
-.create-order,
-.order-details,
-.order-summary {
-  margin: 20px 0;
-  @media (max-width: 992px) {
-    float: none;
-    width: 100%;
-  }
-}
-
-.order-summary {
-  float: right;
-}
-
-.order-details table {
-  width: 100%;
-}
-
 form.new-order {
   padding: 0 10px;
 
@@ -51,7 +27,7 @@ form.new-order {
 .order.summary {
   @extend .bordered;
   margin: auto;
-  width: 400px;
+  width: 450px;
   border-radius: 5px;
   overflow: hidden;
 
