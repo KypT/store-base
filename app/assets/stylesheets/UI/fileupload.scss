@@ -14,12 +14,27 @@
     direction: ltr;
     cursor: pointer;
   }
+}
 
-  .img-preview-cnt {
-    z-index: 2;
-  }
+.img-preview-cnt {
+  z-index: 2;
 
-  img {
-    max-width: 100%;
+  .img-preview {
+    position: relative;
+
+    img {
+      max-width: 100%;
+    }
+
+    .img-preview-remove {
+      cursor: pointer;
+      display: block;
+      position: absolute;
+      background: white;
+      color: red;
+      padding: 0 5px;
+      top: 15px;
+      right: 15px;
+    }
   }
 }
