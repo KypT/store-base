@@ -92,7 +92,7 @@
   @extend .bordered;
   display: none;
   background-color: white;
-  max-width: 800px;
+  max-width: 950px;
   margin: 2em auto;
   padding: 1em 2em;
 
@@ -246,4 +246,9 @@
     }
   }
 
+}
+
+.order-success-msg {
+  display:inline-block;
+  visibility: hidden;
 }

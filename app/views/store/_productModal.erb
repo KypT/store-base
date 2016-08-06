@@ -6,7 +6,7 @@
     <div class="slider-nav"></div>
   </div>
 
-  <div class='details'>
+  <div class='container details'>
     <h2>
       <span class="name"></span>
       <% if admin_signed_in? %>
@@ -14,20 +14,27 @@
       <% end %>
     </h2>
     <p class="description"></p>
-    <div class="buy-panel">
-      <div class='amount-info'>в наличии: <span class='stock-amount'>0</span> <br> <span class="price"></span></div>
-      <%= render partial: 'UI/counter', locals: {id: 'buy-counter'} %>
-      <%= link_to 'Купить', new_cart_path(id: nil), remote: true, class: 'btn buy-button', data: {target: '#buy-counter'} %>
-      <p class="hide buy-success-msg">Товар добавлен в <span class="open-modal link" data-modal="cart">корзину</span></p>
+    <div class="buy-panel row">
+      <div class="col-md-6 text-xs-right">
+        в наличии: <span class='stock-amount'>0</span> <br>
+        <span class="price"></span>
+        <%= render partial: 'UI/counter', locals: {id: 'buy-counter'} %>
+      </div>
+      <div class="col-md-6 text-xs-left">
+        <%= link_to 'Купить', new_cart_path(id: nil), remote: true, class: 'btn btn-lg buy-button', data: {target: '#buy-counter'} %>
+        <p class="hide buy-success-msg">Товар добавлен в <span class="open-modal link" data-modal="cart">корзину</span></p>
+      </div>
     </div>
     <p>Если вы хотите похожий товар, то вы можете <span class="link open-modal" data-modal="product-buy">заказать повтор</span></p>
+    <h3>Другие товары:</h3>
     <div class="product-tags"></div>
   </div>
 </div>
 
 <div class="buy-product-modal clear">
-  <button class="btn open-modal" data-modal="product-show">Вернуться к просмотру</button>
+  <button class="btn open-modal" data-modal="product-show">&larr; Вернуться к просмотру</button> <br>
   <div class="information">
+    <h2 class="h2">Пожалуйста, ознакомьтесь со следующей информацией </h2>
     <p>Повтор изделия - это изготовление похожей работы индивидуально для Вас. Обратите внимание: все изделия
       магазинчика создаются вручную, а потому полная копия невозможна и не приветствуется. Мы стараемся делать каждую
       вещь уникальной.</p>
@@ -43,17 +50,16 @@
 
     <p>Читайте подробнее про условия и способы оплаты и доставки.</p>
 
-
-    <p>Не забудьте оставить ваши пожелания:</p>
-    цвета, оформление или что-то другое, что Вы захотите добавить.
-
     <p>Этот товар есть в наличии, Вы можете его купить или заказать повтор с учетом ваших предпочтений.</p>
-
   </div>
-  <div class="order-panel">
-    <span class="price" <%= editable 'price', '#' %> > 0 </span>
-    <%= render partial: 'UI/counter', locals: {id: 'order-counter'} %>
-    <%= link_to 'Заказать повтор', new_cart_path(id: nil), remote: true, class: 'btn order-button', daыta: {target: '#order-counter'} %>
+  <br>
+  <div class="container">
+    <div class="order-panel text-sm-center">
+      Цена : <span class="price" <%= editable 'price', '#' %> > 0 </span> ₽ <br>
+      <%= render partial: 'UI/counter', locals: {id: 'order-counter'} %> <br>
+      <div class="order-success-msg">Товар добавлен в <span class="open-modal link" data-modal="cart">корзину</span></div> <br>
+      <%= link_to 'Заказать повтор', new_cart_path(id: nil), remote: true, class: 'btn btn-lg order-button', daыta: {target: '#order-counter'} %>
+    </div>
   </div>
 </div>
 

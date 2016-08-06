@@ -127,7 +127,7 @@ function ShowProductModal() {
         $showModal.find('.open-modal[data-modal="product-buy"]').attr('data-arg', product.id);
         $showModal.find('.details .name').text(product.name);
         $showModal.find('.link.open-modal').attr('data-arg', product.id);
-        $showModal.find('.amount-info span').text(product.stock);
+        $showModal.find('.stock-amount').text(product.stock);
         $showModal.find('.price').text('Цена: ' + product.price + '₽');
         $showModal.find('.more-amount').data('target', '.cart-counter-' + product.id);
         $showModal.find('.description').html(product.description);

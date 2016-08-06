@@ -1,5 +1,6 @@
 function BuyProductModal(selector) {
     var $self = $(selector),
+        $successMsg = $self.find('.order-success-msg'),
         UIModal = UI.Modal.create(selector, {centerY: true}),
         orderCounter = UI.Counter.create($(selector).find('#order-counter'));
 
@@ -10,6 +11,15 @@ function BuyProductModal(selector) {
 
             options.url += '&amount=' + counter.val();
         }
+    }
+
+    function showThanks() {
+        var hideFn = function() {
+            $successMsg.css('visibility', 'hidden');
+        };
+
+        $successMsg.css('visibility', 'visible');
+        setTimeout(hideFn, 3000);
     }
 
     var buyModal = {
@@ -33,6 +43,7 @@ function BuyProductModal(selector) {
             $orderBtn[0].search = "?id=" + product.id + '&type=copy';
             $self.find('.price').text(product.price);
             $orderBtn.off('ajax:beforeSend').on('ajax:beforeSend', addDataToRequest(orderCounter));
+            $orderBtn.off('click').on('click', showThanks);
             orderCounter.reset();
         },
 

@@ -1,5 +1,6 @@
 .counter {
   @extend .font-accent;
+  display:inline-block;
   text-align: justify;
   width: 180px;
   font-size: 22px;
